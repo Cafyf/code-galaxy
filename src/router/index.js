@@ -1,13 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import CodeTest from "../components/CodeTest.vue";
-
+import CodeEditor from "../components/CodeEditor.vue";
+import CodeEditorContainer from "../components/CodeEditorContainer.vue"
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomeView,
-  }
+    name: "CodeEditor",
+    component: CodeEditor,
+  },
+  {
+    path: "/c",
+    name: "CodeEditorContainer",
+    component: CodeEditorContainer,
+  },
 ];
 
 const router = createRouter({
