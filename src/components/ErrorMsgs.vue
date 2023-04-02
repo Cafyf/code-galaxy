@@ -1,6 +1,6 @@
 <template>
     <div v-if="show==false" class="errorMsg">
-       <h3>{{errorheader}}</h3>
+       <h3 :style="{ color: textColor }">{{ errorheader }}</h3>
      <span v-for="(error,index) in formatOutPutMessage(outputContainer)" :key="index">{{error}} <br></span>
   </div>
    <div v-if="show===true ">
@@ -18,7 +18,8 @@ export default {
     data(){
         return {
             show:true,
-            errorheader:''
+            errorheader:'',
+            textColor:''
         }
     },
     methods:{
@@ -38,22 +39,53 @@ export default {
 
   return uniqueErrors; // Return the unique array
 },
+customErrors(CheckCustomErrorMsg){
+  
+     for(let i=0;i<CheckCustomErrorMsg.length-1;i++){
+        if(CheckCustomErrorMsg[i].includes("DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION")){
+          this.errorheader="Ambiguity";
+          return ["IF_ADD_MULTIPLE_METHODS","DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION"];
+        }
+        else if(CheckCustomErrorMsg[i].includes("PRINT_STATEMENTS_ARE_NOT_ALLOWED")){
+             this.textColor='red';
+             this.errorheader="PRINT_STATEMENTS_ARE_NOT_ALLOWED";
+             return ["IF YOU WANT TO USE ENABLE TRACE MODE"];
+        }
+       else{
+          console.log(CheckCustomErrorMsg[i]);
+         // this.filterOutPut(CheckCustomErrorMsg);
+      }
+     }
+},
 
      formatOutPutMessage(outputMessage) {
-        this.show=outputMessage.show;
+      this.show=outputMessage.show;
+      if(outputMessage.msg!='' && outputMessage.msg[1].trim()==="class, interface, enum, or record expected")
+      {  
+       return this.customErrors(outputMessage.msg);
+      }  
+
+        if(outputMessage.msg === "Empty code body!"){this.errorheader=outputMessage.msg; return;}
         if( this.show==false && outputMessage.msg!=null ){
+            if(outputMessage.msg.length-1===1){
+             this.errorheader=outputMessage.msg[outputMessage.msg.length-1];
+             return ;
+            }
             this.errorheader=outputMessage.msg[outputMessage.msg.length-1];
             let mergeErrors=[];
             outputMessage.msg.map((errorContainer,index)=>{
-                if(index!=0 && index != outputMessage.msg.length-1) 
-               errorContainer.split('\r\n').map(errorMsg=>{
+                if(index!=0 && index != outputMessage.msg.length-1)
+               errorContainer.split('\r\n').map(errorMsg=> {
                   mergeErrors.push(errorMsg);
-                })  
+                });  
             })
          return this.filterOutPut(mergeErrors);
         }
-       
-      return outputMessage.msg.split('\r\n');
+    try{ 
+      return outputMessage.msg.split('\r\n');}
+    catch(err){
+     return outputMessage.msg;
+    }
     }
 }
 }

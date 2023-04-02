@@ -14,6 +14,7 @@ export default {
     components:{CodeEditor, ErrorMsgs},
 
     data(){
+        console.log("first rendered");
         return {
         outputData:{
             show:true,

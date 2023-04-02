@@ -9,7 +9,8 @@
     :height="200"
     @change="change"
   /> <br>
-  <button @click="compileAndRun">RUN</button>
+  <button @click="compileAndRun">RUN</button> &hairsp;
+  <span><button @click="toggle">{{Enabletrace.msg}}</button></span>
 </div>
 
 </template>
@@ -27,19 +28,24 @@ import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 
 import { ref } from "vue";
+
 export default {
   components: { Codemirror },
-  
+  data(){
+    return {
+        Enabletrace:{msg:'enable Trace Mood',switch:false}
+    }
+  },
   setup() {
     const code = ref(`
-class Main {
-   public static void main(String [] args){
-     System.out.println("hello nandy loose buddy im rps!");
-     for(int i=1;5>i;i++){
-        System.out.println("For Loop Executing "+i);
-     }
-   }
-}`);
+public static int test2(int ans) {
+        return ans+10;
+}
+
+public static String test(int a, String name, boolean show) {
+  System.out.println("hello world");
+    return a + " " + name + " " + show +" "+test2(a);
+ }`);
     return {
       code,
       cmOptions: {
@@ -50,18 +56,49 @@ class Main {
     };
   },
   methods:{ //try to differentiate complie time error and run time error like codeing bat
+            // if the tracing is disable we dont allow user to write print 
+            //hey the method doesnt contains static please create Object and call the method;
    async compileAndRun(){
     const playload={
         language:"java",
-        code:this.code
-    }
-   
+        code:this.code,
+        mode:this.Enabletrace.switch
+    };
   await axios.post(" http://localhost:5000/run",playload).then(response =>{
+    console.log(response);
      this.$emit('showOutput',response.data.output,true);
   }).catch(error =>{
-    console.log(error.response.data.error);
-    this.$emit('showOutput',error.response.data.error.stderr.split("error:"),false);
+    console.log(error);
+    if(error.response.status===400){
+        this.$emit('showOutput',error.response.data.error,false);
+    }
+    else{
+    this.$emit('showOutput',error.response.data.error.stderr.split("error:"),false);}
   });
+ },
+ toggle(){  // popUp a msg it will show your code will disapper click checkBox to preserve [] ok and cancle button
+    this.Enabletrace.switch=!this.Enabletrace.switch;
+    
+    if(this.Enabletrace.switch ){
+    this.Enabletrace.msg= 'disable Trace mood';
+    this.code=`//now you can practice and trace you code flow
+ class Main {
+
+   public static void main(String[] args) {
+       System.out.println("hello world");
+     }
+ }
+ ` } else {
+  this.Enabletrace.msg='enable Trace Mood';
+ this.code=`
+ public static int test2(int ans) {
+        return ans+10;
+}
+
+public static String test(int a, String name, boolean show) {
+    return a + " " + name + " " + show +" "+test2(a);
+ }`
+ }
  }
 }
 };
