@@ -1,18 +1,19 @@
 <template>
-<div>
-  <Codemirror
-    ref="editor"
-    v-model:value="code"
-    :options="cmOptions"
-    border
-    placeholder="JAVA LOGICAL PROGRAMS"
-    :height="200"
-    @change="change"
-  /> <br>
-  <button @click="compileAndRun">RUN</button> &hairsp;
-  <span><button @click="toggle">{{Enabletrace.msg}}</button></span>
-</div>
-
+  <div>
+    <Codemirror
+      ref="editor"
+      v-model:value="code"
+      :options="cmOptions"
+      border
+      placeholder="JAVA LOGICAL PROGRAMS"
+      :height="200"
+    />
+    <br />
+    <button @click="compileAndRun">RUN</button> &hairsp;
+    <span
+      ><button @click="toggle">{{ Enabletrace.msg }}</button></span
+    >
+  </div>
 </template>
 
 <script >
@@ -31,10 +32,16 @@ import { ref } from "vue";
 
 export default {
   components: { Codemirror },
-  data(){
+  props:{
+      defaultInput:{
+        type:Object
+      }
+  },
+  data() {
     return {
-        Enabletrace:{msg:'enable Trace Mood',switch:false}
-    }
+      Enabletrace: { msg: "enable Trace Mood", switch: false },
+      userIp:''
+    };
   },
   setup() {
     const code = ref(`
@@ -42,9 +49,8 @@ public static int test2(int ans) {
         return ans+10;
 }
 
-public static String test(int a, String name, boolean show) {
-  System.out.println("hello world");
-    return a + " " + name + " " + show +" "+test2(a);
+public static int test(int a, String name, boolean show) {
+    return a;
  }`);
     return {
       code,
@@ -52,55 +58,64 @@ public static String test(int a, String name, boolean show) {
         lineNumbers: true,
         mode: "text/x-java", // Language mode
         theme: "dracula", // Theme
-      }
+      },
     };
   },
-  methods:{ //try to differentiate complie time error and run time error like codeing bat
-            // if the tracing is disable we dont allow user to write print 
-            //hey the method doesnt contains static please create Object and call the method;
-   async compileAndRun(){
-    const playload={
-        language:"java",
-        code:this.code,
-        mode:this.Enabletrace.switch
-    };
-  await axios.post(" http://localhost:5000/run",playload).then(response =>{
-    console.log(response);
-     this.$emit('showOutput',response.data.output,true);
-  }).catch(error =>{
-    console.log(error);
-    if(error.response.status===400){
-        this.$emit('showOutput',error.response.data.error,false);
-    }
-    else{
-    this.$emit('showOutput',error.response.data.error.stderr.split("error:"),false);}
-  });
- },
- toggle(){  // popUp a msg it will show your code will disapper click checkBox to preserve [] ok and cancle button
-    this.Enabletrace.switch=!this.Enabletrace.switch;
-    
-    if(this.Enabletrace.switch ){
-    this.Enabletrace.msg= 'disable Trace mood';
-    this.code=`//now you can practice and trace you code flow
+  methods: {
+    //how to refresh the code mirror is enabled the mood
+    // prevent code from the reload
+    //hey the method doesnt contains static please create Object and call the method;
+    async compileAndRun() {
+      const playload = {
+        language: "java",
+        code: this.code,
+        mode: this.Enabletrace.switch,
+        userIp:this.userIp,
+        input:this.defaultInput
+      };
+      await axios
+        .post("http://localhost:5000/run", playload)
+        .then((response) => {
+          console.log(response);
+          this.$emit("showOutput", response.data.output, true ,(this.userIp===''&&this.Enabletrace.switch===false)?"showWithDefault":"");
+        })
+        .catch((error) => {
+          console.log(error);
+          if (error.response.status === 400) {
+            this.$emit("showOutput", error.response.data.error, false);
+          } else {
+            this.$emit("showOutput",error.response.data.error.stderr.split("error:"),false);
+          }
+        });
+    },
+
+    toggle() {
+      // popUp a msg it will show your code will disapper click checkBox to preserve [] ok and cancle button
+      this.Enabletrace.switch = !this.Enabletrace.switch;
+
+      if (this.Enabletrace.switch) {
+        this.Enabletrace.msg = "disable Trace mood";
+        this.code = `//now you can practice and trace you code flow
  class Main {
 
    public static void main(String[] args) {
        System.out.println("hello world");
      }
  }
- ` } else {
-  this.Enabletrace.msg='enable Trace Mood';
- this.code=`
- public static int test2(int ans) {
+ `;
+      } else {
+        this.Enabletrace.msg = "enable Trace Mood";
+        this.code = `
+public static int test2(int ans) {
         return ans+10;
 }
 
-public static String test(int a, String name, boolean show) {
-    return a + " " + name + " " + show +" "+test2(a);
- }`
- }
- }
-}
+public static int test(int a, String name, boolean show) {
+    return a;
+ }`;
+      }
+    },
+  },
 };
 </script>
 
@@ -126,6 +141,6 @@ public static String test(int a, String name, boolean show) {
 }
 
 .codemirror-container.width-auto {
-  width: 100% ;
+  width: 100%;
 }
 </style>

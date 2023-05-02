@@ -2,13 +2,14 @@ const fs = require('fs');
 const { ExtractMethodDeclaration , extractActualDeclaration }=require('./ExtractMethodDec');
 const { generateScannerCode } = require('./GenerateScannersIp');
 const {ArgsExtracter} = require('./ArgsExtract');
+const {ConsDefaultIpTest} = require('./ConsDefaultIpRunner');
 
 // return error header class structural erros . show as GpT
-const classEditor = (filePathExce,codeSnippet) =>{
+const classEditor = (filePathExce,codeSnippet,defaultIp,defaultTest) =>{
   // validation part 
   if(/System\.out\.println\(|print\(/.test(codeSnippet)) return "error:PRINT_STATEMENTS_ARE_NOT_ALLOWED";
  
-  let coreMethod='test(int as, String ok, boolean a)'
+  let coreMethod=defaultIp.methodDesc;
   const methods = codeSnippet.trim().match(/[\w\s]+(\w+)\(([\w\s,]*)\)\s*{[^{}]*}/g);
   let coreCodeSnippet='';
   let count =0;
@@ -57,7 +58,7 @@ else{
 input = ExtractMethodDeclaration(codeSnippet);
 scanners = generateScannerCode(codeSnippet);
 }
- 
+if(defaultTest){ return ConsDefaultIpTest(fileContent,coreCodeSnippet!=''?coreCodeSnippet:codeSnippet,codeSnippet,defaultIp.defaultIp);}
 //console.log(fileContent.slice(-3,-2)); i can get the last before curly braces to add more method and scanners
 //console.log(scanners);
 fileContent=fileContent.replace(/public static void main\(String\[\] args\)\s*\{\s*\}/, `public static void main(String[] args) {\n    ${scanners}\n \n   System.out.println(${input});\n}`);
@@ -74,9 +75,10 @@ return finalContent;
 };
 // const codeSnippet2 = `
 // public static String test(int a, String name, boolean show) {
-//     return a + " " + name + " " + show +" "+test2(a);
-// }`;
-// classEditor('',codeSnippet2);
+//   return a + " " + name + " " + show +" "+test2(a);
+// }
+// `;
+//classEditor('',codeSnippet2,true);
 module.exports={
   classEditor
 }

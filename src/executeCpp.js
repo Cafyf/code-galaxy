@@ -7,19 +7,26 @@ const outputPath = path.join(__dirname, "outputs");
 if (!fs.existsSync(outputPath)) {
   fs.mkdirSync(outputPath, { recursive: true });
 }
- compileErrorCheck = (filepath)=>{
+
+const CheckWithDefaultResults = (filepath)=>{
   return new Promise((resolve, reject) => {
     exec(`java ${filepath}`, (error, stdout, stderr) => {
       error && reject({ error, stderr });
       stderr && reject(stderr);
-      resolve(stdout);
-    }).kill('SIGINT');
+      resolve(stdout.split("\r\n"));
+    });
    });
 };
 
-const executeCpp =  (filepath,enabledTraceMood) => {
+const executeCpp =  (filepath,enabledTraceMood,userIp) => {
+  console.log(userIp);
+  if(userIp==='' && !enabledTraceMood){
+    console.log("INFO : RUN WITH DEFAULT TEST INPUTS");
+ CheckWithDefaultResults(filepath);
+  }
+
   if(!enabledTraceMood){
-  console.log('inside if');
+  console.log('INFO: DISABLED TRACE MOOD');
   return  new Promise((resolve,reject) =>{ 
    const javaProcess = spawnSync('java', [filepath], {
       stdio: ['pipe', 'pipe', 'pipe'],
@@ -30,16 +37,16 @@ const executeCpp =  (filepath,enabledTraceMood) => {
 
     resolve(javaProcess.stdout);
   });
-}
-
-console.log("enabledTraceMood");
+} 
+else{
+console.log("INFO: ENABLEDTRACEMOOD");
   return new Promise((resolve, reject) => {
     exec(`java ${filepath}`, (error, stdout, stderr) => {
       error && reject({ error, stderr });
       stderr && reject(stderr);
       resolve(stdout);
     });
-   });
+   });}
 };
 
 module.exports = {
