@@ -5,7 +5,7 @@ const ArgsExtracter =(inputMethod ,type)=>{
     const parametersString = match[3];
     let dataTypesInOrder=[];
     let variableNamesInOrder=[];
-    const parameterRegex = /(\w+) (\w+)/g;
+    const parameterRegex = /(\w+(?:\[\s*\]|\s+\[\s*\])*) (\w+)/g;
     const methodArgs = [];
     let parameterMatch;
     while ((parameterMatch = parameterRegex.exec(parametersString)) !== null) {

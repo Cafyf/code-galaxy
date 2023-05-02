@@ -12,4 +12,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+body{
+  margin-left: 15px;
+}
+</style>

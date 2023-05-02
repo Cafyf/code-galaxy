@@ -1,20 +1,23 @@
 import java.util.Scanner;
 class Main {
+	
 
 public static int test2(int ans) {
         return ans+10;
 }
 
-public static String test(int a, String name, boolean show) {
-
-    return a + " " + name + " " + show +" "+test2(a);
- }	public static void main(String[] args) {
-    Scanner sc = new Scanner(System.in);
-		int a = Integer.parseInt(sc.nextLine());
-		String name = sc.nextLine();
-		boolean show = Boolean.parseBoolean(sc.nextLine());
-
+public static int test(int a, String name, boolean show) {
+    return a;
+ }
+public static void main(String[] args) { 
  
-   System.out.println(test(a,name,show));
+ Object [][] input = {{2,"hih",true},{3,"puu",false},{4,"iij",false},{23,"iij",false},{12,"iij",false},{9,"iij",false}};
+ for(Object[] v: input) {
+ int a = (int) v[0];
+String name = (String) v[1];
+boolean show = (boolean) v[2];
+ 
+System.out.println(test(a,name,show));
+}
 }
 }

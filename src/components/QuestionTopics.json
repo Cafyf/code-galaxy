@@ -1,0 +1,36 @@
+{
+    "topics": [
+        [
+            {
+                "header": "Warmup-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Simple warmup problems to get started (solutions available)",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Warmup-2",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Medium warmup string/array loops (solutions available)",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "Warmup-3",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Simple warmup problems to get started (solutions available)",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Warmup-4",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Medium warmup string/array loops (solutions available)",
+                "tickImg": "emptyTick.jpg"
+            }
+        ]
+    ]
+}

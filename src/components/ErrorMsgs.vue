@@ -1,23 +1,46 @@
 <template>
-    <div v-if="show==false" class="errorMsg">
+    <div v-if="show===false && supportShow!==true" class="errorMsg">
        <h3 :style="{ color: textColor }">{{ errorheader }}</h3>
-     <span v-for="(error,index) in formatOutPutMessage(outputContainer)" :key="index">{{error}} <br></span>
+     <pre style="margin:0px; padding-top:5px;" v-for="(error,index) in formatOutPutMessage(outputContainer)" :key="index">{{error}} </pre>
   </div>
-   <div v-if="show===true ">
+   <div v-if="show===true && supportShow!==true">
     <span  v-for="(output,index) in formatOutPutMessage(outputContainer)" :key="index">   {{output}} <br> </span>
    </div>
+
+<div class="test" v-if="supportShow===true">
+   <table class="output">
+      <tbody>
+        <tr>
+          <th>Expected</th>
+          <th>Run</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+        <tr v-for="(output,index) in formatOutPutMessage(outputContainer)" :key="index">
+          <th>{{output.desc+" "+output.ans}}</th>
+          <th>{{output.output}}</th>
+          <th>{{output.error?'X ':"ok"}}</th>
+          <th  :class="{error:output.error,pass:!output.error}"></th>
+          </tr>
+      </tbody>
+   </table>
+</div>
 </template>
 
 <script>
 export default {
     props:{
+      change:false,
        outputContainer:{
         type: Object
        }
     },
     data(){
+       console.log(this.outputContainer);
         return {
+           change:false,
             show:true,
+            supportShow:true,
             errorheader:'',
             textColor:''
         }
@@ -30,9 +53,9 @@ export default {
 
        mergedErrorContainer.forEach((element) => {
     // Iterate over the merged array
-    if (typeof element === "string" && !uniqueSet.has(element) && !element.includes(".java")) {
+    if (typeof element === "string" && !uniqueSet.has(element.trim()) && !element.includes(".java")) {
       // Check if the element is a string and not already in the set
-      uniqueSet.add(element); // Add the element to the set
+      uniqueSet.add(element.trim()); // Add the element to the set
       uniqueErrors.push(element); // Add the element to the unique array
     }
   });
@@ -58,14 +81,41 @@ customErrors(CheckCustomErrorMsg){
      }
 },
 
-     formatOutPutMessage(outputMessage) {
-      this.show=outputMessage.show;
-      if(outputMessage.msg!='' && outputMessage.msg[1].trim()==="class, interface, enum, or record expected")
-      {  
-       return this.customErrors(outputMessage.msg);
-      }  
+errorValidation(outputMessage){
+  let returnMessage ={
+    msg:'',
+    validError:false
+  }
+    // if(outputMessage.msg===null ){ return };
 
-        if(outputMessage.msg === "Empty code body!"){this.errorheader=outputMessage.msg; return;}
+      if(outputMessage.msg.length>0 && outputMessage.msg[0].includes('Exception') && outputMessage.msg[0].includes('java.lang.')){
+        console.log("okokoko");
+        returnMessage.msg=outputMessage.msg[0].split('\r\n');
+        returnMessage.validError=true
+        return returnMessage;
+      }
+
+    if(outputMessage.msg!='' && outputMessage.msg[1].trim()==="class, interface, enum, or record expected")
+      {  
+        returnMessage.msg=this.customErrors(outputMessage.msg)
+        returnMessage.validError=true;
+       return returnMessage;
+      }
+      return returnMessage;
+},
+     formatOutPutMessage(outputMessage) {
+      if(outputMessage.defaultOpDesc!=undefined){
+        this.supportShow=true;
+         console.log(outputMessage.defaultOpDesc);
+         return outputMessage.defaultOpDesc;
+      }
+      this.supportShow=false;
+      this.show=outputMessage.show;
+      const returnMessage=this.errorValidation(outputMessage);
+       if(returnMessage.validError){ return returnMessage.msg; }
+
+      if(outputMessage.msg === "Empty code body!"){this.errorheader=outputMessage.msg; return;}
+
         if( this.show==false && outputMessage.msg!=null ){
             if(outputMessage.msg.length-1===1){
              this.errorheader=outputMessage.msg[outputMessage.msg.length-1];
@@ -87,6 +137,9 @@ customErrors(CheckCustomErrorMsg){
      return outputMessage.msg;
     }
     }
+},
+mounted(){
+  this.supportShow=true;
 }
 }
 </script>
@@ -95,5 +148,25 @@ customErrors(CheckCustomErrorMsg){
 .errorMsg{
     border: 1px solid rgb(255, 255, 255) !important;
     width: 100%;
+}
+.error {
+  background: red;
+}
+.output{
+  border-collapse: collapse;
+}
+ th{
+  padding: 5px;
+  border: 2px solid black;
+}
+th:nth-child(3){
+  width: 20px;
+}
+th:last-child{
+  width: 20px;
+  padding: 5px;
+}
+.pass{
+  background: green;
 }
 </style>

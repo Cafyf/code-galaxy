@@ -1,0 +1,24 @@
+{
+  "Description":{"text":"Simple warmup problems to get started (solutions available)."},
+  "Methodtitles":[
+    [
+      {"imgUrl":"tick.png","name":"test","font":"H"},
+      {"imgUrl":"tick.png","name":"test2","font":"H"},
+      {"imgUrl":"tick.png","name":"test3","font":"H"}
+   ]
+]
+ ,
+  "test":{
+      "methodDesc":"test(int as,String b,boolean a)",
+      "questions":"Given an int n, return the absolute difference between n and 21, except return double the absolute difference if n is over 21.",
+      "sampleInputDesc":[
+        {"desc":"test(19) →", "ans":2,"output":null,"error":false},
+        {"desc":"test(10) →", "ans":11,"output":null,"error":false},
+        {"desc":"test(21) →", "ans":2,"output":null,"error":false},
+        {"desc":"test(23) →", "ans":23,"output":null,"error":false},
+        {"desc":"test(1) →", "ans":9,"output":null,"error":false},
+        {"desc":"test(21) →", "ans":12,"output":null,"error":false}
+      ],
+      "inputDesc":["{2,\"hih\",true}","{3,\"puu\",false}","{4,\"iij\",false}","{23,\"iij\",false}","{12,\"iij\",false}","{9,\"iij\",false}"]
+    }
+}
