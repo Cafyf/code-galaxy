@@ -10,6 +10,7 @@
  ,
   "test":{
       "methodDesc":"test(int as,String b,boolean a)",
+      "methodTemplate":"public static int test2(int ans) {\n\r        return ans+10;\n}\n\rpublic static int test(int a, String name, boolean show) {\n\r\t    return a;\n}",
       "questions":"Given an int n, return the absolute difference between n and 21, except return double the absolute difference if n is over 21.",
       "sampleInputDesc":[
         {"desc":"test(19) →", "ans":2,"output":null,"error":false},

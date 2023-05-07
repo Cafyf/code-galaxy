@@ -37,23 +37,20 @@ export default {
         type:Object
       }
   },
+  props:{
+      codeTemplate:{
+        type:String
+      }
+  },
   data() {
     return {
+      code:this.codeTemplate,
       Enabletrace: { msg: "enable Trace Mood", switch: false },
       userIp:''
     };
   },
   setup() {
-    const code = ref(`
-public static int test2(int ans) {
-        return ans+10;
-}
-
-public static int test(int a, String name, boolean show) {
-    return a;
- }`);
     return {
-      code,
       cmOptions: {
         lineNumbers: true,
         mode: "text/x-java", // Language mode
@@ -105,14 +102,7 @@ public static int test(int a, String name, boolean show) {
  `;
       } else {
         this.Enabletrace.msg = "enable Trace Mood";
-        this.code = `
-public static int test2(int ans) {
-        return ans+10;
-}
-
-public static int test(int a, String name, boolean show) {
-    return a;
- }`;
+        this.code = this.codeTemplate;
       }
     },
   },

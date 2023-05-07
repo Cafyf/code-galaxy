@@ -1,7 +1,7 @@
 <template>
   <QuestionsPrb :problemContainer="this.problemContainer" />
  <div class="editor-container">
-  <CodeEditor :defaultInput="defaultIp" @showOutput="initializeCompiledOutPut"/>
+  <CodeEditor :codeTemplate="codeSinppet" :defaultInput="defaultIp" @showOutput="initializeCompiledOutPut"/>
   <ErrorMsgs :change="change" :outputContainer="outputData" />
  </div>
 </template>
@@ -38,7 +38,8 @@ export default {
             msg:'',
             defaultOpDesc:undefined,
         },
-        change:false
+        change:false,
+        codeSinppet:""
         };
     },
     methods:{
@@ -67,6 +68,7 @@ export default {
     },
     created(){
      try{  
+        this.codeSinppet=QuestionsMock[this.name].methodTemplate;
         this.defaultIp.methodDesc=QuestionsMock[this.name].methodDesc;
         this.defaultIp.defaultIp=QuestionsMock[this.name].inputDesc;
         this.problemContainer.problemQuestion=QuestionsMock[this.name].questions;

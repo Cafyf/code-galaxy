@@ -19,7 +19,7 @@
 
 <script>
 // import generateFileForQuestions from '@/generateFile';
-import rimraf from 'rimraf'
+//import rimraf from 'rimraf'
 import axios from "axios";
 export default {
  name:'QuestionsGroups',
