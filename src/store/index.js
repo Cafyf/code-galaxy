@@ -1,11 +1,28 @@
-import { createStore } from "vuex";
+import Vuex from 'vuex';
 
-export default createStore({
+
+const store = new Vuex.Store({
   state: {
-    
+    questions :'',
+    sessionData:[],
+    currentSession:{},
+    sessionManagerDetails:{},
+    singleQuestion:{},
+    lastRunnedStatus:'',
+    isDefaultTestAccepted:''
   },
   getters: {},
-  mutations: {},
-  actions: {},
-  modules: {},
+  mutations: {
+    setPreservedState(state, preservedState) {
+      state.questions = preservedState;
+    },
+  },
+  actions: {
+    setPreservedState(state, preservedState) {
+      state.questions = preservedState;
+    }
+  },
+  modules: {}
 });
+
+export default store;

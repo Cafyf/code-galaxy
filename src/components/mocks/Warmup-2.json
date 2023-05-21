@@ -1,0 +1,102 @@
+{
+    "Description":{"text":"Medium warmup string/array loops (solutions available)."},
+    "Methodtitles":[
+      [
+        {"imgUrl":"tick.png","name":"stringTimes ","font":"H"},
+        {"imgUrl":"tick.png","name":"last2","font":"H"},
+        {"imgUrl":"tick.png","name":"array667 ","font":"H"}
+     ],
+     [
+      {"imgUrl":"tick.png","name":"doubleX ","font":"H"},
+       {"imgUrl":"tick.png","name":"array123 ","font":"H"},
+      {"imgUrl":"tick.png","name":"noTriples ","font":"H"}
+   ]
+    ]
+,
+"stringTimes":{
+    "methodDesc":"stringTimes(String str, int n)",
+    "methodTemplate":"public String stringTimes(String str, int n) {\n\r        \n}",
+    "questions": "Given a string and a non-negative int n, return a larger string that is n copies of the original string." ,    
+    "sampleInputDesc":[
+      {"desc":"stringTimes(\"Hi\", 2) →", "ans":"HiHi","output":null,"error":false},
+      {"desc":" stringTimes(\"Hi\", 3)→", "ans": "HiHiHi","output":null,"error":false},
+      {"desc":"stringTimes(\"Hi\", 1) →", "ans":"Hi","output":null,"error":false},
+      {"desc":"stringTimes(\"Hi\", 0) →", "ans":"","output":null,"error":false},
+      {"desc":"stringTimes(\"Hi\", 5) →", "ans":"HiHiHiHiHi","output":null,"error":false},
+      {"desc":"stringTimes(\"Oh Boy!\", 2) →", "ans":"Oh Boy!Oh Boy!","output":null,"error":false},
+      {"desc":" stringTimes(\"x\",4 )→", "ans": "xxxx"	,"output":null,"error":false},
+      {"desc":"stringTimes(\"\", 4) →", "ans":"","output":null,"error":false},
+      {"desc":" stringTimes(\"code\", 2)→", "ans":"codecode","output":null,"error":false},
+      {"desc":" stringTimes(\"code\", 3)→", "ans": "codecodecode","output":null,"error":false}
+      
+    ],
+    "inputDesc":["{\"Hi\",2}","{\"Hi\", 3}","{\"Hi\", 1}","{\"Hi\", 0}","{\"Hi\", 5}","{\"Oh Boy!\", 2}","{\"x\",4}","{\"\", 4}","{\"code\", 2}","{\"code\", 3}"]
+  },
+  
+  "last2":{
+    "methodDesc":"last2(String str)",
+    "methodTemplate":"public int last2(String str) {\n\r        \n}",
+    "questions":"Given a string, return the count of the number of times that a substring length 2 appears in the string and also as the last 2 chars of the string, so  \"hixxxhi\" yields 1 (we won't count the end substring).",
+    "sampleInputDesc":[
+      {"desc":"last2(\"hixxhi\") →", "ans":1,"output":null,"error":false},
+      {"desc":"last2(\"xaxxaxaxx\") →", "ans":1,"output":null,"error":false},
+      {"desc":"last2(\"axxxaaxx\") →", "ans":2,"output":null,"error":false},
+      {"desc":" last2(\"xxaxxaxxaxx\") →", "ans":3,"output":null,"error":false},
+      {"desc":" last2(\"xaxaxaxx\") →", "ans":0,"output":null,"error":false},
+      {"desc":" last2(\"xxxx\") →", "ans":2,"output":null,"error":false},
+      {"desc":" last2(\"13121312\") →", "ans":1,"output":null,"error":false},
+      {"desc":" last2(\"11212\") →", "ans":1,"output":null,"error":false},
+      {"desc":" last2(\"13121311\") →", "ans":0,"output":null,"error":false},
+      {"desc":" last2(\"1717171\") →", "ans":2,"output":null,"error":false},
+      {"desc":" last2(\"hi\") →", "ans":0,"output":null,"error":false},
+      {"desc":" last2(\"h\") →", "ans":0,"output":null,"error":false},
+      {"desc":" last2(\"\") →", "ans":0,"output":null,"error":false}
+    ],
+    "inputDesc":["{\"hixxhi\"}","{\"xaxxaxaxx\"}","{\"axxxaaxx\"}","{\"xxaxxaxxaxx\"}","{\"xaxaxaxx\"}","{\"xxxx\"}","{\"13121312\"}","{\"11212\"}","{\"13121311\"}","{\"1717171\"}","{\"hi\"}","{\"h\"}","{\"\"}"]
+},
+"array667 ":{
+"methodDesc":"array667(int[] nums)",
+"methodTemplate":"public int array667(int[] nums) {\n\r        \n}",
+
+
+"questions":"Given an array of ints, return the number of times that two 6's are next to each other in the array. Also count instances where the second   \"6 \" is actually a 7.",
+"sampleInputDesc":[
+  {"desc":" array667([6, 6, 2]) →", "ans":1,"output":null,"error":false},
+  {"desc":"array667([6, 6, 2, 6]) →", "ans":1,"output":null,"error":false},
+  {"desc":"array667([6, 7, 2, 6])→", "ans":1,"output":null,"error":false},
+  {"desc":" array667([6, 6, 2, 6, 7]) →", "ans":2,"output":null,"error":false},
+  {"desc":"array667([1, 6, 3])→", "ans":0,"output":null,"error":false},
+  {"desc":" array667([6, 1]) →", "ans":0,"output":null,"error":false},
+  {"desc":" array667([])→", "ans":0,"output":null,"error":false},
+  {"desc":" array667([3, 6, 7, 6]) →", "ans":1,"output":null,"error":false},
+  {"desc":" array667([3, 6, 6, 7]) →", "ans":2,"output":null,"error":false},
+  {"desc":"array667([6, 3, 6, 6])→", "ans":1,"output":null,"error":false},
+  {"desc":" array667([6, 7, 6, 6]) →", "ans":2,"output":null,"error":false},
+  {"desc":"array667([1, 2, 3, 5, 6])→", "ans":0,"output":null,"error":false},
+  {"desc":" array667([1, 2, 3, 6, 6]) →", "ans":1,"output":null,"error":false}
+],
+"inputDesc":["{[6, 6, 2]}","{[6, 6, 2, 6]}","{[6, 7, 2, 6]}","{[6, 6, 2, 6, 7]}","{[1, 6, 3]}","{[6, 1]}","{[]}","{[3, 6, 7, 6]}","{[3, 6, 6, 7]}","{[6, 3, 6, 6]}","{[6, 7, 6, 6]}","{[1, 2, 3, 5, 6]}","{[1, 2, 3, 6, 6]}"]
+},
+
+"doubleX":{
+  "methodDesc":"doubleX(String str)",
+  "methodTemplate":"boolean doubleX(String str) {\n\r        \n}",
+  "questions":"Given a string, return true if the first instance of \"x\" in the string is immediately followed by another \"x\".",
+    "sampleInputDesc":[
+    {"desc":" doubleX(\"axxbb\") →", "ans":true,"output":null,"error":false},
+    {"desc":" doubleX(\"axaxax\")→", "ans": false,"output":null,"error":false},
+    {"desc":" doubleX(\"xxxxx\") →", "ans":true,"output":null,"error":false},
+    {"desc":" doubleX(\"xaxxx\") →", "ans":false,"output":null,"error":false},
+    {"desc":" doubleX(\"aaaax\") →", "ans":false,"output":null,"error":false},
+    {"desc":"doubleX(\"\") →", "ans":false,"output":null,"error":false},
+    {"desc":" doubleX(\"abc\") →", "ans":false,"output":null,"error":false},
+    {"desc":" doubleX(\"x\") →", "ans":false,"output":null,"error":false},
+    {"desc":" doubleX(\"xx\") →", "ans":true,"output":null,"error":false},
+    {"desc":" doubleX(\"xax\") →", "ans": false,"output":null,"error":false},
+    {"desc":" doubleX(\"xaxx\") →", "ans": false,"output":null,"error":false}
+  ],
+  "inputDesc":["{\"axxbb\"}","{\"axaxax\"}","{\"xxxxx\"}","{\"xaxxx\"}","{\"aaaax\"}","{\"\"}","{\"abc\"}","{\"x\"}","{\"xx\"}","{\"xax\"}","{\"xaxx\"}"]
+}
+}
+
+  
