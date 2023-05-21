@@ -10,10 +10,11 @@ const classEditor = (filePathExce,codeSnippet,defaultIp,defaultTest) =>{
   if(/System\.out\.println\(|print\(/.test(codeSnippet)) return "error:PRINT_STATEMENTS_ARE_NOT_ALLOWED";
  
   let coreMethod=defaultIp.methodDesc;
-  const methods = codeSnippet.trim().match(/[\w\s]+(\w+)\(([\w\s,]*)\)\s*{[^{}]*}/g);
+  console.log(coreMethod);
+  const methods = codeSnippet.trim().match(/public static \w+ \w+\([^)]*\)\s*{[^}]*}/g);
   let coreCodeSnippet='';
   let count =0;
-
+  console.log(methods);
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   }

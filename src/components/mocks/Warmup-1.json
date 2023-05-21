@@ -7,14 +7,14 @@
       {"imgUrl":"tick.png","name":"test3","font":"H"}
    ],
    [
-    {"imgUrl":"tick.png","name":" sleepIn","font":"H"},
+    {"imgUrl":"tick.png","name":"sleepIn","font":"H"},
    {"imgUrl":"tick.png","name":"monkeyTrouble","font":"H"},
-    {"imgUrl":"tick.png","name":" sumDouble ","font":"H"}
+    {"imgUrl":"tick.png","name":"sumDouble ","font":"H"}
  ],
  [
   {"imgUrl":"tick.png","name":"diff21","font":"H"},
   {"imgUrl":"tick.png","name":"parrotTrouble","font":"H"},
-  {"imgUrl":"tick.png","name":" makes10","font":"H"}
+  {"imgUrl":"tick.png","name":"makes10","font":"H"}
 ],
 [
 {"imgUrl":"tick.png","name":"nearHundred ","font":"H"},
@@ -58,6 +58,8 @@
   {"imgUrl":"tick.png","name":"endUp ","font":"H"}
 ]
 
+
+ 
 ]
  ,
   "test":{
@@ -72,13 +74,13 @@
         {"desc":"test(1) →", "ans":9,"output":null,"error":false},
         {"desc":"test(21) →", "ans":12,"output":null,"error":false}
       ],
-      "inputDesc":["{2,\"hih\",true}","{3,\"puu\",false}","{4,\"iij\",false}","{23,\"iij\",false}","{12,\"iij\",false}","{9,\"iij\",false}"]
-     ,"mode":"easy"
+      "inputDesc":["{2,\"hih\",true}","{3,\"puu\",false}","{4,\"iij\",false}","{23,\"iij\",false}","{12,\"iij\",false}","{9,\"iij\",false}"],
+      "mode":"easy"
     },
     
     " sleepIn":{
       "methodDesc":"sleepIn(boolean weekday, boolean vacation)",
-      "methodTemplate":"public boolean sleepIn(boolean weekday, boolean vacation) {\n\r        \n}",
+      "methodTemplate":"public static boolean sleepIn(boolean weekday, boolean vacation) {\n\r        \n}",
       "questions":"The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.",
       "sampleInputDesc":[
         {"desc":"sleepIn(false, false) →", "ans":true,"output":null,"error":false},
@@ -87,12 +89,11 @@
         {"desc":"sleepIn(true, true)  →", "ans":true,"output":null,"error":false}
         
       ],
-      "inputDesc":["{false, false}","{true, false}","{false, true}","{true, true}"],
-      "mode":"medium"
+      "inputDesc":["{false, false}","{true, false}","{false, true}","{true, true}"]
 },
-"monkeyTrouble":{
+" monkeyTrouble ":{
   "methodDesc":"monkeyTrouble(boolean aSmile, boolean bSmile) ",
-  "methodTemplate":"public boolean monkeyTrouble(boolean aSmile, boolean bSmile)  {\n\r        \n}",
+  "methodTemplate":"public static boolean monkeyTrouble(boolean aSmile, boolean bSmile)  {\n\r        \n}",
   
   
   "questions":"We have two monkeys, a and b, and the parameters aSmile and bSmile indicate if each is smiling. We are in trouble if they are both smiling or if neither of them is smiling. Return true if we are in trouble.",
@@ -104,11 +105,11 @@
     
   ],
   "inputDesc":["{true, true}","{false, false}","{true, false}","{false, true}"],
-  "mode":"hard"
+  "mode":"medium"
 },
-"sumDouble":{
+"sumDouble ":{
   "methodDesc":"sumDouble(int a, int b) ",
-  "methodTemplate":"public int sumDouble(int a, int b)  {\n\r        \n}",
+  "methodTemplate":"public static int sumDouble(int a, int b)  {\n\r        \n}",
   
   
   "questions":"Given two int values, return their sum. Unless the two values are the same, then return double their sum.",
@@ -129,7 +130,7 @@
 },
 "diff21":{
   "methodDesc":"diff21(int n) ",
-  "methodTemplate":"public int diff21(int n)   {\n\r        \n}",
+  "methodTemplate":"public static  int diff21(int n) {\n\r        \n}",
   "questions":"Given an int n, return the absolute difference between n and 21, except return double the absolute difference if n is over 21.",
   "sampleInputDesc":[
     {"desc":" diff21(19) →", "ans":2,"output":null,"error":false},
@@ -148,12 +149,13 @@
     
     
   ],
-  "inputDesc":["{19}","{10}","{21}","{22}","{25}","{30}","{0}","{1}","{2}","{-1}","{-2}","{50}"]
+  "inputDesc":["{19}","{10}","{21}","{22}","{25}","{30}","{0}","{1}","{2}","{-1}","{-2}","{50}"],
+  "mode":"easy"
 
 },
 "parrotTrouble":{
   "methodDesc":"parrotTrouble(boolean talking, int hour) ",
-  "methodTemplate":"public boolean parrotTrouble(boolean talking, int hour)  {\n\r        \n}",
+  "methodTemplate":"public static boolean parrotTrouble(boolean talking, int hour)  {\n\r        \n}",
   "questions":"We have a loud talking parrot.The'hour' parameter is the current hour time in the range 0..23. We are in trouble if the parrot is talking and the hour is before 7 or after 20. Return true if we are in trouble.",
   "sampleInputDesc":[
     {"desc":" parrotTrouble(true, 6) →", "ans":true,"output":null,"error":false},
@@ -166,34 +168,31 @@
     {"desc":" parrotTrouble(false, 23)  →", "ans":false,"output":null,"error":false},
     {"desc":"parrotTrouble(true, 20) →", "ans":false,"output":null,"error":false},
     {"desc":" parrotTrouble(true, 20) →", "ans":false,"output":null,"error":false}
-    
-    
-    
   ],
-  "inputDesc":["{true, 6}","{true, 7}","{false, 6}","{true, 21}","{false, 21}","{false, 20}","{true, 23}","{false, 23}","{true, 20}","{false, 12}"]
+  "inputDesc":["{true, 6}","{true, 7}","{false, 6}","{true, 21}","{false, 21}","{false, 20}","{true, 23}","{false, 23}","{true, 20}","{false, 12}"],
+  "mode":"medium"
 },
 "makes10":{
   "methodDesc":"makes10(int a, int b) ",
-  "methodTemplate":"public boolean makes10(int a, int b)  {\n\r        \n}",
+  "methodTemplate":"public static boolean makes10(int a, int b)  {\n\r        \n}",
     "questions":"Given 2 ints, a and b, return true if one if them is 10 or if their sum is 10.",
   "sampleInputDesc":[
-    {"desc":" makes10(9, 10) →", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(9, 10) →", "ans":true,"output":null,"error":false},
     {"desc":"makes10(9, 9)  →", "ans":false,"output":null,"error":false},
-    {"desc":" makes10(1, 9) →", "ans":true,"output":null,"error":false},
-    {"desc":" makes10(10, 1) →", "ans":true,"output":null,"error":false},
-    {"desc":" makes10(10, 10)  →", "ans":true,"output":null,"error":false},
-    {"desc":" makes10(8, 2)→", "ans":true,"output":null,"error":false},
-    {"desc":" makes10(8, 3)  →", "ans":false,"output":null,"error":false},
-    {"desc":" makes10(10, 42) →", "ans":true,"output":null,"error":false},
-    {"desc":" makes10(12, -2) →", "ans":true,"output":null,"error":false}
-    
-    
+    {"desc":"makes10(1, 9) →", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(10, 1) →", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(10, 10)  →", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(8, 2)→", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(8, 3)  →", "ans":false,"output":null,"error":false},
+    {"desc":"makes10(10, 42) →", "ans":true,"output":null,"error":false},
+    {"desc":"makes10(12, -2) →", "ans":true,"output":null,"error":false}
   ],
-  "inputDesc":["{9, 10}","{9, 9}","{1, 9}","{10, 1}","{10, 10}","{8, 2}","{8, 3}","{10, 42}","{12,-2}"]
+  "inputDesc":["{9, 10}","{9, 9}","{1, 9}","{10, 1}","{10, 10}","{8, 2}","{8, 3}","{10, 42}","{12,-2}"],
+  "mode":"medium"
 },
 "nearHundred":{
   "methodDesc":" nearHundred(int n)",
-  "methodTemplate":"public boolean nearHundred(int n)  {\n\r        \n}",
+  "methodTemplate":"public static boolean nearHundred(int n)  {\n\r        \n}",
     "questions":"Given an int n, return true if it is within 10 of 100 or 200. Note: Math.abs(num) computes the absolute value of a number.",
   "sampleInputDesc":[
     {"desc":" nearHundred(93) →", "ans": true,"output":null,"error":false},
@@ -215,113 +214,178 @@
     {"desc":" nearHundred(210) →", "ans":true,"output":null,"error":false},
     {"desc":"nearHundred(211) →", "ans":false,"output":null,"error":false},
     {"desc":" nearHundred(290) →", "ans":false,"output":null,"error":false}
-    
-    
-    
   ],
-  "inputDesc":["{93}","{90}","{89}","{110}","{111}","{121}","{-101}","{-209}","{190}","{209}","{0}","{5}","{-50}","{191}","{189}","{200}","{210}","{211}","{290}"]
+  "inputDesc":["{93}","{90}","{89}","{110}","{111}","{121}","{-101}","{-209}","{190}","{209}","{0}","{5}","{-50}","{191}","{189}","{200}","{210}","{211}","{290}"],
+  "mode":"hard"
 },
 "posNeg":{
   "methodDesc":"posNeg(int a, int b, boolean negative) ",
   "methodTemplate":"public boolean posNeg(int a, int b, boolean negative)  {\n\r        \n}",
     "questions":"Given 2 int values, return true if one is negative and one is positive. Except if the parameter \"negative\" is true, then return true only if both are negative.",
   "sampleInputDesc":[
-    {"desc":" posNeg(1, -1, false) →", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-1, 1, false)→", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-4, -5, true) →", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-4, -5, false) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(-4, 5, false)  →", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-4, 5, true)→", "ans": false,"output":null,"error":false},
-    {"desc":" posNeg(1, 1, false) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(-1, -1, false) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(1, -1, true) →", "ans": false,"output":null,"error":false},
-    {"desc":" posNeg(-1, 1, true) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(1, 1, true) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(5, -5, false)  →", "ans": true,"output":null,"error":false},
-    {"desc":" posNeg(-6, 6, false)  →", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-5, -6, false) →", "ans":true,"output":null,"error":false},
-    {"desc":" posNeg(-2, -1, false) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(1, 2, false) →", "ans":false,"output":null,"error":false},
-    {"desc":" posNeg(-5, 6, true) →", "ans": false,"output":null,"error":false},
-    {"desc":" posNeg(-5, -5, true) →", "ans": true,"output":null,"error":false}
+    {"desc":"posNeg(1, -1, false) →", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-1, 1, false)→", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-4, -5, true) →", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-4, -5, false) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(-4, 5, false)  →", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-4, 5, true)→", "ans": false,"output":null,"error":false},
+    {"desc":"posNeg(1, 1, false) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(-1, -1, false) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(1, -1, true) →", "ans": false,"output":null,"error":false},
+    {"desc":"posNeg(-1, 1, true) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(1, 1, true) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(5, -5, false)  →", "ans": true,"output":null,"error":false},
+    {"desc":"posNeg(-6, 6, false)  →", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-5, -6, false) →", "ans":true,"output":null,"error":false},
+    {"desc":"posNeg(-2, -1, false) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(1, 2, false) →", "ans":false,"output":null,"error":false},
+    {"desc":"posNeg(-5, 6, true) →", "ans": false,"output":null,"error":false},
+    {"desc":"posNeg(-5, -5, true) →", "ans": true,"output":null,"error":false}
     
     
     
   ],
-  "inputDesc":["{1, -1, false}","{-1, 1, false}","{-4, -5, true}","{-4, -5, false}","{-4, 5, false}","{-4, 5, true}","{1, 1, false}","{-1, -1, false}","{1, -1, true}","{-1, 1, true}","{1, 1, true}","{-1, -1, true}","{5, -5, false}","{-6, 6, false}","{-5, -6, false}","{-2, -1, false}","{1, 2, false}","{-5, 6, true}","{-5, -5, true}"]
+  "inputDesc":["{1, -1, false}","{-1, 1, false}","{-4, -5, true}","{(-4, -5, false) }","{-4, 5, false}","{-4, 5, true}","{1, 1, false}","{-1, -1, false}","{1, -1, true}","{-1, 1, true}","{1, 1, true}","{-1, -1, true}","{5, -5, false}","{-6, 6, false}","{-5, -6, false}","{-2, -1, false}","{1, 2, false}","{-5, 6, true}","{-5, -5, true}"],
+  "mode":"hard"
 },
 "notString":{
   "methodDesc":"notString(String str)",
-  "methodTemplate":"public String notString(String str) {\n\r        \n}",
+  "methodTemplate":"public static String notString(String str) {\n\r        \n}",
     "questions":"Given a string, return a new string where \"not\"  has been added to the front. However, if the string already begins with \"not\", return the string unchanged. Note: use .equals() to compare 2 strings.",
   "sampleInputDesc":[
-    {"desc":" notString( \"candy\") →", "ans":"not candy","output":null,"error":false},
+    {"desc":"notString( \"candy\") →", "ans":"not candy","output":null,"error":false},
     {"desc":"notString(\"x\")  →", "ans":"not x","output":null,"error":false},
-    {"desc":" notString(\"not bad\") →", "ans":"not bad","output":null,"error":false},
-    {"desc":" notString(\"bad\") →", "ans": "not bad","output":null,"error":false},
-    {"desc":" notString(\"not\") →", "ans": "not","output":null,"error":false},
-    {"desc":" notString(\"is not\")→", "ans":"not is not","output":null,"error":false},
-    {"desc":" notString(\"no\") →", "ans":"not no","output":null,"error":false}
+    {"desc":"notString(\"not bad\") →", "ans":"not bad","output":null,"error":false},
+    {"desc":"notString(\"bad\") →", "ans": "not bad","output":null,"error":false},
+    {"desc":"notString(\"not\") →", "ans": "not","output":null,"error":false},
+    {"desc":"notString(\"is not\")→", "ans":"not is not","output":null,"error":false},
+    {"desc":"notString(\"no\") →", "ans":"not no","output":null,"error":false}
    
     
   ],
-  "inputDesc":["{\"candy\"}","{\"x\"}","{\"not bad\"}","{\"bad\"}","{\"not\"}","{\"is not\"}","{\"no\"}","{}"]
+  "inputDesc":["{\"candy\"}","{\"x\"}","{\"not bad\"}","{\"bad\"}","{\"not\"}","{\"is not\"}","{\"no\"}","{}"],
+  "mode":"easy"
 },
 "missingChar":{
   "methodDesc":"missingChar(String str, int n) " ,
-  "methodTemplate":"public String missingChar(String str, int n) {\n\r        \n}", 
+  "methodTemplate":"public static String missingChar(String str, int n) {\n\r        \n}", 
     "questions":"Given a non-empty string and an int n, return a new string where the char at index n has been removed. The value of n will be a valid index of a char in the original string (i.e. n will be in the range 0..str.length()-1 inclusive).",
   "sampleInputDesc":[
-    {"desc":" missingChar(\"kitten\", 1) →", "ans":"ktten","output":null,"error":false},
+    {"desc":"missingChar(\"kitten\", 1) →", "ans":"ktten","output":null,"error":false},
     {"desc":"missingChar(\"kitten\", 0) →", "ans": "itten","output":null,"error":false},
     {"desc":"missingChar(\"kitten\", 4) →", "ans":"kittn","output":null,"error":false},
-    {"desc":" missingChar(\"Hi\", 0) →", "ans":"i","output":null,"error":false},
-    {"desc":" missingChar(\"Hi\", 1) →", "ans":"H","output":null,"error":false},
-    {"desc":" missingChar(\"code\", 0) →", "ans":"ode","output":null,"error":false},
+    {"desc":"missingChar(\"Hi\", 0) →", "ans":"i","output":null,"error":false},
+    {"desc":"missingChar(\"Hi\", 1) →", "ans":"H","output":null,"error":false},
+    {"desc":"missingChar(\"code\", 0) →", "ans":"ode","output":null,"error":false},
     {"desc":"missingChar(\"code\", 1) →", "ans":"cde","output":null,"error":false},
-    {"desc":" missingChar(\"code\", 2) →", "ans": "coe","output":null,"error":false},
-    {"desc":" missingChar(\"code\", 3) →", "ans":"cod","output":null,"error":false},
-    {"desc":" missingChar(\"chocolate\", 8) →", "ans":"chocolat","output":null,"error":false}
+    {"desc":"missingChar(\"code\", 2) →", "ans": "coe","output":null,"error":false},
+    {"desc":"missingChar(\"code\", 3) →", "ans":"cod","output":null,"error":false},
+    {"desc":"missingChar(\"chocolate\", 8) →", "ans":"chocolat","output":null,"error":false}
     
     
   ],
-  "inputDesc":["{\"kitten\", 1}","{\"kitten\", 0}","{\"kitten\", 4}","{\"Hi\", 0}","{\"Hi\", 1}","{\"code\", 0}","{\"code\", 1}","{\"code\", 2}","{\"code\", 3}","{\"chocolate\", 8}"]
+  "inputDesc":["{\"kitten\", 1}","{\"kitten\", 0}","{\"kitten\", 4}","{\"Hi\", 0}","{\"Hi\", 1}","{\"code\", 0}","{\"code\", 1}","{\"code\", 2}","{\"code\", 3}","{\"chocolate\", 8}"],
+  "mode":"medium"
 },
 "frontBack":{
   "methodDesc":"frontBack(String str) ",
-  "methodTemplate":"public String frontBack(String str)   {\n\r        \n}",
+  "methodTemplate":"public static String frontBack(String str)   {\n\r        \n}",
     "questions":"Given a string, return a new string where the first and last chars have been exchanged.",
   "sampleInputDesc":[
     {"desc":"frontBack(\"code\")  →", "ans":"eodc","output":null,"error":false},
-    {"desc":" frontBack(\"a\") →", "ans":"a","output":null,"error":false},
-    {"desc":" frontBack(\"ab\") →", "ans":"ba","output":null,"error":false},
-    {"desc":" frontBack(\"abc\") →", "ans":"cba","output":null,"error":false},
-    {"desc":" frontBack(\"\") →", "ans":"","output":null,"error":false},
+    {"desc":"frontBack(\"a\") →", "ans":"a","output":null,"error":false},
+    {"desc":"frontBack(\"ab\") →", "ans":"ba","output":null,"error":false},
+    {"desc":"frontBack(\"abc\") →", "ans":"cba","output":null,"error":false},
+    {"desc":"frontBack(\"\") →", "ans":"","output":null,"error":false},
     {"desc":"frontBack(\"Chocolate\") →", "ans": "ehocolatC","output":null,"error":false},
-    {"desc":" frontBack(\"aavJ\") →", "ans": "Java","output":null,"error":false},
-    {"desc":" frontBack(\"hello\") →", "ans":"oellh","output":null,"error":false}
+    {"desc":"frontBack(\"aavJ\") →", "ans": "Java","output":null,"error":false},
+    {"desc":"frontBack(\"hello\") →", "ans":"oellh","output":null,"error":false}
     
     
   ],
-  "inputDesc":["{\"code\"}","{\"a\"}","{\"ab\"}","{\"abc\"}","{\"\"}","{\"Chocolate\"}","{\"aavJ\"}","{\"hello\"}"]
+  "inputDesc":["{\"code\"}","{\"a\"}","{\"ab\"}","{\"abc\"}","{\"\"}","{\"Chocolate\"}","{\"aavJ\"}","{\"hello\"}"],
+  "mode":"easy"
 },
 
 "front3":{
   "methodDesc":"front3(String str) ",
-  "methodTemplate":"public String front3(String str) {\n\r        \n}", 
+  "methodTemplate":"public static String front3(String str) {\n\r        \n}", 
     "questions":"Given a string, we'll say that the front is the first 3 chars of the string. If the string length is less than 3, the front is whatever is there. Return a new string which is 3 copies of the front.",
   "sampleInputDesc":[
-    {"desc":" front3(\"Java\") →", "ans": "JavJavJav","output":null,"error":false},
-    {"desc":" front3(\"Chocolate\") →", "ans":"ChoChoCho","output":null,"error":false},
-    {"desc":" front3(\"abc\") →", "ans": "abcabcabc","output":null,"error":false},
-    {"desc":" front3(\"abcXYZ\") →", "ans":"abcabcabc","output":null,"error":false},
-    {"desc":" front3(\"ab\") →", "ans":"ababab","output":null,"error":false},
+    {"desc":"front3(\"Java\") →", "ans": "JavJavJav","output":null,"error":false},
+    {"desc":"front3(\"Chocolate\") →", "ans":"ChoChoCho","output":null,"error":false},
+    {"desc":"front3(\"abc\") →", "ans": "abcabcabc","output":null,"error":false},
+    {"desc":"front3(\"abcXYZ\") →", "ans":"abcabcabc","output":null,"error":false},
+    {"desc":"front3(\"ab\") →", "ans":"ababab","output":null,"error":false},
     {"desc":"front3(\"a\") →", "ans":"aaa","output":null,"error":false},
-    {"desc":" front3(\"\") →", "ans":"","output":null,"error":false}
+    {"desc":"front3(\"\") →", "ans":"","output":null,"error":false}
     
     
     
   ],
-  "inputDesc":["{\"Java\"}","{\"Chocolate\"}","{\"abc\"}","{\"abcXYZ\"}","{\"ab\"}","{\"a\"}","{\"\"}"]
+  "inputDesc":["{\"Java\"}","{\"Chocolate\"}","{\"abc\"}","{\"abcXYZ\"}","{\"ab\"}","{\"a\"}","{\"\"}"],
+  "mode":"medium"
 }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

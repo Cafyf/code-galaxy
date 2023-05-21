@@ -1,7 +1,7 @@
 <template>
-  <nav>
+  <!-- <nav>
     <router-link to="/">Logical Programing</router-link>
-  </nav>
+  </nav> -->
   <router-view />
 </template>
 <script lang="js">
@@ -13,7 +13,9 @@ export default {
 </script>
 
 <style>
+
 body{
-  margin-left: 15px;
+  font-family: 'Times New Roman', Times, serif !important;
+  font-size: 16px !important;
 }
 </style>

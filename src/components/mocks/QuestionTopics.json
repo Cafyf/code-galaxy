@@ -1,0 +1,148 @@
+{
+    "topics": [
+        [
+            {
+                "header": "Warmup-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Simple warmup problems to get started",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Warmup-2",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Medium warmup string/array loops (solutions available)",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "String-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Basic string problems -- no loops",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "String-2 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Medium String problems -- 1 loop",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "String-3",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Harder String problems -- 2 loops",
+                "tickImg": "emptyTick.jpg"  
+            },
+            {
+                "header": "Array-1 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Basic array problems -- no loops.",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "Recursion-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Basic recursion problems",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Recursion-2 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Harder recursion problems",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "Array-2 ",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Medium array problems -- 1 loop",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Array-3 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Harder array problems -- 2 loops, more complex logic",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "String-2",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Medium String problems -- 1 loop",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "String-3",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Harder String problems -- 2 loops",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "Logic-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Basic boolean logic puzzles -- if else && || !",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Logic-2 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Medium boolean logic puzzles -- if else && || !",
+                "tickImg": "emptyTick.jpg"
+            }
+        ],
+        [
+            {
+                "header": "Map-1",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Basic Map get()/put(), no loops",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": "Map-2 ",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Maps with bulk data and loops",
+                "tickImg": "emptyTick.jpg"
+            }
+        ], 
+        [
+            {
+                "header": "Functional-1 ",
+                "stars": 8,
+                "starImg": "star.jpg",
+                "desc": "Functional mapping operations on lists with lambdas",
+                "tickImg": "emptyTick.jpg"
+            },
+            {
+                "header": " Functional-2",
+                "stars": 6,
+                "starImg": "star.jpg",
+                "desc": "Func filtering and mapping operations on lists with lambdas",
+                "tickImg": "emptyTick.jpg"
+            }
+        ]        
+    ]
+}

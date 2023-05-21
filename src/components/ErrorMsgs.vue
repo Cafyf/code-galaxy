@@ -115,7 +115,7 @@ errorValidation(outputMessage){
        if(returnMessage.validError){ return returnMessage.msg; }
 
       if(outputMessage.msg === "Empty code body!"){this.errorheader=outputMessage.msg; return;}
-
+     if(outputMessage.msg.includes("Declarations are wrong")) {this.errorheader=outputMessage.msg; return;}
         if( this.show==false && outputMessage.msg!=null ){
             if(outputMessage.msg.length-1===1){
              this.errorheader=outputMessage.msg[outputMessage.msg.length-1];
@@ -145,6 +145,10 @@ mounted(){
 </script>
 
 <style scoped>
+pre{
+   white-space: pre-wrap;
+  word-wrap: break-word;
+}
 .errorMsg{
     border: 1px solid rgb(255, 255, 255) !important;
     width: 100%;
@@ -152,19 +156,20 @@ mounted(){
 .error {
   background: red;
 }
-.output{
-  border-collapse: collapse;
+
+table{
+  border-collapse: separate;
 }
  th{
-  padding: 5px;
-  border: 2px solid black;
+  padding: 5px !important;
+ box-shadow: 1px 1px 6px 0px #dad6d0;;
 }
 th:nth-child(3){
-  width: 20px;
+  width: 20px !important;
 }
 th:last-child{
-  width: 20px;
-  padding: 5px;
+  width: 38px !important;
+  padding: 5px !important;
 }
 .pass{
   background: green;

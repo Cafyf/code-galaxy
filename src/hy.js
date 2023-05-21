@@ -2,11 +2,23 @@ const express = require("express");
 const cors = require('cors');
 const { generateFile,generateFileForQuestions } = require("./generateFile");
 const { executeCpp } = require("./executeCpp");
+const { deleteFolder } = require("./EliminateFloder");
 const app = express();
+const bodyParser = require('body-parser');
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.post("/delete", async (req, res) => {
+  const  { path }=req.body;
+ let ok =await deleteFolder(path);
+console.log("deleted.... "+path);
+console.log(ok);
+})
 
 app.get("/", async (req, res) => {
   const {jsonData,fileName}=req.query;
