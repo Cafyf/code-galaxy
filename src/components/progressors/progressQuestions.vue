@@ -49,7 +49,7 @@
             </div>
             </div>
               </div>
-                <button @click="backToHomePage" class="btn ">
+                <button @click="backToHomePage" class="btn btn1">
              back to home Page
             </button>
             </div>
@@ -120,7 +120,7 @@ export default {
 </script>
 
 <style scoped>
-.btn{
+.btn1{
   border:1px solid ;
   background: white;
   color: #000;
