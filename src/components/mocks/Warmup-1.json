@@ -78,10 +78,10 @@
       "mode":"easy"
     },
     
-    " sleepIn":{
+    "sleepIn":{
       "methodDesc":"sleepIn(boolean weekday, boolean vacation)",
       "methodTemplate":"public static boolean sleepIn(boolean weekday, boolean vacation) {\n\r        \n}",
-      "questions":"The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in.",
+      "questions":"The parameter weekday is true if it is a weekday, and the parameter vacation is true if we are on vacation. We sleep in if it is not a weekday or we're on vacation. Return true if we sleep in. (easy)",
       "sampleInputDesc":[
         {"desc":"sleepIn(false, false) →", "ans":true,"output":null,"error":false},
         {"desc":" sleepIn(true, false)→", "ans":false,"output":null,"error":false},
@@ -89,9 +89,10 @@
         {"desc":"sleepIn(true, true)  →", "ans":true,"output":null,"error":false}
         
       ],
-      "inputDesc":["{false, false}","{true, false}","{false, true}","{true, true}"]
+      "inputDesc":["{false, false}","{true, false}","{false, true}","{true, true}"],
+      "mode":"easy"
 },
-" monkeyTrouble ":{
+"monkeyTrouble":{
   "methodDesc":"monkeyTrouble(boolean aSmile, boolean bSmile) ",
   "methodTemplate":"public static boolean monkeyTrouble(boolean aSmile, boolean bSmile)  {\n\r        \n}",
   
@@ -107,7 +108,7 @@
   "inputDesc":["{true, true}","{false, false}","{true, false}","{false, true}"],
   "mode":"medium"
 },
-"sumDouble ":{
+"sumDouble":{
   "methodDesc":"sumDouble(int a, int b) ",
   "methodTemplate":"public static int sumDouble(int a, int b)  {\n\r        \n}",
   

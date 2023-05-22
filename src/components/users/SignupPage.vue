@@ -81,8 +81,14 @@ export default {
 }
       const signed=  await axios.post("http://localhost:8090/addUser",reqBody);
       if(signed.status===200){
+         if(signed.data.email==='Email already exist please use different'){
+          alert('Email already exist please use different');
+          return;
+         }
         signed.data.password='';
         localStorage.setItem('user-info',JSON.stringify(signed.data));
+        alert("SignUp Successful");
+        this.$router.push({ name: 'HomePage' })
         console.log(signed.data);
       }
     }

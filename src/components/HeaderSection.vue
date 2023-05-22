@@ -32,6 +32,10 @@
              <router-link to="/submission" class="nav-link">Submission</router-link>
 
             </li>
+             <li  class="nav-item list-2 ml-auto ">
+             <a @click="logout" class="nav-link">LogOut</a>
+
+            </li>
           </ul>
         </div>
       </div>
@@ -46,11 +50,15 @@ export default {
   data() {
     return {
       profileName:'',
-      status:''
+      status:'',
+      logoutCount:'',
     };
   },
   methods: {
-  
+  logout(){
+       localStorage.clear();
+        window.location.reload();
+  }
   },
   created(){
     const userinfo=JSON.parse(localStorage.getItem('user-info'));
@@ -63,6 +71,9 @@ export default {
 <style scoped>
 nav{
      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+a{
+  cursor: pointer;
 }
 .profile-card {
   position: absolute;

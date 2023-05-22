@@ -85,6 +85,10 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
   const isAuthenticated = checkIfUserIsAuthenticated(); // Implement your own logic to check if the user is authenticated
   if (to.meta.requiresAuth && !isAuthenticated) {
     // Redirect the user to the login page or any other appropriate page

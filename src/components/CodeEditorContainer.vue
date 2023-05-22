@@ -108,6 +108,9 @@ export default {
     }
 }
      const response= await axios.post('http://localhost:8090/submit',reqBody);
+     if(response.status==200){
+        alert('Submitted')
+     }
       console.log(response);
         }
     },
@@ -138,5 +141,8 @@ export default {
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 10px;
+}
+.main-container{
+    width: 97%;
 }
 </style>
