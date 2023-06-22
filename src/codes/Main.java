@@ -1,6 +1,7 @@
 import java.util.Scanner;
 class Main {
-	
+
+	
 
 public static int test2(int ans) {
         return ans+10;
@@ -15,7 +16,7 @@ public static void main(String[] args) {
  for(Object[] v: input) {
  int a = (int) v[0];
 String name = (String) v[1];
-boolean show = (boolean) v[2];
+boolean  show = (boolean) v[2];
  
 System.out.println(test(a,name,show));
 }
