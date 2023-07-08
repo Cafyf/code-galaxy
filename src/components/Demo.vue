@@ -1,5 +1,5 @@
 <template>
-<div>
+<section>
  <div class="box">
   <div v-for="(img,index) in firstImgs" :key="index" class="card card-main">
   <div class="card-body p-0">
@@ -19,15 +19,17 @@
    </div>
 </div>
 
-</div>
+</section>
 </template>
 
 <script>
+import getImage from '../Utils/asset-utils'
 export default {
     name:"Demo",
 
     data(){
-     return{
+     return{      
+        getImage,
         firstImgs:['java.jpg','js.png','topic.png'],
         subContent:[
          { 
@@ -59,9 +61,7 @@ export default {
     },
 
       methods:{
-         getImage(imgUrl) {
-            return require('../../src/assets/'+imgUrl);
-         }
+         getImage
       }
 
 }
