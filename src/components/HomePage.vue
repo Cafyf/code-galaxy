@@ -1,5 +1,8 @@
 <template>
+<div>
+
 <HeaderSection/>
+
 <div class="container-page">
   <div class="QuestionGrpTopics">
     <div class="demoSection"><Demo/></div>
@@ -22,6 +25,7 @@
   <sessionCard  />
   </div>
   <footerPage/>
+</div>
 </template>
 
 <script>
@@ -30,18 +34,18 @@ import sessionCard from './cards/sessionCard.vue'
 import Demo from './Demo.vue'
 import footerPage from './footerPage.vue'
 import HeaderSection from './HeaderSection.vue'
+import getImage from '../Utils/asset-utils'
 export default {
   name:"HomePage",
   components:{sessionCard,Demo,footerPage,HeaderSection},
   data(){
    return {
+    getImage,
     questionTopic:{}
    }
   },
    methods:{
-         getImage(imgUrl) {
-            return require('../../src/assets/'+imgUrl);
-         },
+        
          initUserDatas(){
           const body={
     "id": 1,
@@ -59,7 +63,7 @@ export default {
          }
     },
      created(){
-    //  this.initUserDatas();
+     this.initUserDatas();
      
       this.questionTopic=QuestionTopics.topics;
     }

@@ -1,10 +1,11 @@
 <template>
-
+<div>
 <div class="desc">
     <span class="h2">{{topic.header}}</span> &ensp;
     <img width="20" v-for="i in topic.stars" :key="i" :src="getImage(topic.starImg)" alt=""> 
     <p>{{description}}</p>
 </div>
+
   <table>
     <tbody >
         <tr v-for="(question,index) in questions" :key="index" >
@@ -16,14 +17,16 @@
         </tr>
     </tbody>
   </table>
-
+</div>
 </template>
 
 <script>
+
 // import generateFileForQuestions from '@/generateFile';
 //import rimraf from 'rimraf'
 import axios from "axios";
 import state from '../store/index'
+import getImage from '../Utils/asset-utils';
 
 export default {
  name:'QuestionsGroups',
@@ -36,14 +39,13 @@ props:{
 },
     data(){
         return { 
+            getImage,
             description:"",
             questions:[]
         }
     },
     methods:{
-         getImage(imgUrl) {
-            return require('../../src/assets/'+imgUrl);
-         }
+       
     },
     async created(){
     await localStorage.setItem('topic',JSON.stringify({topic:this.topic.header}));
@@ -112,4 +114,4 @@ table{
   tr {
     margin-bottom:10px; /* Adjust: the value  to increase or decrease the space */
   }
-</style>
+</style>                
