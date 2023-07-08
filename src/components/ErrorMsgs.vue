@@ -30,7 +30,7 @@
 </div>
 
 </section>
-</template>>
+</template>
 
 
 <script>

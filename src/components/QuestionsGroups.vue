@@ -45,7 +45,7 @@ props:{
         }
     },
     methods:{
-         getImage
+       
     },
     async created(){
     await localStorage.setItem('topic',JSON.stringify({topic:this.topic.header}));
