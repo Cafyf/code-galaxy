@@ -20,3 +20,17 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+# Step to copy files to ArtifactStagingDirectory
+- script: |
+    mkdir -p $(Build.ArtifactStagingDirectory)/code-galaxy
+    cp -R dist/* $(Build.ArtifactStagingDirectory)/code-galaxy/
+  displayName: 'Copy files to Artifact Staging Directory'
+
+# Step to publish artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/code-galaxy'
+    ArtifactName: 'code-galaxy-artifact'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifacts'
