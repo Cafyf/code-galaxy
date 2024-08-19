@@ -1,3 +1,4 @@
+<style lang="css" scoped src="./signup.css"></style>
 <template>
   <div class="container">
     <form @submit.prevent="validateInputs">
@@ -95,64 +96,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.container {
-  width: 380px;
-  margin: 17vh auto 0 auto;
-  padding: 20px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 4px;
-  font-size: 14px;
-  box-shadow: -1px 0px 15px rgba(0, 0, 0, 0.1);
-}
-
-.container h1 {
-  color: #0f2027;
- 
-text-align: center;
-}
-
-.container button {
-padding: 10px;
-margin-top: 10px;
-width: 100%;
-color: white;
-background-color: rgb(41, 57, 194);
-border: none;
-border-radius: 4px;
-}
-
-.input-control {
-display: flex;
-flex-direction: column;
-}
-
-.input-control input {
-border: 2px solid #f0f0f0;
-border-radius: 4px;
-display: block;
-font-size: 14px;
-padding: 8px;
-width: 100%;
-}
-
-.input-control input:focus {
-outline: 0;
-}
-
-.input-control.success input {
-border-color: #09c372;
-}
-
-.input-control.error input {
-border-color: #ff3860;
-}
-
-.input-control .error {
-color: #ff3860;
-font-size: 9px;
-height: 13px;
-}
-</style>
-
