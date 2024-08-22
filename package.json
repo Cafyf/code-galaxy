@@ -1,9 +1,9 @@
 {
-  "name": "coding-bat-upgradation",
+  "name": "code-galaxy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "do": "node src/hy.js",
+    "do": "node public/hy.js",
     "serve": "concurrently \"vue-cli-service serve\" \"npm run do\"",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
