@@ -28,7 +28,7 @@ import "codemirror/mode/clike/clike";
 
 // theme
 import "codemirror/theme/dracula.css";
-import state from '../store/index'
+import state from '../../store/index'
 export default {
   components: { Codemirror },
   props:{

@@ -1,15 +1,15 @@
 import { createRouter, createWebHistory } from "vue-router";
-import CodeEditor from "../components/CodeEditor.vue";
-import CodeEditorContainer from "../components/CodeEditorContainer.vue"
-import QuestionsGroups from "../components/QuestionsGroups.vue"
-import HomePage from"../components/HomePage.vue"
-import progressQuestions from"../components/progressors/progressQuestions.vue"
-import submissionDetails from"../components/progressors/submissionDetails.vue"
-import sessionCard from"../components/cards/sessionCard.vue"
-import sessionActives from"../components/cards/sessionActives.vue"
-import LoginPage from "../components/users/LoginPage.vue"
-import SignupPage  from "../components/users/SignupPage.vue"
-import HeaderSection from "../components/HeaderSection.vue"
+import CodeEditor from "../components/code-editor/CodeEditor.vue";
+import CodeEditorContainer from "../components/code-editor-container/CodeEditorContainer.vue"
+import QuestionsGroups from "../components/questions-group/QuestionsGroups.vue"
+import HomePage from"../components/home/HomePage.vue"
+import ProgressQuestions from"../components/progress/progressQuestionsDetail/ProgressQuestions.vue"
+import SubmissionDetails from"../components/progress/submissionDetails/SubmissionDetails.vue"
+import SessionCard from"../components/user-session/session-card/SessionCard.vue"
+import SessionActives from"../components/user-session/session-actives/SessionActives.vue"
+import LoginPage from "../components/auth/login/LoginPage.vue"
+import SignupPage  from "../components/auth/signup/SignupPage.vue"
+import HeaderSection from "../components/header/HeaderSection.vue"
 const routes = [
   {
     path: "/h",
@@ -29,13 +29,13 @@ const routes = [
   {
     path: "/card",
     name: "sessionCard",
-    component: sessionCard,
+    component: SessionCard,
     meta: { requiresAuth: true }
   },
   {
     path: "/session",
     name: "sessionActives",
-    component: sessionActives,
+    component: SessionActives,
     meta: { requiresAuth: true }
   },
   {
@@ -53,13 +53,13 @@ const routes = [
   {
     path: "/progress",
     name: "progress",
-    component: progressQuestions,
+    component: ProgressQuestions,
     meta: { requiresAuth: true }
   },
   {
     path: "/submission",
     name: "submissionDetails",
-    component: submissionDetails,
+    component: SubmissionDetails,
     meta: { requiresAuth: true }
   },
   {

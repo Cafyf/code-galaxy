@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import getImage from '../Utils/asset-utils'
+import getImage from '../../Utils/asset-utils'
 export default {
     name:"Demo",
 
