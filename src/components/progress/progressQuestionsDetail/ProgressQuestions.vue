@@ -59,9 +59,9 @@
 
 <script>
 import axios from 'axios'
-import state from '../../store/index'
+import state from '../../../store/index'
 export default {
- name:"progressQuestion",
+ name:"ProgressQuestion",
 
     data() {
      return {
@@ -74,7 +74,7 @@ export default {
   },
   methods:{
       getImage(imgUrl) {
-            return require('../../../src/assets/'+imgUrl);
+            return require('../../../../src/assets/'+imgUrl);
          },
           backToHomePage(){
     this.$router.push({name:'HomePage'})
@@ -103,7 +103,7 @@ export default {
       const res=  await axios.get(`http://localhost:8090/getSubmission?submissionQuestionId=${submissionQuestionId}`);
           // res.data.topic  replace here (from vue template)
       localStorage.setItem('topic',JSON.stringify({topic:res.data.topic}))
-      const questionFile=require(`../mocks/${res.data.topic}.json`);
+      const questionFile=require(`../../mocks/${res.data.topic}.json`);
       state.questions=questionFile;
       state.submittedQuestions=res.data.submittedQuestion;
       this.$router.push({ name: 'CodeEditorContainer', query: { name: questionName , option:'previous'} });

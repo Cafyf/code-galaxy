@@ -35,9 +35,9 @@
 
 <script>
 import axios from 'axios'
-import state from '../../store/index'
+import state from '../../../store'
 export default {
-    name:"sessionCard",
+    name:"SessionCard",
    
 data(){
 return {

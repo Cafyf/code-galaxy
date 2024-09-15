@@ -62,10 +62,10 @@
 <script>
 import moment from "moment";
 import axios from "axios";
-import state from '../../store/index'
+import state from '../../../store/index'
 
 export default {
-  name: "submissionDetails",
+  name: "SubmissionDetails",
   data() {
     return {
       isLoading: false,
@@ -78,7 +78,7 @@ export default {
     },
     showInEditor(question,submittedQuestion,topic){
        localStorage.setItem('topic',JSON.stringify({topic:topic}))
-       const questionFile=require(`../mocks/${topic}.json`);
+       const questionFile=require(`../../mocks/${topic}.json`);
        state.questions=questionFile;
       state.submittedQuestions=submittedQuestion;
       this.$router.push({ name: 'CodeEditorContainer', query: { name: question ,option:'previous' } });

@@ -25,8 +25,8 @@
 // import generateFileForQuestions from '@/generateFile';
 //import rimraf from 'rimraf'
 import axios from "axios";
-import state from '../store/index'
-import getImage from '../Utils/asset-utils';
+import state from '../../store/index'
+import getImage from '../../Utils/asset-utils';
 
 export default {
  name:'QuestionsGroups',
@@ -50,7 +50,7 @@ props:{
     async created(){
     await localStorage.setItem('topic',JSON.stringify({topic:this.topic.header}));
     const topic=JSON.parse(localStorage.getItem('topic'))
-    state.questions=require(`./mocks/${topic.topic}.json`);
+    state.questions=require(`../mocks/${topic.topic}.json`);
 
      let getData;
     try {
@@ -59,7 +59,7 @@ props:{
     } catch(err){  // this part is to make call to server side to get json data okay
  await axios.get(`http://localhost:5000/`,{
             params:{
-            jsonData:JSON.stringify(require('./QuestionsMock.json')),
+            jsonData:JSON.stringify(require('../QuestionsMock.json')),
             fileName:this.topic.header
         }
     },

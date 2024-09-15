@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import state from '../../store'
+import state from '../../../store'
 import axios from 'axios'
 export default {
-    name:'sessionActives',
+    name:'SessionActives',
 data(){
     // we need a column for last active to update it again login just show that session only
   return {

@@ -22,22 +22,22 @@
     </tbody>
   </table>
   </div>
-  <sessionCard  />
+  <SessionCard  />
   </div>
-  <footerPage/>
+  <FooterPage/>
 </div>
 </template>
 
 <script>
-import QuestionTopics from './mocks/QuestionTopics.json'
-import sessionCard from './cards/sessionCard.vue'
-import Demo from './Demo.vue'
-import footerPage from './footerPage.vue'
-import HeaderSection from './HeaderSection.vue'
-import getImage from '../Utils/asset-utils'
+import QuestionTopics from '../mocks/QuestionTopics.json'
+import SessionCard from '../user-session/session-card/SessionCard.vue'
+import Demo from '../demo/Demo.vue'
+import FooterPage from '../footer/FooterPage.vue'
+import HeaderSection from '../header/HeaderSection.vue'
+import getImage from '../../Utils/asset-utils'
 export default {
   name:"HomePage",
-  components:{sessionCard,Demo,footerPage,HeaderSection},
+  components:{SessionCard,Demo,FooterPage,HeaderSection},
   data(){
    return {
     getImage,

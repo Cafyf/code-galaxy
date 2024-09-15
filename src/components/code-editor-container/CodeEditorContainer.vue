@@ -9,10 +9,10 @@
 </template>
 
 <script>
-import QuestionsPrb from './QuestionsPrb.vue'
-import CodeEditor from './CodeEditor.vue'
-import ErrorMsgs from './ErrorMsgs.vue'
-import state from '../store/index'
+import QuestionsPrb from '../questions/QuestionsPrb.vue'
+import CodeEditor from '../code-editor/CodeEditor.vue'
+import ErrorMsgs from '../error-message/ErrorMsgs.vue'
+import state from '../../store/index'
 import axios from 'axios'
 export default {
     name:'CodeEditorContainer',

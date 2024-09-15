@@ -30,7 +30,7 @@ const executeCpp =  (filepath,enabledTraceMood,userIp) => {
   return  new Promise((resolve,reject) =>{ 
    const javaProcess = spawnSync('java', [filepath], {
       stdio: ['pipe', 'pipe', 'pipe'],
-      input: fs.readFileSync("D:/CODING-BAT-UPGRADATION/src/codes"+'/input.txt'),
+      input: fs.readFileSync("D:/code-galaxy/src/codes"+'/input.txt'),
       encoding: 'utf-8'
     });
     javaProcess.stderr && reject({error:javaProcess.error,stderr:javaProcess.stderr});
