@@ -4,11 +4,14 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-  - develop
-  - feature/*
+  branches:
+    include:
+      - develop
 
 pr:
-  - develop
+  branches:
+    include:
+      - develop
 
 pool:
   vmImage: ubuntu-latest
@@ -37,3 +40,4 @@ steps:
     ArtifactName: 'code-galaxy-artifact'
     publishLocation: 'Container'
   displayName: 'Publish Artifacts'
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop') 
