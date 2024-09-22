@@ -1,3 +1,5 @@
+<style lang="css" scoped src="./codeEditor.css"></style>
+
 <template>
   <div>
     <Codemirror
@@ -122,97 +124,4 @@ export default {
 };
 </script>
 
-<style >
-.cm-s-dracula span.cm-keyword {
-  color: #ff4706 !important;
-}
 
-.cm-s-dracula.CodeMirror {
-  background-color: #2f2f2f !important;
-  font-size: 12.8px !important;
-}
-.cm-s-dracula span.cm-def {
-  color: #3a99ff !important;
-}
-.cm-s-dracula span.cm-type {
-  color: #ffc800 !important;
-}
-.cm-s-dracula span.cm-variable {
-  color: #218dd6 !important;
-}
-.cm-s-dracula span.cm-string {
-  color: #6bd9dc !important;
-}
-
-.codemirror-container.width-auto {
-  width: 100%;
-}
-
-/* CSS */
-.button-62 {
-  background: linear-gradient(to bottom right, #4675e3, #0a4087);
-  border: 0;
-  border-radius: 12px;
-  color: #FFFFFF;
-  cursor: pointer;
-  display: inline-block;
-  font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 2.5;
-  outline: transparent;
-  padding: 0 1rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow .2s ease-in-out;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-}
-
-.button-62:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
-}
-
-.button-62:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(91, 89, 113, 0.5), .125rem .125rem 1rem rgba(7, 39, 134, 0.5);
-}
-
-.btn-13{
-  width: 140px !important;
-}
-/* CSS */
-.button-13 {
-  background-color: #fff;
-  border: 1px solid #d5d9d9;
-  border-radius: 8px;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  box-sizing: border-box;
-  color: #0f1111;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Amazon Ember",sans-serif;
-  font-size: 13px;
-  line-height: 29px;
-  padding: 0 10px 0 11px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  width: 100px;
-}
-
-.button-13:hover {
-  background-color: #f7fafa;
-}
-
-.button-13:focus {
-  border-color: #008296;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  outline: 0;
-}
-</style>

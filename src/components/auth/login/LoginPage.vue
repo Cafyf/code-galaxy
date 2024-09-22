@@ -83,7 +83,7 @@ export default {
         } else {alert("InValid Username or Password")}
     } catch(err){
           console.log(err);
-          initUserDatas(); 
+          this.initUserDatas(); 
           this.$router.push({ name: 'HomePage' })
     }
    }

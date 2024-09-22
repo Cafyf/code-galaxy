@@ -1,3 +1,6 @@
+<style lang="css" scoped src="./header.css"></style>
+
+
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -68,28 +71,4 @@ export default {
 };
 </script>
 
-<style scoped>
-nav{
-     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-a{
-  cursor: pointer;
-}
-.profile-card {
-  position: absolute;
-  top: 100%;
-  right: 10px;
-  z-index: 999;
-}
-.list-1{
-   font-size: 12px;
-   margin-left: -18px;
-    margin-right: 5px;
-}
-.list-2{
-    font-weight: bolder !important;
-}
-.card {
-  width: 200px;
-}
-</style>
+

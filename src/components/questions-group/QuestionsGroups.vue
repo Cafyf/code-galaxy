@@ -1,3 +1,4 @@
+<style lang="css" scoped src="./questionGroup.css"></style>
 <template>
 <div>
 <div class="desc">
@@ -75,43 +76,4 @@ props:{
        
 }
 </script>
-
-<style scoped>
-.desc{
-    box-shadow: 5px 4px 5px 2px #e5dede;;
-    background: #f2f2f2;
-    padding: 10px;
-    margin: 0px !important;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-div{
-     margin-top: 20px !important;
-     margin-left: 15px !important;
-}
-.h2{
-  font-size: 126%;
-}
-tr > td{
-        border: none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 3px 0px #00000042;
-}
-a{
-    padding-right: 10px;
-    padding-left: 10px;
-}
-table{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    border-spacing: 36px !important;
-    margin-left: 10px;
-    border-collapse: separate;
-}
-  td {
-     margin-right: 10px;
-    padding: 10px; /* Adjust the value to increase or decrease the space */
-  }
-  tr {
-    margin-bottom:10px; /* Adjust: the value  to increase or decrease the space */
-  }
-</style>                
+            
