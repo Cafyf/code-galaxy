@@ -1,0 +1,30 @@
+
+pre{
+   white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.errorMsg{
+    border: 1px solid rgb(255, 255, 255) !important;
+    width: 100%;
+}
+.error {
+  background: red;
+}
+
+table{
+  border-collapse: separate;
+}
+ th{
+  padding: 5px !important;
+ box-shadow: 1px 1px 6px 0px #dad6d0;;
+}
+th:nth-child(3){
+  width: 20px !important;
+}
+th:last-child{
+  width: 38px !important;
+  padding: 5px !important;
+}
+.pass{
+  background: green;
+}

@@ -1,3 +1,4 @@
+<style lang="css" scoped src="./footer.css"></style>
 <template>
   <footer class="footer">
     <div class="container">
@@ -14,16 +15,4 @@ export default {
 </script>
 
 
-<style scoped>
-.footer {
-  background-color: #f5f5f5;
-  padding: 15px;
-  text-align: center;
-  margin-top: 35px;
-}
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-}
-</style>

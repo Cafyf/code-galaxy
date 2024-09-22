@@ -1,3 +1,4 @@
+<style lang="css" scoped src="./question.css"></style>
 <template>
   <div class="question-section">
     {{problemContainer.problemQuestion}}
@@ -24,19 +25,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.question-section{
-  margin-left: 25px !important;
- margin: 13px 10px 10px 0px;
- width: 100%;
- background: white;
- box-shadow: 0px 2px 0px 0px black;
-margin-bottom: 30px;
-padding-bottom: 10px;
-}
-.input-desc{
-  background: rgb(247, 247, 247);
-  padding-left: 15px;
-padding-top: 15px;
-}
-</style>

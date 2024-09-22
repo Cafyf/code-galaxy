@@ -1,3 +1,5 @@
+<style lang="css" scoped src="./home.css"></style>
+
 <template>
 <div>
 
@@ -70,34 +72,3 @@ export default {
 }
 </script>
 
-<style  scoped>
-body{
-  margin-left: 15px !important;
-}
-.QuestionGrpTopics{
-float: left;
-}
-.headingCottage{
-    max-width: 100%;
-    margin: 15px;
-    padding: 10px;
-    border-radius: 9px;
-    box-shadow: 0 2px 4px 4px rgba(0, 0, 0, 0.1);
-     transition: box-shadow 0.5s ease;
-}
-.headingCottage:hover{
- box-shadow:  0px 4px 0px rgba(0, 0, 0, 0.1);;  
-}
-
-.h2{
-  font-size: 166% !important;
-}
-.container-page{
-  display: grid;
-  grid-template-columns: 2.5fr 1fr; /* Adjust the column sizes as needed */
-  gap: 20px;
-}
-.demoSection{
-margin: 20px;
-}
-</style>

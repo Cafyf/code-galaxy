@@ -1,3 +1,5 @@
+<style lang="css" scoped src="./codeContainer.css"></style>
+
 <template>
 <div class="main-container">
   <QuestionsPrb :problemContainer="this.problemContainer" />
@@ -133,16 +135,3 @@ export default {
 }
 </script>
 
-<style scoped>
-.editor-container{
-    margin-left: 25px !important;
-}
-.editor-container{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 10px;
-}
-.main-container{
-    width: 97%;
-}
-</style>
