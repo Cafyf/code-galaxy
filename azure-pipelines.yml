@@ -7,13 +7,13 @@ trigger:
   branches:
     include:
       - develop
-      - maintaince
+      - maintenance
 
 pr:
   branches:
     include:
       - develop
-      - maintaince
+      - maintenance
 
 pool:
   vmImage: ubuntu-latest
