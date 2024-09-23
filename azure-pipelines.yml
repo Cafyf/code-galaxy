@@ -7,11 +7,13 @@ trigger:
   branches:
     include:
       - develop
+      - maintaince
 
 pr:
   branches:
     include:
       - develop
+      - maintaince
 
 pool:
   vmImage: ubuntu-latest
@@ -40,4 +42,5 @@ steps:
     ArtifactName: 'code-galaxy-artifact'
     publishLocation: 'Container'
   displayName: 'Publish Artifacts'
-  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop') 
+  condition: eq(variables['Build.SourceBranch'], 'refs/heads/develop')
+   # as of now dev branch on only have the capability to produce artifacts
