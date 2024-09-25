@@ -1,6 +1,5 @@
 <style lang="css" scoped src="./header.css"></style>
-
-
+<script src="./headerSection.js" text="type" lang="js"></script>
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -45,30 +44,3 @@
     </nav>
   </header>
 </template>
-
-
-<script>
-export default {
-    name:'HeaderSection',
-  data() {
-    return {
-      profileName:'',
-      status:'',
-      logoutCount:'',
-    };
-  },
-  methods: {
-  logout(){
-       localStorage.clear();
-        window.location.reload();
-  }
-  },
-  created(){
-    const userinfo=JSON.parse(localStorage.getItem('user-info'));
-    this.profileName=userinfo.name;
-    this.status=userinfo.userProfile.status;
-  }
-};
-</script>
-
-

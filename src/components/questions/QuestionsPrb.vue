@@ -1,4 +1,5 @@
 <style lang="css" scoped src="./question.css"></style>
+<script type="text" src="./questionsPrb.js" lang="js"></script>
 <template>
   <div class="question-section">
     {{problemContainer.problemQuestion}}
@@ -10,18 +11,5 @@
   </div>
 </template>
 
-<script>
-export default {
-    props:{
-        problemContainer:{
-           type:Object
-        }
-    },
 
-    method:{
-      
-    }
-
-}
-</script>
 
