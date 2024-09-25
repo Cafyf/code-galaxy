@@ -22,9 +22,12 @@
     "moment": "^2.29.4",
     "path": "^0.12.7",
     "path-browserify": "^1.0.1",
+    "postcss": "^8.4.47",
     "rimraf": "^5.0.0",
     "stream-browserify": "^3.0.0",
     "vue": "^3.2.13",
+    "vue-class-component": "^8.0.0-rc.1",
+    "vue-property-decorator": "^9.1.2",
     "vue-router": "^4.0.3",
     "vuex": "^4.1.0"
   },
