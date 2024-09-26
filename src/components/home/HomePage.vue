@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./home.css"></style>
-<script src="./homePage.js" text="type" lang="js"></script>
+<script src="./homePage.js"></script>
 
 <template>
 <div>
