@@ -4,7 +4,7 @@ import state from '../../../store'
 import { Component, Vue } from 'vue-facing-decorator'
 
 @Component
-export default class SessionCards extends Vue {
+export default class SessionCard extends Vue {
   sessionPicked = {
     modes: {
       easy: 0,
@@ -32,6 +32,7 @@ export default class SessionCards extends Vue {
   }
 
   async created() {
+    console.log('logger from session card: checking how fast the deployment is reflecting in environment');
     try {
       const userInfo = JSON.parse(localStorage.getItem('user-info'));
       const sessionActiveId = localStorage.getItem('active-session');

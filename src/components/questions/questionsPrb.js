@@ -1,12 +1,7 @@
-export default {
-    props:{
-        problemContainer:{
-           type:Object
-        }
-    },
+import { Component,Prop,Vue} from "vue-facing-decorator"
 
-    method:{
-      
-    }
-
+@Component
+export default class QuestionsPrb extends Vue {
+    @Prop()
+    problemContainer;
 }
