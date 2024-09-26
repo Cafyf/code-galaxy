@@ -1,4 +1,4 @@
-<style lang="css" src="./codeEditor.css"></style>
+<style lang="css" scoped src="./codeEditor.css"></style>
 
 <template>
   <div>
