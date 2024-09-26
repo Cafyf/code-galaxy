@@ -1,6 +1,7 @@
 module.exports = {
   presets: ["@vue/cli-plugin-babel/preset"],
   plugins: [
-    '@babel/plugin-proposal-private-methods'
+    // This enables support for decorators in JavaScript, beocz javascript cant use decorators directly in vue 3
+    ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
   ]
 };

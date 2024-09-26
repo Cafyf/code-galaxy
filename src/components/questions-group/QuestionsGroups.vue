@@ -14,7 +14,7 @@
             <td v-for="details in question" :key="details.name" width="200px">
                 <img width="20" :src="getImage(details.imgUrl)" alt="">
                  <router-link :to="{name: 'CodeEditorContainer', query:{ name: details.name } }">{{details.name}}</router-link> &nbsp;
-                 <font color="grey">{{details.font}}</font>
+                 <span style="color:grey; font-family: Arial; font-size: 16px;">{{details.font}}</span>
             </td>
         </tr>
     </tbody>
