@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./header.css"></style>
-<script src="./headerSection.js" text="type" lang="js"></script>
+<script src="./headerSection.js"></script>
 <template>
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

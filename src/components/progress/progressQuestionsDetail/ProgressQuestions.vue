@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./progress.css"></style>
-<script src="./progress.js" type="text" lang="js"></script>
+<script src="./progress.js"></script>
 
 <template>
                             <!-- <div class="progress">

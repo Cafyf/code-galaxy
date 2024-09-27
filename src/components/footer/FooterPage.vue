@@ -1,4 +1,6 @@
 <style lang="css" scoped src="./footer.css"></style>
+<script  src="./footerPage.js"></script>
+
 <template>
   <footer class="footer">
     <div class="container">
@@ -6,13 +8,3 @@
     </div>
   </footer>
 </template>
-
-<script>
-
-export default {
-    name:'footerPage'
-}
-</script>
-
-
-

@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./questionGroup.css"></style>
-<script src="./questionsGroup.js" type="text" lang="js"></script>
+<script src="./questionsGroup.js"></script>
 <template>
 <div>
 <div class="desc">

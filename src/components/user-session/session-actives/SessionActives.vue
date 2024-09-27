@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./sessionActives.css"></style>
-<script src="./sessionActives.js" type="text" lang="js"></script>
+<script src="./sessionActives.js"></script>
 <template>
 <div class="container ">
 <div class="card card-panel">

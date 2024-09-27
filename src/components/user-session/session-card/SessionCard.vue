@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./sessionCard.css"></style>
-<script src="./sessionCard.js" type="text" lang="js"></script>
+<script src="./sessionCard.js" ></script>
 <template>
 
     <div class="card">
