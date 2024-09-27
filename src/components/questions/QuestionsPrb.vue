@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./question.css"></style>
-<script type="text" src="./questionsPrb.js" lang="js"></script>
+<script src="./questionsPrb.js" ></script>
 <template>
   <div class="question-section">
     {{problemContainer.problemQuestion}}
