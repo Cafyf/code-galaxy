@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./submission.css"> </style>
-<script src="./submissionDetails.js" type="text" lang="js"></script>
+<script src="./submissionDetails.js"></script>
 <template>
   <!-- <div class="progress">
                               <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
