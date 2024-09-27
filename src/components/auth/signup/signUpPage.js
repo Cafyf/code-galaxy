@@ -1,36 +1,36 @@
 
 import axios from 'axios'
-export default {
-    name:"SignupPage",
-  data() {
-    return {
-      stopValidate:true,
-      username: '',
-      email: '',
-      password: '',
-      password2: '',
-      usernameError: '',
-      emailError: '',
-      passwordError: '',
-      password2Error: ''
-    };
-  },
-  computed: {
-    usernameIsValid() {
+import { Component, Vue } from 'vue-facing-decorator';
+@Component
+export default class SignupPage extends Vue{
+   
+      stopValidate=true
+      username= ''
+      email= ''
+      password= ''
+      password2= ''
+      usernameError= ''
+      emailError=''
+      passwordError= ''
+      password2Error= ''
+
+
+ 
+   get usernameIsValid() {
       return this.username.trim() !== '';
-    },
-    emailIsValid() {
+    }
+   get emailIsValid() {
       const emailPattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       return this.email.trim() !== '' && emailPattern.test(this.email.trim().toLowerCase());
-    },
-    passwordIsValid() {
+    }
+  get  passwordIsValid() {
       return this.password.trim() !== '' && this.password.trim().length >= 8;
-    },
-    passwordMatch() {
+    }
+   get passwordMatch() {
       return this.password === this.password2;
     }
-  },
-  methods: {
+  
+
     validateInputs() {
       if(this.stopValidate){this.stopValidate=false; return;}
       console.log("logged",this.stopValidate);
@@ -42,7 +42,7 @@ export default {
       if (this.usernameIsValid && this.emailIsValid && this.passwordIsValid && this.passwordMatch) {
          this.submit();
       }
-    },
+    }
    async submit(){
     const reqBody={
     "name":this.username,
@@ -63,5 +63,5 @@ export default {
         console.log(signed.data);
       }
     }
-  }
+  
 };
