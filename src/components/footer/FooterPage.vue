@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./footer.css"></style>
-<script  src="./signUpPage.js"></script>
+<script  src="./footerPage.js"></script>
 
 <template>
   <footer class="footer">

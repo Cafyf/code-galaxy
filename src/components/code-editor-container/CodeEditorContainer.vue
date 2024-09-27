@@ -1,5 +1,5 @@
 <style lang="css" scoped src="./codeContainer.css"></style>
-<script  src="./signUpPage.js"></script>
+<script  src="./codeEditorContainer.js"></script>
 
 <template>
 <div class="main-container">
