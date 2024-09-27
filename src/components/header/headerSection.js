@@ -1,4 +1,4 @@
-import { Component } from "vue-facing-decorator";
+import { Component, Vue } from "vue-facing-decorator";
 
 @Component
 export default class HeaderSection extends Vue {
