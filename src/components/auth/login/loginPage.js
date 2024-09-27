@@ -8,7 +8,7 @@ export default {
       password: '',
       emailError: false,
       passwordError: false
-    };
+    }; 
   },
   computed: {
     validEmail() {
