@@ -4,10 +4,10 @@ import { Component, Vue } from 'vue-facing-decorator';
 @Component
 export default class SignupPage extends Vue{
    
-      stopValidate=true
-      username= ''
-      email= ''
-      password= ''
+      stopValidate=true;
+      username= '';
+      email= '';
+      password= '';
       password2= ''
       usernameError= ''
       emailError=''
