@@ -1,4 +1,3 @@
-
 import QuestionTopics from '../mocks/QuestionTopics.json'
 import SessionCard from '../user-session/session-card/SessionCard.vue'
 import Demo from '../demo/Demo.vue'
@@ -29,10 +28,10 @@ export default class HomePage extends Vue{
     }
     localStorage.setItem("user-info", JSON.stringify(body));
 
-  }
+  };
 
   created() {
     this.initUserDatas();
     this.questionTopic = QuestionTopics.topics;
-  }
+  };
 }

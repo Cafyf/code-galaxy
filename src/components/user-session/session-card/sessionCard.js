@@ -1,4 +1,3 @@
-
 import axios from 'axios'
 import state from '../../../store'
 import { Component, Vue } from 'vue-facing-decorator'
@@ -11,10 +10,10 @@ export default class SessionCard extends Vue {
       medium: 0,
       hard: 0
     }
-  }
-  selectedSession = 0
-  totalNoOfQuestion = 0
-  sessions = [0]
+  };
+  selectedSession = 0;
+  totalNoOfQuestion = 0;
+  sessions = [0];
 
 
   selected() {
@@ -29,7 +28,7 @@ export default class SessionCard extends Vue {
     }
     state.currentSession = this.sessionPicked;
     localStorage.setItem('active-session', JSON.stringify({ id: this.selectedSession, sessionName: this.sessionPicked.sessionName }))
-  }
+  };
 
   async created() {
     console.log('logger from session card: checking how fast the deployment is reflecting in environment');
@@ -48,6 +47,5 @@ export default class SessionCard extends Vue {
 
     } catch (err) {
     }
-  }
+  };
 }
-

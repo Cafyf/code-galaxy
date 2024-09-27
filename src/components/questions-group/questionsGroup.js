@@ -35,6 +35,6 @@ export default class QuestionsGroups extends Vue {
         }
         this.description = getData.Description.text;
         this.questions = getData.Methodtitles;
-    }
+    };
 
 }
