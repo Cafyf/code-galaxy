@@ -1,22 +1,24 @@
 import axios from 'axios'
+import { Component } from 'vue-facing-decorator';
 
-export default {
-    name:"LoginPage",
-  data() {
-    return {
-      email: '',
-      password: '',
-      emailError: false,
-      passwordError: false
-    };
-  },
-  computed: {
-    validEmail() {
+
+@Component
+export default class LoginPage extends Vue {
+   
+  
+      email= '';
+      password= '';
+      emailError= false;
+      passwordError= false
+   
+
+  
+    get validEmail() {
       const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
       return this.email.match(pattern);
     }
-  },
-  methods: {
+
+
     submitForm() {
       this.emailError = this.email === '';
       this.passwordError = this.password === '';
@@ -24,7 +26,7 @@ export default {
       if (!this.emailError && !this.passwordError) {
        this.logIn();
       }
-    },
+    }
         initUserDatas(){
           const body={
     "id": 1,
@@ -39,7 +41,7 @@ export default {
 }
          localStorage.setItem("user-info",JSON.stringify(body));
           
-         },
+         }
    async logIn(){
     console.log(this.email,this.password);
     try {   const response=  await axios.get(`http://localhost:8090/login/email=${this.email}&password=${this.password}`);
@@ -56,4 +58,4 @@ export default {
     }
    }
   }
-};
+
