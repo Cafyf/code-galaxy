@@ -50,7 +50,7 @@ export default class CodeEditorContainer extends Vue {
       state.isDefaultTestAccepted = "Accepted";
     }
     return DefaultAnswers;
-  } //array question topics user input ah disable pannidu
+  }; //array question topics user input ah disable pannidu
   initializeCompiledOutPut(message, show, showDefaulTester) {
     this.outputData.show = show;
     if (showDefaulTester === "showWithDefault") {
@@ -64,7 +64,7 @@ export default class CodeEditorContainer extends Vue {
       this.outputData.msg = message;
       this.outputData.defaultOpDesc = undefined;
     }
-  }
+  };
 
   async submit(code, errors) {
     console.log(state.questions, "questions2");
@@ -112,7 +112,7 @@ export default class CodeEditorContainer extends Vue {
       alert("Submitted");
     }
     console.log(response);
-  }
+  };
 
   created() {
     console.log(state.questions, "questions");
@@ -134,5 +134,5 @@ export default class CodeEditorContainer extends Vue {
       this.$router.go(-1);
     }
     console.log(this.name);
-  }
+  };
 }
