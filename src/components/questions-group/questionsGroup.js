@@ -8,12 +8,12 @@ export default class QuestionsGroups extends Vue {
     @Prop({ required: true, default: {} })
     topic;
     description = "";
-    questions = []
+    questions = [];
     getImage = getImage;
 
     async created() {
         await localStorage.setItem('topic', JSON.stringify({ topic: this.topic.header }));
-        const topic = JSON.parse(localStorage.getItem('topic'))
+        const topic = JSON.parse(localStorage.getItem('topic'));
         state.questions = require(`../mocks/${topic.topic}.json`);
 
         let getData;

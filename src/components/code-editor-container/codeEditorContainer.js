@@ -7,7 +7,7 @@ import { Component, Vue } from "vue-facing-decorator";
 import { Prop } from "vue-facing-decorator";
 
 @Component({
-  components: { CodeEditor, ErrorMsgs, QuestionsPrb },
+  components: { CodeEditor, ErrorMsgs, QuestionsPrb }
 })
 export default class CodeEditorContainer extends Vue {
   @Prop({ type: String, required: true, default: "hey" }) name;
