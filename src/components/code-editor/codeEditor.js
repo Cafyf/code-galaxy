@@ -8,17 +8,6 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 
 @Component({
   components: { Codemirror },
-})
-export default class CodeEditor extends Vue {
-  @Prop({ type: Object }) defaultInput;
-  @Prop({ type: String }) codeTemplate;
-
-  sizeheight = 300;
-  code = this.codeTemplate;
-  Enabletrace = { msg: "enable Trace Mood", switch: false };
-  userIp = "";
-  errors = "";
-
   setup() {
     return {
       cmOptions: {
@@ -27,8 +16,17 @@ export default class CodeEditor extends Vue {
         theme: "dracula", // Theme
       },
     };
-  };
-
+  }
+})
+export default class CodeEditor extends Vue {
+  @Prop({ type: Object }) defaultInput;
+  @Prop({ type: String }) codeTemplate;
+  sizeheight = 300;
+  code = '';
+  Enabletrace = { msg: "enable Trace Mood", switch: false };
+  userIp = "";
+  errors = "";
+  
   async compileAndRun() {
     const playload = {
       language: "java",
@@ -106,5 +104,9 @@ export default class CodeEditor extends Vue {
       this.Enabletrace.msg = "enable Trace Mood";
       this.code = this.codeTemplate;
     }
+  };
+
+  created(){
+    this.code=this.codeTemplate;
   };
 }

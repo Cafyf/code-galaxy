@@ -7,12 +7,7 @@ import getImage from "../../Utils/asset-utils";
 import { Component, Vue } from "vue-facing-decorator";
 
 @Component({
-  components: {
-    SessionCard,
-    Demo,
-    FooterPage,
-    HeaderSection,
-  },
+  components: { SessionCard, Demo, FooterPage, HeaderSection }
 })
 export default class HomePage extends Vue {
   questionTopic = {};
