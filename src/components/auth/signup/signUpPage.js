@@ -1,5 +1,6 @@
-import axios from "axios";
 import { Component, Vue } from "vue-facing-decorator";
+import HttpClient from '@/service/httpClient.js'
+
 @Component
 export default class SignupPage extends Vue {
   stopValidate = true;
@@ -59,7 +60,8 @@ export default class SignupPage extends Vue {
       password: this.password2,
       userProfile: {},
     };
-    const signed = await axios.post("http://localhost:8090/addUser", reqBody);
+   
+    const signed = await HttpClient.executeApiCall('post', "http://localhost:8090/addUser", { reqBody });
     if (signed.status === 200) {
       if (signed.data.email === "Email already exist please use different") {
         alert("Email already exist please use different");

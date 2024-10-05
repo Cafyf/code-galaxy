@@ -1,6 +1,6 @@
-import state from '../../../store'
-import axios from 'axios'
-import { Component, Vue } from 'vue-facing-decorator'
+import { Component, Vue } from 'vue-facing-decorator' // Third-party library
+import HttpClient from '@/service/httpClient.js' // Service module
+import state from '../../../store' // Internal state management
 
 @Component
 export default class SessionActives extends Vue {
@@ -19,7 +19,8 @@ export default class SessionActives extends Vue {
         sessionName: this.createNewSession,
         loginId: userInfo.id
       }
-      const response = await axios.post(`http://localhost:8090/createSession`, null, { params: requestParam });
+      
+      const response = await HttpClient.executeApiCall('post',"http://localhost:8090/createSession",{ params: requestParam });
       console.log(response);
       if (response.status === 200) {
         console.log(response.data);
@@ -60,7 +61,8 @@ export default class SessionActives extends Vue {
         loginId: userInfo.id,
         manageId: session.id
       }
-      const dataResponse = await axios.post(`http://localhost:8090/renameSession`, null, { params: SessionRenameParams });
+     
+      const dataResponse = await HttpClient.executeApiCall('post',"http://localhost:8090/renameSession",{ params: SessionRenameParams });
       if (dataResponse.status === 200) {
         window.location.reload();
       }
@@ -80,7 +82,7 @@ export default class SessionActives extends Vue {
 
     const userInfo = JSON.parse(localStorage.getItem('user-info'));
     if (state.sessionManagerDetails === undefined) {
-      state.sessionManagerDetails = (await axios.get("http://localhost:8090/sessionActive", { params: { loginId: userInfo.id } })).data
+      state.sessionManagerDetails =  (await HttpClient.executeApiCall('get',"http://localhost:8090/sessionActive",{ params: { loginId: userInfo.id } })).data;
     }
 
     this.getCallResponse = state.sessionManagerDetails;

@@ -1,10 +1,9 @@
+import { Component, Vue , Prop} from "vue-facing-decorator";
 import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorMsgs from "../error-message/ErrorMsgs.vue";
+import HttpClient from '@/service/httpClient.js'
 import state from "../../store/index";
-import axios from "axios";
-import { Component, Vue } from "vue-facing-decorator";
-import { Prop } from "vue-facing-decorator";
 
 @Component({
   components: { CodeEditor, ErrorMsgs, QuestionsPrb }
@@ -107,7 +106,7 @@ export default class CodeEditorContainer extends Vue {
         mode: state.questions[this.name].mode,
       },
     };
-    const response = await axios.post("http://localhost:8090/submit", reqBody);
+    const response = await await HttpClient.executeApiCall('post',"http://localhost:8090/submit",{ reqBody });
     if (response.status == 200) {
       alert("Submitted");
     }

@@ -1,7 +1,7 @@
-import axios from 'axios'
-import state from '../../../store/index'
-import getImage from '@/Utils/asset-utils';
 import { Component, Vue } from 'vue-facing-decorator'
+import getImage from '@/Utils/asset-utils';
+import HttpClient from '@/service/httpClient.js'
+import state from '../../../store/index'
 
 @Component
 export default class ProgressQuestion extends Vue {
@@ -36,7 +36,7 @@ export default class ProgressQuestion extends Vue {
   };
 
   async getSubmission(questionName, submissionQuestionId) {
-    const res = await axios.get(`http://localhost:8090/getSubmission?submissionQuestionId=${submissionQuestionId}`);
+    const res = await HttpClient.executeApiCall('get',"http://localhost:8090/getSubmission",{ params:{'submissionQuestionId':submissionQuestionId} });
     // res.data.topic  replace here (from vue template)
     localStorage.setItem('topic', JSON.stringify({ topic: res.data.topic }))
     const questionFile = require(`../../mocks/${res.data.topic}.json`);
@@ -49,7 +49,8 @@ export default class ProgressQuestion extends Vue {
   async created() {
     const userInfo = JSON.parse(localStorage.getItem('user-info'));
     const session = JSON.parse(localStorage.getItem('active-session'));
-    this.progressData = (await axios.get(`http://localhost:8090/progressDetails?sessionId=${session.id}&progressId=${userInfo.id}`)).data;
+    
+    this.progressData = (await HttpClient.executeApiCall('get',"http://localhost:8090/progressDetails",{ params:{'sessionId':session.id,'progressId':userInfo.id}})).data;
     if (this.progressData.length === 0) {
       alert(`Hi, you have not yet progressed`)
     }

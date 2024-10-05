@@ -1,6 +1,6 @@
-import axios from 'axios'
-import state from '../../../store'
 import { Component, Vue } from 'vue-facing-decorator'
+import HttpClient from '@/service/httpClient.js'
+import state from '../../../store'
 
 @Component
 export default class SessionCard extends Vue {
@@ -35,7 +35,7 @@ export default class SessionCard extends Vue {
     try {
       const userInfo = JSON.parse(localStorage.getItem('user-info'));
       const sessionActiveId = localStorage.getItem('active-session');
-      const data = await axios.get("http://localhost:8090/sessionDetails", { params: { sessionId: userInfo.id } });
+      const data = await HttpClient.executeApiCall('get',"http://localhost:8090/sessionDetails",{ params:{'sessionId':userInfo.id}});
       this.sessions = data.data;
       console.log(sessionActiveId);
       if (sessionActiveId === null) {
