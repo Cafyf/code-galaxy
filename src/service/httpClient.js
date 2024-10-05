@@ -1,4 +1,5 @@
 import axios from "axios";
+
 export default class HttpClient {
 
    static setParamValue(url, params) {
@@ -7,11 +8,11 @@ export default class HttpClient {
         .filter(Boolean).join('&');
         return url.concat("\\").concat('?').concat(constructedParams);
       }
-  
+
       static async executeApiCall(requestMethod, endPoint, requestData) {
         const { params, reqBody } = requestData;
         if (params != null && params != undefined) {
-                setParamValue(endPoint, params);
+          endPoint = HttpClient.setParamValue(endPoint, params);
         }
         let argument = [endPoint];
         if (reqBody != null) argument.push(reqBody);

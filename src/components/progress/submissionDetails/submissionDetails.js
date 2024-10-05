@@ -1,7 +1,7 @@
-import moment from "moment";
-import axios from "axios";
-import state from '../../../store/index';
 import { Component, Vue } from 'vue-facing-decorator';
+import moment from "moment";
+import HttpClient from '@/service/httpClient.js'
+import state from '../../../store/index';
 
 @Component
 export default class SubmissionDetails extends Vue {
@@ -44,13 +44,9 @@ export default class SubmissionDetails extends Vue {
     }
   };
   async created() {
-
     const userInfo = JSON.parse(localStorage.getItem("user-info"));
     const session = JSON.parse(localStorage.getItem("active-session"));
-    this.submissionsData = (
-      await axios.get(
-        `http://localhost:8090/submissionDetails?sessionId=${session.id}&submissionId=${userInfo.id}`
-      )
-    ).data;
+    this.submissionsData = 
+      (await HttpClient.executeApiCall('get',"http://localhost:8090/submissionDetails",{ params:{'sessionId':session.id,'submissionId':userInfo.id}})).data;
   };
 };

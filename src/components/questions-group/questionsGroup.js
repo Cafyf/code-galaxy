@@ -1,7 +1,6 @@
-import axios from "axios";
-import state from '../../store/index'
-import getImage from '../../Utils/asset-utils';
 import { Component, Vue, Prop } from "vue-facing-decorator";
+import getImage from '../../Utils/asset-utils';
+import state from '../../store/index'
 
 @Component
 export default class QuestionsGroups extends Vue {

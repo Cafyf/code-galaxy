@@ -1,5 +1,5 @@
-import axios from "axios";
 import { Component, Vue } from "vue-facing-decorator";
+import HttpClient from '@/service/httpClient.js'
 
 @Component
 export default class LoginPage extends Vue {
@@ -38,9 +38,8 @@ export default class LoginPage extends Vue {
   async logIn() {
     console.log(this.email, this.password);
     try {
-      const response = await axios.get(
-        `http://localhost:8090/login/email=${this.email}&password=${this.password}`
-      );
+      const params ={email:this.email,password:this.password};
+      const response =  await HttpClient.executeApiCall('get',"http://localhost:8090/login",{ params });
       if (response.data != "") {
         console.log(response.data);
         localStorage.setItem("user-info", JSON.stringify(response.data));
