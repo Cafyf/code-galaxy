@@ -26,7 +26,7 @@ export default class SignupPage extends Vue {
   };
   get passwordIsValid() {
     return this.password.trim() !== "" && this.password.trim().length >= 8;
-  }
+  }; //check
   get passwordMatch() {
     return this.password === this.password2;
   };
@@ -64,7 +64,7 @@ export default class SignupPage extends Vue {
     const signed = await HttpClient.executeApiCall('post', "http://localhost:8090/addUser", { reqBody });
     if (signed.status === 200) {
       if (signed.data.email === "Email already exist please use different") {
-        alert("Email already exist please use different");
+        alert("Email already exist please use differents");
         return;
       }
       signed.data.password = "";
