@@ -26,15 +26,11 @@ export default class SignupPage extends Vue {
   };
   get passwordIsValid() {
     return this.password.trim() !== "" && this.password.trim().length >= 8;
-  };
+  }
   get passwordMatch() {
     return this.password === this.password2;
   };
 
-
-
-
-  
   validateInputs() {
     if (this.stopValidate) {
       this.stopValidate = false;
