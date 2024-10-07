@@ -31,6 +31,10 @@ export default class SignupPage extends Vue {
     return this.password === this.password2;
   };
 
+
+
+
+  
   validateInputs() {
     if (this.stopValidate) {
       this.stopValidate = false;
