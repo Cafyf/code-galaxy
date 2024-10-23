@@ -1,5 +1,6 @@
 import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
+import ValidationUtils from '@/Utils/validationUtil';
 
 @Component
 export default class SignupPage extends Vue {
@@ -14,23 +15,19 @@ export default class SignupPage extends Vue {
   password2Error = "";
 
   get usernameIsValid() {
-    return this.username.trim() !== "";
-  };
+    return ValidationUtils.usernameIsValid(this.username);
+  }
+ 
   get emailIsValid() {
-    const emailPattern =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return (
-      this.email.trim() !== "" &&
-      emailPattern.test(this.email.trim().toLowerCase())
-    );
-  };
-  get passwordIsValid() {
-    return this.password.trim() !== "" && this.password.trim().length >= 8;
-  };
+    return ValidationUtils.emailIsValid(this.email);
+    }
+   get passwordIsValid() {
+    return ValidationUtils.passwordIsValid(this.password);
+  }
+  
   get passwordMatch() {
-    return this.password === this.password2;
-  };
-
+    return ValidationUtils.passwordMatch(this.password, this.password2);
+  }
   validateInputs() {
     if (this.stopValidate) {
       this.stopValidate = false;
