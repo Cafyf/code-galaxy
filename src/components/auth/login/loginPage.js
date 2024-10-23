@@ -1,5 +1,7 @@
 import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
+import ObjectUtils from "@/Utils/object-utils";
+import ValidationUtils from '@/Utils/validationUtil';
 
 @Component
 export default class LoginPage extends Vue {
@@ -8,19 +10,30 @@ export default class LoginPage extends Vue {
   emailError = false;
   passwordError = false;
 
-  get validEmail() {
-    const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-    return this.email.match(pattern);
-  };
+  get emailIsValid() {
+    return ValidationUtils.emailIsValid(this.email);
+  }
 
+  // submitForm() {
+  //   this.emailError = this.email === "";
+  //   this.passwordError = this.password === "";
+
+  //   if (!this.emailError && !this.passwordError) {
+  //     this.logIn();
+  //   }
+  // };
   submitForm() {
-    this.emailError = this.email === "";
-    this.passwordError = this.password === "";
+    // Use ObjectUtils to check for empty values
+    this.emailError = ObjectUtils.isNullOrUndefinedOrEmpty(this.email);
+    this.passwordError = ObjectUtils.isNullOrUndefinedOrEmpty(this.password);
 
+    // Proceed with login if no errors
     if (!this.emailError && !this.passwordError) {
       this.logIn();
-    }
+    } 
   };
+
+
   initUserDatas() {
     const body = {
       id: 1,
