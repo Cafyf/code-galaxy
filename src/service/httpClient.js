@@ -20,8 +20,7 @@ export default class HttpClient {
            return await axios[requestMethod](...argument); 
         }
         catch (err) {
-            console.error(err);
-            return { data: null };
+           throw err;
         }
     }
 }
