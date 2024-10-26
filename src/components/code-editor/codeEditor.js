@@ -1,4 +1,3 @@
-import axios from "axios";
 import Codemirror from "codemirror-editor-vue3";
 import "codemirror/addon/display/placeholder.js";
 import "codemirror/mode/clike/clike";

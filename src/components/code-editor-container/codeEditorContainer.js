@@ -1,4 +1,4 @@
-import { Component, Vue , Prop} from "vue-facing-decorator";
+import { Component, Vue, Prop } from "vue-facing-decorator";
 import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorMsgs from "../error-message/ErrorMsgs.vue";
@@ -29,7 +29,7 @@ export default class CodeEditorContainer extends Vue {
   };
 
   change = false;
-  codeSinppet = "";
+  codeSnippet = "";
 
   constructDefaultOpContent(DefaultAnswers, newOutPut) {
     let count = 0;
@@ -106,7 +106,7 @@ export default class CodeEditorContainer extends Vue {
         mode: state.questions[this.name].mode,
       },
     };
-    const response = await await HttpClient.executeApiCall('post',"http://localhost:8090/submit",{ reqBody });
+    const response = await await HttpClient.executeApiCall('post', "http://localhost:8090/submit", { reqBody });
     if (response.status == 200) {
       alert("Submitted");
     }
@@ -116,22 +116,35 @@ export default class CodeEditorContainer extends Vue {
   created() {
     console.log(state.questions, "questions");
     try {
-      if (this.option === "previous") {
-        this.codeSinppet = state.submittedQuestions;
-      } else {
-        this.codeSinppet = state.questions[this.name].methodTemplate;
-      }
-      this.defaultIp.methodDesc = state.questions[this.name].methodDesc;
-      this.defaultIp.defaultIp = state.questions[this.name].inputDesc;
-      this.problemContainer.problemQuestion =
-        state.questions[this.name].questions;
-      this.problemContainer.sampleInputDesc = state.questions[
-        this.name
-      ].sampleInputDesc.slice(0, 3);
-    } catch (err) {
+      const question = state.questions[this.name];
+      this.initializeDefaultMethodWithInputs(question);
+      this.initializeProblemContainer(question);
+      this.initializeCodeSnippet(question);
+    }
+    catch (err) {
+      console.error(err);
       alert("Question not found");
       this.$router.go(-1);
     }
-    console.log(this.name);
+    console.log(this.name, " Question Selected");
   };
+
+
+  initializeCodeSnippet(question) {
+    if (this.option === "previous") {
+      this.codeSnippet = state.submittedQuestions;
+    } else {
+      this.codeSnippet = question.methodTemplate;
+    }
+  }
+
+  initializeDefaultMethodWithInputs(question) {
+    this.defaultIp.methodDesc = question.methodDesc;
+    this.defaultIp.defaultIp = question.inputDesc;
+  }
+
+  initializeProblemContainer(question) {
+    this.problemContainer.problemQuestion = question.questions;
+    this.problemContainer.sampleInputDesc = question.sampleInputDesc.slice(0, 3);
+  }
 }

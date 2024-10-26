@@ -3,9 +3,9 @@
 
 <template>
 <div class="main-container">
-  <QuestionsPrb :problemContainer="this.problemContainer" />
+  <QuestionsPrb :problemContainer="problemContainer" />
  <div class="editor-container">
-  <CodeEditor :codeTemplate="codeSinppet" :defaultInput="defaultIp" @submit="submit" @showOutput="initializeCompiledOutPut"/>
+  <CodeEditor :codeTemplate="codeSnippet " :defaultInput="defaultIp" @submit="submit" @showOutput="initializeCompiledOutPut"/>
   <ErrorMsgs :change="change" :outputContainer="outputData" />
  </div>
  </div>
