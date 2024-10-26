@@ -5,6 +5,7 @@ import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 import state from "../../store/index";
 import { Component, Prop, Vue } from "vue-facing-decorator";
+import HttpClient from "@/service/httpClient";
 
 @Component({
   components: { Codemirror },
@@ -35,10 +36,8 @@ export default class CodeEditor extends Vue {
       userIp: this.userIp,
       input: this.defaultInput,
     };
-
-    await axios
-      .post("http://localhost:5000/run", playload)
-      .then((response) => {
+    
+    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:playload }).then((response) => {
         state.lastRunnedStatus = "Accepted";
         this.$emit(
           "showOutput",
