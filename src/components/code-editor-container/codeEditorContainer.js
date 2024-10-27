@@ -4,6 +4,7 @@ import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorMsgs from "../error-message/ErrorMsgs.vue";
 import HttpClient from '@/service/httpClient.js'
 import state from "../../store/index";
+import RequestBodyFactory from "../../Utils/requestBodyFactory.js"
 
 @Component({
   components: { CodeEditor, ErrorMsgs, QuestionsPrb }
@@ -83,30 +84,14 @@ export default class CodeEditorContainer extends Vue {
         ? state.isDefaultTestAccepted
         : "compile Error";
 
-    const reqBody = {
-      submission: {
-        submissionId: userInfo.id,
-        question: this.name,
-        status: submissionStatus,
-        runtime: runtime + " ms",
-        language: "Java",
-        submittedQuestion: code,
-        topic: topic.topic,
-      },
-      progress: {
-        progressId: userInfo.id,
-        question: this.name,
-        topic: topic.topic,
-        mode: state.questions[this.name].mode,
-        status: state.lastRunnedStatus,
-      },
-      session: {
-        sessionId: userInfo.id,
-        sessionName: sessionInfo.sessionName,
-        mode: state.questions[this.name].mode,
-      },
-    };
-    const response = await HttpClient.executeApiCall('post', "http://localhost:8090/submit", { reqBody });
+    //The request body values should be follow the preserve order of request Body keys
+    const submissionReqBodyValues = [userInfo.id,this.name,submissionStatus,runtime + " ms","Java",code,topic.topic];
+    const progressReqBodyValues = [userInfo.id,this.name,topic.topic,state.questions[this.name].mode,state.lastRunnedStatus];
+    const sessionReqBodyValues = [userInfo.id,"sessionName",state.questions[this.name].mode];
+
+    const reqBodyValues =[submissionReqBodyValues,progressReqBodyValues,sessionReqBodyValues];
+
+    const response = await HttpClient.executeApiCall('post', "http://localhost:8090/submit", { reqBody:RequestBodyFactory.createRequestBody('submit',reqBodyValues) });
     if (response.status == 200) {
       alert("Submitted");
     }

@@ -36,7 +36,7 @@ export default class CodeEditor extends Vue {
       input: this.defaultInput,
     };
     
-    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:playload }).then((response) => {
+    await HttpClient.executeApiCall('post',"http://localhost:5000/run",{ reqBody:playload }).then((response) => {
         state.lastRunnedStatus = "Accepted";
         this.$emit(
           "showOutput",
