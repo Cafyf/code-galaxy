@@ -6,13 +6,13 @@ const submissionRequestBody = {
     language: "",
     submittedQuestion: "",
     topic: "",
-  }
+  };
   
 const sessionRequestBody = {
     sessionId:0,
     sessionName: "",
     mode: "",
-  }
+  };
 
 const progressRequestBody = {
     progressId: 0,
@@ -20,12 +20,6 @@ const progressRequestBody = {
     topic: "",
     mode: "",
     status: "",
-  }
+  };
   
-const requestPayloads = new Map([
-    ['submission',submissionRequestBody],
-    ['session',sessionRequestBody],
-    ['progress',progressRequestBody],
-]);
-
-export default requestPayloads;
+  export default {progressRequestBody,sessionRequestBody,submissionRequestBody};

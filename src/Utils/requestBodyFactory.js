@@ -1,4 +1,4 @@
-import requestBodies from '../model/requestBodies.js'
+import requestBodies from '../models/requestBodies.js'
 
 export default class RequestBodyFactory {
 
