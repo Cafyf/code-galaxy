@@ -106,7 +106,7 @@ export default class CodeEditorContainer extends Vue {
         mode: state.questions[this.name].mode,
       },
     };
-    const response = await await HttpClient.executeApiCall('post', "http://localhost:8090/submit", { reqBody });
+    const response = await HttpClient.executeApiCall('post', "http://localhost:8090/submit", { reqBody });
     if (response.status == 200) {
       alert("Submitted");
     }
