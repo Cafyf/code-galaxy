@@ -1,7 +1,7 @@
 import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import ObjectUtils from "@/Utils/object-utils";
-import ValidationUtils from '@/Utils/validationUtil';
+import ValidationUtils from '@/Utils/validation-util';
 
 @Component
 export default class LoginPage extends Vue {

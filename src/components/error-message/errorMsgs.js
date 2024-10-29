@@ -1,4 +1,7 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
+import { MESSAGES } from "@/models/constants/custom-messages.js";
+import { CONSTANTS } from "@/models/constants/globalConstants";
+
 @Component
 export default class errorMsgs extends Vue {
   @Prop({ default: false }) change;
@@ -32,21 +35,16 @@ export default class errorMsgs extends Vue {
   customErrors(CheckCustomErrorMsg) {
     for (let i = 0; i < CheckCustomErrorMsg.length - 1; i++) {
       if (
-        CheckCustomErrorMsg[i].includes(
-          "DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION"
-        )
+        CheckCustomErrorMsg[i].includes(CONSTANTS.NO_CHANGE_DECLARATION)
       ) {
-        this.errorheader = "Ambiguity";
-        return [
-          "IF_ADD_MULTIPLE_METHODS",
-          "DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION",
-        ];
+        this.errorheader = MESSAGES.ambiguity.title;
+        return MESSAGES.ambiguity.msg;
       } else if (
-        CheckCustomErrorMsg[i].includes("PRINT_STATEMENTS_ARE_NOT_ALLOWED")
+        CheckCustomErrorMsg[i].includes(CONSTANTS.PRINT_NOT)
       ) {
         this.textColor = "red";
-        this.errorheader = "PRINT_STATEMENTS_ARE_NOT_ALLOWED";
-        return ["IF YOU WANT TO USE ENABLE TRACE MODE"];
+        this.errorheader = MESSAGES.traceError.title;
+        return MESSAGES.traceError.msg;
       } else {
         console.log(CheckCustomErrorMsg[i]);
         // this.filterOutPut(CheckCustomErrorMsg);

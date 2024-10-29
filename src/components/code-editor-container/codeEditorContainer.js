@@ -4,7 +4,7 @@ import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorMsgs from "../error-message/ErrorMsgs.vue";
 import HttpClient from '@/service/httpClient.js'
 import state from "../../store/index";
-import RequestBodyFactory from "../../Utils/requestBodyFactory.js"
+import RequestBodyFactory from "../../Utils/request-body-factory.js"
 
 @Component({
   components: { CodeEditor, ErrorMsgs, QuestionsPrb }
