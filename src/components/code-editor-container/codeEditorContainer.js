@@ -87,7 +87,7 @@ export default class CodeEditorContainer extends Vue {
     //The request body values should be follow the preserve order of request Body keys
     const submissionReqBodyValues = [userInfo.id,this.name,submissionStatus,runtime + " ms","Java",code,topic.topic];
     const progressReqBodyValues = [userInfo.id,this.name,topic.topic,state.questions[this.name].mode,state.lastRunnedStatus];
-    const sessionReqBodyValues = [userInfo.id,"sessionName",state.questions[this.name].mode];
+    const sessionReqBodyValues = [userInfo.id,sessionInfo.sessionName,state.questions[this.name].mode];
 
     const reqBodyValues =[submissionReqBodyValues,progressReqBodyValues,sessionReqBodyValues];
 
