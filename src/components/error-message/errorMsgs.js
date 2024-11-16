@@ -71,9 +71,12 @@ export default class errorMsgs extends Vue {
     }
 
     if (
-      outputMessage.msg != "" &&
+      (outputMessage.msg != "" &&
       outputMessage.msg[1].trim() ===
-        "class, interface, enum, or record expected"
+        "class, interface, enum, or record expected") || 
+        (outputMessage.msg != "" &&
+          outputMessage.msg[1].trim() ===
+            "class, interface, or enum expected")
     ) {
       returnMessage.msg = this.customErrors(outputMessage.msg);
       returnMessage.validError = true;
