@@ -1,5 +1,5 @@
-<style lang="css" scoped src="./errormsg.css"></style>
-<script  src="./errorMsgs.js"></script>
+<style lang="css" scoped src="./errorDisplay.css"></style>
+<script  src="./errorDisplayProcessor.js"></script>
 
 <template>
 <section>
