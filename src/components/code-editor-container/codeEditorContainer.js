@@ -1,13 +1,13 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
 import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
-import ErrorMsgs from "../error-message/ErrorMsgs.vue";
 import HttpClient from '@/service/httpClient.js'
+import ErrorDisplayProcessor from '../output-panel/error-display-processor/ErrorDisplayProcessor.vue'
 import state from "../../store/index";
 import RequestBodyFactory from "../../Utils/request-body-factory.js"
 
 @Component({
-  components: { CodeEditor, ErrorMsgs, QuestionsPrb }
+  components: { CodeEditor, ErrorDisplayProcessor, QuestionsPrb}
 })
 export default class CodeEditorContainer extends Vue {
   @Prop({ type: String, required: true, default: "hey" }) name;

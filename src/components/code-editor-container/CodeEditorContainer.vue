@@ -6,7 +6,7 @@
   <QuestionsPrb :problemContainer="problemContainer" />
  <div class="editor-container">
   <CodeEditor :codeTemplate="codeSnippet " :defaultInput="defaultIp" @submit="submit" @showOutput="initializeCompiledOutPut"/>
-  <ErrorMsgs :change="change" :outputContainer="outputData" />
+  <ErrorDisplayProcessor :change="change" :outputContainer="outputData" />
  </div>
  </div>
 </template>
