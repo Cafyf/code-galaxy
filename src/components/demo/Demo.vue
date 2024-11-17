@@ -9,7 +9,7 @@
     <img class="imgs" :src="getImage(img)" alt="">
   </div>
 </div>
- </div>
+ </div>  
 <h3>Study plan <small>coming soon...</small></h3>
 <div class="inner-box">
 
