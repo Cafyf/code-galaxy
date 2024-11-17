@@ -1,7 +1,7 @@
 <style lang="css" scoped src="./demo.css"></style>
 <script  src="./demo.js"></script>
 
-<template>
+<template>  
 <section>
  <div class="box">
   <div v-for="(img,index) in firstImgs" :key="index" class="card card-main">
