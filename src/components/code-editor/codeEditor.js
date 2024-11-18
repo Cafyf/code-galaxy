@@ -1,10 +1,10 @@
+import { Component, Prop, Vue } from "vue-facing-decorator";
 import Codemirror from "codemirror-editor-vue3";
 import "codemirror/addon/display/placeholder.js";
 import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
-import state from "../../store/index";
-import { Component, Prop, Vue } from "vue-facing-decorator";
 import HttpClient from "@/service/httpClient";
+import state from "../../store/index";
 
 @Component({
   components: { Codemirror },
@@ -52,7 +52,7 @@ export default class CodeEditor extends Vue {
         this.errors = "compilation failed";
         if (error.response.status === 400) {
           this.errors = "Declaraction MisMatch";
-          this.$emit("showOutput", error.response.data.error, false);
+          this.$emit("showOutput", error.response.data.error, false,"");
         } else if (
           error.response.status === 500 &&
           Object.values(error.response.data.error).length === 0

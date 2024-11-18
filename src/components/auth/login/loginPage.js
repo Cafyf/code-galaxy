@@ -13,15 +13,7 @@ export default class LoginPage extends Vue {
   get emailIsValid() {
     return ValidationUtils.emailIsValid(this.email);
   }
-
-  // submitForm() {
-  //   this.emailError = this.email === "";
-  //   this.passwordError = this.password === "";
-
-  //   if (!this.emailError && !this.passwordError) {
-  //     this.logIn();
-  //   }
-  // };
+  
   submitForm() {
     // Use ObjectUtils to check for empty values
     this.emailError = ObjectUtils.isNullOrUndefinedOrEmpty(this.email);
