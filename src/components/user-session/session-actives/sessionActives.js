@@ -1,6 +1,7 @@
 import { Component, Vue } from 'vue-facing-decorator' // Third-party library
 import HttpClient from '@/service/httpClient.js' // Service module
 import state from '../../../store' // Internal state management
+import ObjectUtils from '@/Utils/object-utils';
 
 @Component
 export default class SessionActives extends Vue {
@@ -51,7 +52,7 @@ export default class SessionActives extends Vue {
   async editSession(index, mode, sessionName, manageId) {
     console.log(sessionName);
     if (!this.isActive(manageId)) { alert("Please Click And Active Your Session"); return; }
-    if (mode === 'save' && this.sessionRename.trim() !== '') {
+    if (mode === 'save' && !ObjectUtils.isNullOrUndefinedOrEmpty(this.sessionRename.trim())) { //this.sessionRename.trim() !== ''
       const userInfo = JSON.parse(localStorage.getItem('user-info'));
       const session = JSON.parse(localStorage.getItem('active-session'));
       console.log(session);
