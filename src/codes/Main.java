@@ -1,18 +1,18 @@
 import java.util.Scanner;
 class Main {
 	
-public static boolean makes10(int a, int b)  {
+public static boolean sleepIn(boolean weekday, boolean vacation) {
 
-        return true;
+       return !weekday || vacation;
 }
 public static void main(String[] args) { 
  
- Object [][] input = {{9, 10},{9, 9},{1, 9},{10, 1},{10, 10},{8, 2},{8, 3},{10, 42},{12,-2}};
+ Object [][] input = {{false, false},{true, false},{false, true},{true, true}};
  for(Object[] v: input) {
- int a = (int) v[0];
-int b = (int) v[1];
+ boolean weekday = (boolean) v[0];
+boolean vacation = (boolean) v[1];
  
-System.out.println(makes10(a,b));
+System.out.println(sleepIn(weekday,vacation));
 }
 }
 }

@@ -84,14 +84,8 @@ export default class errorMsgs extends Vue {
     }
     return returnMessage;
   };
+  
   formatOutPutMessage(outputMessage) {
-    if (outputMessage.defaultOpDesc != undefined) {
-      this.supportShow = true;
-      console.log(outputMessage.defaultOpDesc);
-      return outputMessage.defaultOpDesc;
-    }
-    this.supportShow = false;
-    this.show = outputMessage.show;
     const returnMessage = this.errorValidation(outputMessage);
     if (returnMessage.validError) {
       return returnMessage.msg;
@@ -105,7 +99,7 @@ export default class errorMsgs extends Vue {
       this.errorheader = outputMessage.msg;
       return;
     }
-    if (this.show == false && outputMessage.msg != null) {
+    if (outputMessage.msg != null) {
       if (outputMessage.msg.length - 1 === 1) {
         this.errorheader = outputMessage.msg[outputMessage.msg.length - 1];
         return;
@@ -120,14 +114,5 @@ export default class errorMsgs extends Vue {
       });
       return this.filterOutPut(mergeErrors);
     }
-    try {
-      return outputMessage.msg.split("\r\n");
-    } catch (err) {
-      return outputMessage.msg;
-    }
-  };
-
-  mounted() {
-    this.supportShow = true;
   };
 }
