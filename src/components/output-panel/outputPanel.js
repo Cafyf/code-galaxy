@@ -19,13 +19,13 @@ export default class OutputPanel extends Vue {
         this.show = false;
         this.displayComponent = ""
         this.displayComponentProps = {};
-        if (this.outputContainer.isTestResult && this.outputContainer.defaultOpDesc != undefined) {
+        if (this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
             this.displayComponent = "TestResult";
             this.displayComponentProps = {testData:this.outputContainer}
-        } else if (!this.outputContainer.isTestResult && this.outputContainer.msg != undefined) {
+        } else if (!this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
             this.displayComponent = "ErrorDisplayProcessor";
             this.displayComponentProps = {outputContainer:this.outputContainer}
-        } else if (this.outputContainer.isTestResult && this.outputContainer.msg != undefined){
+        } else if (this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )){
             try {
                 this.show = true;
                 this.normalOutput = this.outputContainer.msg.split("\r\n");
