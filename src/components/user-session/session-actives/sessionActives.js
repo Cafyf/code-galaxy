@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-facing-decorator' // Third-party library
 import HttpClient from '@/service/httpClient.js' // Service module
 import state from '../../../store' // Internal state management
-
+import ObjectUtils from '@/Utils/object-utils';
 @Component
 export default class SessionActives extends Vue {
   getCallResponse = {};

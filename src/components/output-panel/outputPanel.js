@@ -1,7 +1,7 @@
 import { Component,Prop, Vue,Watch  } from "vue-facing-decorator";
 import TestResult from "./test-result/TestResult.vue";
 import ErrorDisplayProcessor from "./error-display-processor/ErrorDisplayProcessor.vue";
-
+import ObjectUtils from "@/Utils/object-utils";
 @Component({
     components:{TestResult, ErrorDisplayProcessor}
 })
@@ -19,13 +19,13 @@ export default class OutputPanel extends Vue {
         this.show = false;
         this.displayComponent = ""
         this.displayComponentProps = {};
-        if (this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
+        if (this.outputContainer.isTestResult && !ObjectUtils.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
             this.displayComponent = "TestResult";
             this.displayComponentProps = {testData:this.outputContainer}
-        } else if (!this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
+        } else if (!this.outputContainer.isTestResult && !ObjectUtils.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )) {
             this.displayComponent = "ErrorDisplayProcessor";
             this.displayComponentProps = {outputContainer:this.outputContainer}
-        } else if (this.outputContainer.isTestResult && !TestResult.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )){
+        } else if (this.outputContainer.isTestResult && !ObjectUtils.isNullOrUndefinedOrEmpty(this.outputContainer.defaultOpDesc )){
             try {
                 this.show = true;
                 this.normalOutput = this.outputContainer.msg.split("\r\n");
