@@ -1,6 +1,7 @@
 import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import ValidationUtils from '@/Utils/validation-util';
+import RequestBodyFactory from "@/Utils/request-body-factory";
 
 @Component
 export default class SignupPage extends Vue {
@@ -51,14 +52,21 @@ export default class SignupPage extends Vue {
     }
   };
   async submit() {
-    const reqBody = {
-      name: this.username,
-      email: this.email,
-      password: this.password2,
-      userProfile: {},
-    };
+    // const reqBody = {
+    //   name: this.username,
+    //   email: this.email,
+    //   password: this.password2,
+    //   userProfile: {},
+    // };
+
+    const userProfile = {}
+
+    const signupPayload = [this.username,this.email,this.password2,userProfile]
+    console.log(RequestBodyFactory.createRequestBody('signup',signupPayload),'sidgk')
+    const signed = await HttpClient.executeApiCall('post', "http://localhost:8090/addUser", { reqBody:RequestBodyFactory.createRequestBody('signup',signupPayload) 
+
+    });
    
-    const signed = await HttpClient.executeApiCall('post', "http://localhost:8090/addUser", { reqBody });
     if (signed.status === 200) {
       if (signed.data.email === "Email already exist please use different") {
         alert("Email already exist please use different");

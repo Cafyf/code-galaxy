@@ -59,7 +59,7 @@ export default class CodeEditorContainer extends Vue {
       this.outputData = {
         ...this.outputData, defaultOpDesc: this.constructDefaultOpContent(
           state.questions[this.name].sampleInputDesc,
-          message.split("\r\n")
+          message.split("\n")
         )
       }
       console.log(this.outputData.defaultOpDesc);

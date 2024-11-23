@@ -21,5 +21,17 @@ const progressRequestBody = {
     mode: "",
     status: "",
   };
-  
-  export default {progressRequestBody,sessionRequestBody,submissionRequestBody};
+  const codeRequestBody = {
+    language : "",
+    code :"",
+    mode : false,
+    userIp: "",
+    input: "",
+  }
+  const signupRequestBody = {
+    name:"",
+    email:"",
+    password:"",
+    userProfile:{},
+  }
+  export default {progressRequestBody,sessionRequestBody,submissionRequestBody,codeRequestBody,signupRequestBody};

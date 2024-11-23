@@ -3,7 +3,9 @@ import requestBodies from '../models/requestBodies.js'
 export default class RequestBodyFactory {
 
     static reqBodyConfigMap = new Map([
-        ['submit', ['submission', 'progress', 'session']]
+        ['submit', ['submissionTemplate', 'progressTemplate', 'sessionTemplate']],
+        ['code','codeTemplate'],
+        ['signup','signupTemplate'],
     ]);
 
     // setting values to their appropriate keys
@@ -15,7 +17,7 @@ export default class RequestBodyFactory {
     }
 
     static createRequestBody(configName, modelValues) {
-        const requestBody  = {};
+        let requestBody  = {};
         const configStructure = this.reqBodyConfigMap.get(configName);
         if (Array.isArray(configStructure)) { // nested object structure
             configStructure.forEach((modelName, index) => {
