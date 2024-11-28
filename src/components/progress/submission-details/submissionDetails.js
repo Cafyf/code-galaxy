@@ -2,6 +2,7 @@ import { Component, Vue } from 'vue-facing-decorator';
 import moment from "moment";
 import HttpClient from '@/service/httpClient.js'
 import state from '../../../store/index';
+import { navigateTo } from '@/router/navigation';
 
 @Component
 export default class SubmissionDetails extends Vue {
@@ -9,14 +10,15 @@ export default class SubmissionDetails extends Vue {
   submissionsData = [];
 
   backToHomePage() {
-    this.$router.push({ name: 'HomePage' })
+    navigateTo("HomePage")
   };
   showInEditor(question, submittedQuestion, topic) {
     localStorage.setItem('topic', JSON.stringify({ topic: topic }))
     const questionFile = require(`../../mocks/${topic}.json`);
     state.questions = questionFile;
     state.submittedQuestions = submittedQuestion;
-    this.$router.push({ name: 'CodeEditorContainer', query: { name: question, option: 'previous' } });
+    navigateTo("CodeEditorContainer", { name: question, option: "previous" });
+
   };
   dateFormate(date) {
     const currentDate = moment();

@@ -28,10 +28,5 @@ const progressRequestBody = {
     userIp: "",
     input: "",
   }
-  const signupRequestBody = {
-    name:"",
-    email:"",
-    password:"",
-    userProfile:{},
-  }
-  export default {progressRequestBody,sessionRequestBody,submissionRequestBody,codeRequestBody,signupRequestBody};
+ 
+  export default {progressRequestBody,sessionRequestBody,submissionRequestBody,codeRequestBody};

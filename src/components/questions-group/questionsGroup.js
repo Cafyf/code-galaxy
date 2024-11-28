@@ -20,7 +20,7 @@ export default class QuestionsGroups extends Vue {
             getData = state.questions;
             getData.Description;
         } catch (err) {  // this part is to make call to server side to get json data okay
-            await axios.get(`http://localhost:5001/`, {
+            await axios.get(`http://localhost:5000/`, {
                 params: {
                     jsonData: JSON.stringify(require('../QuestionsMock.json')),
                     fileName: this.topic.header

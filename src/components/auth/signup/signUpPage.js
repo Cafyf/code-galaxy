@@ -2,6 +2,7 @@ import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import ValidationUtils from '@/Utils/validation-util';
 import RequestBodyFactory from "@/Utils/request-body-factory";
+import { navigateTo } from "@/router/navigation";
 
 @Component
 export default class SignupPage extends Vue {
@@ -75,7 +76,7 @@ export default class SignupPage extends Vue {
       signed.data.password = "";
       localStorage.setItem("user-info", JSON.stringify(signed.data));
       alert("SignUp Successful");
-      this.$router.push({ name: "HomePage" });
+      navigateTo("HomePage")
       console.log(signed.data);
     }
   };

@@ -30,9 +30,9 @@ export default class CodeEditor extends Vue {
   
   async compileAndRun() {
     const language = 'java'
-    const codePayloadValues = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
+    const codePayload = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
     
-    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayloadValues) }).then((response) => {
+    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
         state.lastRunnedStatus = "Accepted";
         this.$emit(
           "showOutput",
