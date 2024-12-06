@@ -1,9 +1,10 @@
 import java.util.Scanner;
 class Main {
-	
+
+	
 public static boolean sleepIn(boolean weekday, boolean vacation) {
 
-       return !weekday || vacation;
+        return true;
 }
 public static void main(String[] args) { 
  

@@ -2,6 +2,7 @@ import { Component, Vue } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import ObjectUtils from "@/Utils/object-utils";
 import ValidationUtils from '@/Utils/validation-util';
+import { navigateTo } from "@/router/navigation";
 
 @Component
 export default class LoginPage extends Vue {
@@ -48,15 +49,15 @@ export default class LoginPage extends Vue {
       if (response.data != "") {
         console.log(response.data);
         localStorage.setItem("user-info", JSON.stringify(response.data));
-        this.$router.push({ name: "HomePage" });
+        navigateTo("HomePage");
         alert("Login Success");
-      } else {
+      }else {
         alert("InValid Username or Password");
       }
     } catch (err) {
       console.log(err);
       this.initUserDatas();
-      this.$router.push({ name: "HomePage" });
+      navigateTo("HomePage");
     }
   };
 }

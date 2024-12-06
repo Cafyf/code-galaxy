@@ -5,6 +5,7 @@ import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 import HttpClient from "@/service/httpClient";
 import state from "../../store/index";
+import RequestBodyFactory from "@/Utils/request-body-factory";
 
 @Component({
   components: { Codemirror },
@@ -28,15 +29,10 @@ export default class CodeEditor extends Vue {
   errors = "";
   
   async compileAndRun() {
-    const playload = {
-      language: "java",
-      code: this.code,
-      mode: this.Enabletrace.switch,
-      userIp: this.userIp,
-      input: this.defaultInput,
-    };
+    const language = 'java'
+    const codePayload = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
     
-    await HttpClient.executeApiCall('post',"http://localhost:5000/run",{ reqBody:playload }).then((response) => {
+    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
         state.lastRunnedStatus = "Accepted";
         this.$emit(
           "showOutput",

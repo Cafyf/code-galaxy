@@ -2,6 +2,7 @@ import { Component, Vue } from 'vue-facing-decorator'
 import getImage from '@/Utils/asset-utils';
 import HttpClient from '@/service/httpClient.js'
 import state from '../../../store/index'
+import { navigateTo } from '@/router/navigation';
 
 @Component
 export default class ProgressQuestion extends Vue {
@@ -13,7 +14,7 @@ export default class ProgressQuestion extends Vue {
   getImage = getImage;
 
   backToHomePage() {
-    this.$router.push({ name: 'HomePage' })
+    navigateTo("HomePage")
   };
   async search() {
     this.isLoading = true;
@@ -42,7 +43,7 @@ export default class ProgressQuestion extends Vue {
     const questionFile = require(`../../mocks/${res.data.topic}.json`);
     state.questions = questionFile;
     state.submittedQuestions = res.data.submittedQuestion;
-    this.$router.push({ name: 'CodeEditorContainer', query: { name: questionName, option: 'previous' } });
+    navigateTo("CodeEditorContainer", { name: questionName, option: "previous" });
     console.log(res.data);
   };
 

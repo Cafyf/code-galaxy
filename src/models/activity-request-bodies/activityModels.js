@@ -21,5 +21,12 @@ const progressRequestBody = {
     mode: "",
     status: "",
   };
-  
-  export default {progressRequestBody,sessionRequestBody,submissionRequestBody};
+  const codeRequestBody = {
+    language : "",
+    code :"",
+    mode : false,
+    userIp: "",
+    input: "",
+  }
+ 
+  export default {progressRequestBody,sessionRequestBody,submissionRequestBody,codeRequestBody};
