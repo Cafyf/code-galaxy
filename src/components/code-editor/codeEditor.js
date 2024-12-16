@@ -6,6 +6,7 @@ import "codemirror/theme/dracula.css";
 import HttpClient from "@/service/httpClient";
 import state from "../../store/index";
 import RequestBodyFactory from "@/Utils/request-body-factory";
+import CodeViolationValidator from "@/service/codeViolationValidator";
 
 @Component({
   components: { Codemirror },
@@ -31,9 +32,14 @@ export default class CodeEditor extends Vue {
   async compileAndRun() {
     const language = 'java'
     const codePayload = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
+    console.log(codePayload,"codePay",this.defaultInput.methodDesc);
     
-    await HttpClient.executeApiCall('post',"http://localhost:5001/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
+    console.log(CodeViolationValidator.rulesViolationChecker(this.code,this.defaultInput.methodDesc));
+    
+    await HttpClient.executeApiCall('post',"http://localhost:5000/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
         state.lastRunnedStatus = "Accepted";
+        console.log( response.data.output);
+        
         this.$emit(
           "showOutput",
           response.data.output,

@@ -1,6 +1,7 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import { MESSAGES } from "@/models/constants/custom-messages.js";
 import { CONSTANTS } from "@/models/constants/globalConstants";
+import ObjectUtils from "@/Utils/object-utils";
 
 @Component
 export default class errorMsgs extends Vue {
@@ -71,10 +72,10 @@ export default class errorMsgs extends Vue {
     }
 
     if (
-      (outputMessage.msg != "" &&
+      (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
       outputMessage.msg[1].trim() ===
         "class, interface, enum, or record expected") || 
-        (outputMessage.msg != "" &&
+        (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
           outputMessage.msg[1].trim() ===
             "class, interface, or enum expected")
     ) {

@@ -9,24 +9,25 @@ const classEditor = (filePathExce,codeSnippet,defaultIp,defaultTest) =>{
   // validation part 
   if(/System\.out\.println\(|print\(/.test(codeSnippet)) return "error:PRINT_STATEMENTS_ARE_NOT_ALLOWED";
  
-  let coreMethod=defaultIp.methodDesc;
+  let coreMethod="test(int a, String [ ] name, boolean[] show)";
   console.log(coreMethod);
-  const methods = codeSnippet.trim().match(/public static \w+ \w+\([^)]*\)\s*{[^}]*}/g);
+  const methods = codeSnippet.trim().match(/(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\([^)]*\)\s*{[^}]*}/g);
   let coreCodeSnippet='';
   let count =0;
   console.log(methods);
   function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\s?\\$&').replace(" ","");
   }
 
   if(methods.length>1){
   try {for (const method of methods) {
-    const methodName = extractActualDeclaration(method.trim(),"methodName");
+    const methodName = ArgsExtracter(method.trim(),"methodName");
     const parameterTypes = ArgsExtracter(method.trim(),"dataTypes");
+    console.log(parameterTypes,"parameterTypes");
     const escapedParameterTypes = parameterTypes.map(escapeRegEx=> escapeRegExp(escapeRegEx));
-    const regexString =`\\b${methodName}\\s*\\(\\s*(?:${escapedParameterTypes.join('\\s+\\w+\\s*,\\s*')})\\s+\\w+\\s*\\)`;
+    console.log(escapedParameterTypes,"escapedParameterTypes");
+    const regexString =`\\b${methodName}\\s*\\(\\s*(?:${escapedParameterTypes.join('\\s?\\w+\\s*,\\s*')})\\s+\\w+\\s*\\)`;
     const methodRegex = new RegExp(regexString);
-
     if (methodRegex.test(coreMethod) ) {
         coreCodeSnippet=method.trim();
         count++;
@@ -74,12 +75,15 @@ const finalContent = fileContent.slice(0, insertionPosition) + codeSnippet + '\r
 return finalContent;
 //fs.writeFileSync(filePathExce, finalContent);
 };
-// const codeSnippet2 = `
-// public static String test(int a, String name, boolean show) {
-//   return a + " " + name + " " + show +" "+test2(a);
-// }
-// `;
-//classEditor('',codeSnippet2,true);
+const codeSnippet2 = `
+public static String test(int a, String name, boolean show) {
+  return a + " " + name + " " + show +" "+test2(a);
+}
+public  void test(int a,String [] name,boolean []show) {
+  return a + " " + name + " " + show +" "+test2(a);
+}
+`;
+classEditor('',codeSnippet2,true);
 module.exports={
   classEditor
 }

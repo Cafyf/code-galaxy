@@ -1,12 +1,13 @@
 
 const ArgsExtracter =(inputMethod ,type)=>{
-    const regex = /(?:public\s+|private\s+)?(?:static\s+)?(?:final\s+)? (\w+) (\w+)\((.*?)\)/;
+    const regex = /(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\((.*?)\)/;
     const match = inputMethod.match(regex);
+    if(type=="methodName") return match[2];
     const parametersString = match[3];
     let dataTypesInOrder=[];
     let variableNamesInOrder=[];
-    const parameterRegex = /(\w+(?:\[\s*\]|\s+\[\s*\])*) (\w+)/g;
-    const methodArgs = [];
+    const parameterRegex = /(\w+(?:\[\s*\]|\s?\[\s*\])*)\s*(\w+)/g;
+    const methodArgs = []; 
     let parameterMatch;
     while ((parameterMatch = parameterRegex.exec(parametersString)) !== null) {
       dataTypesInOrder.push(parameterMatch[1]);
