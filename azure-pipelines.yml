@@ -21,7 +21,7 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x.x'
+    versionSpec: '14.17.3'
   displayName: 'Install Node.js'
 
 - script: |
@@ -32,6 +32,13 @@ steps:
 - script: |
     npm cache clean --force
     rm -rf node_modules
+    echo "Checking if node_modules is removed..."
+    if [ -d "node_modules" ]; then
+      echo "node_modules was not removed successfully!"
+      exit 1
+    else
+      echo "node_modules removed successfully!"
+    fi
     npm install
     npm run build
   displayName: 'npm install and build'
