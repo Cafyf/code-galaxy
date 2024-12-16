@@ -25,7 +25,13 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    df -h
+    node -v
+    npm -v
+  displayName: 'Verify Node.js and NPM Versions'
+
+- script: |
+    npm cache clean --force
+    rm -rf node_modules
     npm install
     npm run build
   displayName: 'npm install and build'
