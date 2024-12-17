@@ -9,15 +9,15 @@ export default class CodeViolationValidator {
         } 
         const isMethodRulesViolated = this.validateMethodSignatures(codeSnippet,methodBrief);
          if(isMethodRulesViolated){
-            return "error:DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION";
+            return ["DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION"];
         }
 
-        return "rulesNotViolated";
+        return false;
     }
 
     static checkProhibitedLines(codeSnippet){
         if(/System\.out\.println\(|print\(/.test(codeSnippet)) 
-          return "error:PRINT_STATEMENTS_ARE_NOT_ALLOWED";
+          return ["PRINT_STATEMENTS_ARE_NOT_ALLOWED"];
     }
 
     static validateMethodSignatures(codeSnippet,methodBrief){

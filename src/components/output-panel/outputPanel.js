@@ -27,7 +27,7 @@ export default class OutputPanel extends Vue {
             this.displayComponent = "ErrorDisplayProcessor";
             this.displayComponentProps = {outputContainer:this.outputContainer}
         } else if (this.outputContainer.isTestResult && !ObjectUtils.isNullOrUndefinedOrEmpty(this.outputContainer.msg)){
-            try {
+            try {//This block used for trace mood
                 this.show = true;
                 this.normalOutput = this.outputContainer.msg.split("\r\n");
               } catch (err) {
