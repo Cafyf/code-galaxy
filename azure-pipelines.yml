@@ -30,16 +30,11 @@ steps:
   displayName: 'Verify Node.js and NPM Versions'
 
 - script: |
+    echo "Cleaning npm cache and removing node_modules"
     npm cache clean --force
-    rm -rf node_modules
-    echo "Checking if node_modules is removed..."
-    if [ -d "node_modules" ]; then
-      echo "node_modules was not removed successfully!"
-      exit 1
-    else
-      echo "node_modules removed successfully!"
-    fi
-    npm install
+    rm -rf node_modules package-lock.json
+    echo "Installing dependencies"
+    npm install --no-cache --verbose || npm install --no-cache --verbose
     npm run build
   displayName: 'npm install and build'
 
