@@ -37,7 +37,6 @@ steps:
     echo "Cleaning npm cache and removing node_modules"
     npm cache clean --force
     rm -rf node_modules
-    rm -rf package-lock.json
     echo "Installing dependencies"
     npm install
     npm run build
