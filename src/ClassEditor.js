@@ -75,15 +75,15 @@ const finalContent = fileContent.slice(0, insertionPosition) + codeSnippet + '\r
 return finalContent;
 //fs.writeFileSync(filePathExce, finalContent);
 };
-const codeSnippet2 = `
-public static String test(int a, String name, boolean show) {
-  return a + " " + name + " " + show +" "+test2(a);
-}
-public  void test(int a,String [] name,boolean []show) {
-  return a + " " + name + " " + show +" "+test2(a);
-}
-`;
-classEditor('',codeSnippet2,true);
+// const codeSnippet2 = `
+// public static String test(int a, String name, boolean show) {
+//   return a + " " + name + " " + show +" "+test2(a);
+// }
+// public  void test(int a,String [] name,boolean []show) {
+//   return a + " " + name + " " + show +" "+test2(a);
+// }
+// `;
+// classEditor('',codeSnippet2,true);
 module.exports={
   classEditor
 }

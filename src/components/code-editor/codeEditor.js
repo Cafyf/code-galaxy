@@ -33,15 +33,27 @@ export default class CodeEditor extends Vue {
     const language = 'java'
     const codePayload = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
     console.log(codePayload,"codePay",this.defaultInput.methodDesc);
+   const rulesVoilated = CodeViolationValidator.rulesViolationChecker(this.code,this.defaultInput.methodDesc);
+   console.log(rulesVoilated,"rulesVoilated");
+   
+   if(rulesVoilated){
+    console.log("ullaaa");
     
-    console.log(CodeViolationValidator.rulesViolationChecker(this.code,this.defaultInput.methodDesc));
+      this.$emit(
+        "showOutput", // emit Listner name
+        rulesVoilated,
+        false,
+         ""
+      );
+      return ;
+    }
     
     await HttpClient.executeApiCall('post',"http://localhost:5000/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
         state.lastRunnedStatus = "Accepted";
         console.log( response.data.output);
         
         this.$emit(
-          "showOutput",
+          "showOutput", // emit Listner name
           response.data.output,
           true,
           this.userIp === "" && this.Enabletrace.switch === false

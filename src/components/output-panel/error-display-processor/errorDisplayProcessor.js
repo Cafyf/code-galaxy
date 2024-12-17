@@ -34,7 +34,8 @@ export default class errorMsgs extends Vue {
     return uniqueErrors; // Return the unique array
   };
   customErrors(CheckCustomErrorMsg) {
-    for (let i = 0; i < CheckCustomErrorMsg.length - 1; i++) {
+    
+    for (let i = 0; i <= CheckCustomErrorMsg.length - 1; i++) {
       if (
         CheckCustomErrorMsg[i].includes(CONSTANTS.NO_CHANGE_DECLARATION)
       ) {
@@ -45,6 +46,7 @@ export default class errorMsgs extends Vue {
       ) {
         this.textColor = "red";
         this.errorheader = MESSAGES.traceError.title;
+        console.log(this.errorheader ,MESSAGES.ambiguity.msg);
         return MESSAGES.traceError.msg;
       } else {
         console.log(CheckCustomErrorMsg[i]);
@@ -60,6 +62,13 @@ export default class errorMsgs extends Vue {
     };
     // if(outputMessage.msg===null ){ return };
 
+    const customError = this.customErrors(outputMessage.msg);
+    if(!ObjectUtils.isNullOrUndefinedOrEmpty(customError)){
+         returnMessage.msg=customError;
+         returnMessage.validError = true;
+         return returnMessage;
+    }
+
     if (
       outputMessage.msg.length > 0 &&
       outputMessage.msg[0].includes("Exception") &&
@@ -73,13 +82,10 @@ export default class errorMsgs extends Vue {
 
     if (
       (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
-      outputMessage.msg[1].trim() ===
-        "class, interface, enum, or record expected") || 
-        (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
-          outputMessage.msg[1].trim() ===
-            "class, interface, or enum expected")
+      outputMessage.msg[1].trim() === "class, interface, enum, or record expected") || 
+      (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
+      outputMessage.msg[1].trim() === "class, interface, or enum expected")
     ) {
-      returnMessage.msg = this.customErrors(outputMessage.msg);
       returnMessage.validError = true;
       return returnMessage;
     }
