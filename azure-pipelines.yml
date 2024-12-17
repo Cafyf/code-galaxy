@@ -21,10 +21,24 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '14.x.x'
+    versionSpec: '16.x'
   displayName: 'Install Node.js'
 
 - script: |
+    echo "Running on: $(Agent.OS)"
+  displayName: 'Check Agent Operating System'
+
+- script: |
+    node -v
+    npm -v
+  displayName: 'Verify Node.js and NPM Versions'
+
+- script: |
+    echo "Cleaning npm cache and removing node_modules"
+    npm cache clean --force
+    rm -rf node_modules
+    rm -rf package-lock.json
+    echo "Installing dependencies"
     npm install
     npm run build
   displayName: 'npm install and build'
