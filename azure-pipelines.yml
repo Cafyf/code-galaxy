@@ -34,7 +34,7 @@ steps:
     npm cache clean --force
     rm -rf node_modules package-lock.json
     echo "Installing dependencies"
-    npm install --no-cache --verbose || npm install --no-cache --verbose
+    npm install --verbose
     npm run build
   displayName: 'npm install and build'
 
