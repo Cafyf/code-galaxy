@@ -5,7 +5,7 @@
   <div>
     <Codemirror
       ref="editor"
-      v-model:value="code"
+      v-model:value="codeSnippet"
       :options="cmOptions"
       border
       placeholder="JAVA LOGICAL PROGRAMS"

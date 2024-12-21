@@ -1,6 +1,6 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import HttpClient from '@/service/httpClient.js'
-import state from '../../../store'
+import state from '../../../store/store'
 
 @Component
 export default class SessionCard extends Vue {

@@ -12,4 +12,14 @@ export const MESSAGES = Object.freeze({
         type:"error",
         msg:["IF YOU WANT TO USE ENABLE TRACE MODE"]
     },
+    declarationMissing:{
+        title:"Method Declaration Missing",
+        type:"error",
+        msg:["PLEASE ADD PROPER SYNTAX OR KEEP THE DEFAULT DECLARATION"]
+    },
+    dataTypeModified:{
+        title:" Data Type Declaration Modified",
+        type:"warning",
+        msg:["DO NOT CHANGE THE PARAMENT DATA TYPE DECLARATION KEEP THE DEFAULT ONE"]
+    }
 });

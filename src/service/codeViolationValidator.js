@@ -1,14 +1,25 @@
+import state from "@/store/store";
 import MethodSignatureExtractor from "@/Utils/method-signature-extractor";
+import ObjectUtils from "@/Utils/object-utils";
 
 export default class CodeViolationValidator {
 
     static rulesViolationChecker(codeSnippet,methodBrief){
+        const isNotValidCodeSnippent = this.isValidForExecution(codeSnippet);
+        if(isNotValidCodeSnippent){
+         return ["METHOD_DECLARATION_MISSING"];
+        } 
+        const isDataTypesModified = this.checkDataTypeDeclaration(codeSnippet,methodBrief);
+        if(isDataTypesModified){
+         return ["DATA_TYPES_DECLARATION_MODIFIED"];
+        }
         const prohibitedLines = this.checkProhibitedLines(codeSnippet);
         if(prohibitedLines){
             return prohibitedLines;
         } 
         const isMethodRulesViolated = this.validateMethodSignatures(codeSnippet,methodBrief);
          if(isMethodRulesViolated){
+            state.codeStatus="Declaraction MisMatch";
             return ["DONT_CHANGE_THE_DEFAULT_METHOD_DECLARATION"];
         }
 
@@ -21,8 +32,7 @@ export default class CodeViolationValidator {
     }
 
     static validateMethodSignatures(codeSnippet,methodBrief){
-        const methodRegex =/(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\([^)]*\)\s*{[^}]*}/g;
-        const methods = codeSnippet.trim().match(methodRegex);
+        const methods = this.extractMethodDefinition(codeSnippet);
         if(methods.length>1){
             for (const method of methods) {
                 const methodName = MethodSignatureExtractor.extract(method,"methodName",null);
@@ -40,4 +50,26 @@ export default class CodeViolationValidator {
     static escapeRegExp(stringValue) {
         return stringValue.replace(/[.*+?^${}()|[\]\\]/g, '\\s?\\$&').replace(" ","");
       }
+    
+    static isMultipleMethodSignature(codeSnippet){
+        return this.extractMethodDefinition(codeSnippet).length>1;
+    }
+    
+    static isValidForExecution(codeSnippet){
+        if(ObjectUtils.isNullOrUndefinedOrEmpty(codeSnippet.trim())) return true;
+        return ObjectUtils.isNullOrUndefinedOrEmpty(this.extractMethodDefinition(codeSnippet));
+    }
+
+    static extractMethodDefinition(codeSnippet){
+        const methodRegex =/(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\([^)]*\)\s*{[^}]*}/g;
+        return codeSnippet.match(methodRegex);
+    }
+
+    static checkDataTypeDeclaration(codeSnippet,methodBrief){
+        const methods = this.extractMethodDefinition(codeSnippet);
+        if(methods.length===1){
+         return !(JSON.stringify(MethodSignatureExtractor.extract(methods[0],"parameters","dataTypes")).replace(/\s+/g, '') === JSON.stringify( MethodSignatureExtractor.extract("prototype "+methodBrief,"parameters","dataTypes")).replace(/\s+/g, ''));
+       }
+       return false;
+    }
 }

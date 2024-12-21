@@ -1,10 +1,11 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
+import state from "../../../store/store";
 import { MESSAGES } from "@/models/constants/custom-messages.js";
 import { CONSTANTS } from "@/models/constants/globalConstants";
 import ObjectUtils from "@/Utils/object-utils";
 
 @Component
-export default class errorMsgs extends Vue {
+export default class ErrorDisplayProcessor extends Vue {
   @Prop({ default: false }) change;
   @Prop({ type: Object }) outputContainer;
 
@@ -14,25 +15,26 @@ export default class errorMsgs extends Vue {
   errorheader = "";
   textColor = "";
 
-  filterOutPut(mergedErrorContainer) {
-    let uniqueErrors = []; // Initialize an empty array to store unique string elements
-    let uniqueSet = new Set(); // Initialize a Set to keep track of unique elements
+  // filterOutPut(mergedErrorContainer) {
+  //   let uniqueErrors = []; // Initialize an empty array to store unique string elements
+  //   let uniqueSet = new Set(); // Initialize a Set to keep track of unique elements
 
-    mergedErrorContainer.forEach((element) => {
-      // Iterate over the merged array
-      if (
-        typeof element === "string" &&
-        !uniqueSet.has(element.trim()) &&
-        !element.includes(".java")
-      ) {
-        // Check if the element is a string and not already in the set
-        uniqueSet.add(element.trim()); // Add the element to the set
-        uniqueErrors.push(element); // Add the element to the unique array
-      }
-    });
+  //   mergedErrorContainer.forEach((element) => {
+  //     // Iterate over the merged array
+  //     if (
+  //       typeof element === "string" &&
+  //       !uniqueSet.has(element.trim()) &&
+  //       !element.includes(".java")
+  //     ) {
+  //       // Check if the element is a string and not already in the set
+  //       uniqueSet.add(element.trim()); // Add the element to the set
+  //       uniqueErrors.push(element); // Add the element to the unique array
+  //     }
+  //   });
 
-    return uniqueErrors; // Return the unique array
-  };
+  //   return uniqueErrors; // Return the unique array
+  // };
+  
   customErrors(CheckCustomErrorMsg) {
     
     for (let i = 0; i <= CheckCustomErrorMsg.length - 1; i++) {
@@ -48,44 +50,33 @@ export default class errorMsgs extends Vue {
         this.errorheader = MESSAGES.traceError.title;
         console.log(this.errorheader ,MESSAGES.ambiguity.msg);
         return MESSAGES.traceError.msg;
-      } else {
-        console.log(CheckCustomErrorMsg[i]);
-        // this.filterOutPut(CheckCustomErrorMsg);
-      }
+      } else if (CheckCustomErrorMsg[i].includes(CONSTANTS.DECLARATION_MISSING)){
+        this.textColor = "orange";
+        this.errorheader = MESSAGES.declarationMissing.title;
+        return MESSAGES.declarationMissing.msg;
+      } else if (CheckCustomErrorMsg[i].includes(CONSTANTS.DATA_TYPE_MODIFIED)){
+        this.textColor = "orange";
+        this.errorheader = MESSAGES.dataTypeModified.title;
+        return MESSAGES.dataTypeModified.msg;
+      } 
     }
   };
 
   errorValidation(outputMessage) {
     let returnMessage = {
-      msg: "",
+      msg: [],
       validError: false,
     };
-    // if(outputMessage.msg===null ){ return };
-
     const customError = this.customErrors(outputMessage.msg);
     if(!ObjectUtils.isNullOrUndefinedOrEmpty(customError)){
          returnMessage.msg=customError;
          returnMessage.validError = true;
          return returnMessage;
     }
-
-    if (
-      outputMessage.msg.length > 0 &&
-      outputMessage.msg[0].includes("Exception") &&
-      outputMessage.msg[0].includes("java.lang.")
-    ) {
+    if (outputMessage.msg.length > 0) {
       console.log("okokoko");
-      returnMessage.msg = outputMessage.msg[0].split("\r\n");
-      returnMessage.validError = true;
-      return returnMessage;
-    }
-
-    if (
-      (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
-      outputMessage.msg[1].trim() === "class, interface, enum, or record expected") || 
-      (!ObjectUtils.isNullOrUndefinedOrEmpty(outputMessage.msg) &&
-      outputMessage.msg[1].trim() === "class, interface, or enum expected")
-    ) {
+      this.errorheader = state.lastRunnedStatus;
+      returnMessage.msg = outputMessage.msg.split("\n");
       returnMessage.validError = true;
       return returnMessage;
     }
@@ -98,28 +89,15 @@ export default class errorMsgs extends Vue {
       return returnMessage.msg;
     }
 
-    if (outputMessage.msg === "Empty code body!") {
-      this.errorheader = outputMessage.msg;
-      return;
-    }
-    if (outputMessage.msg.includes("Declarations are wrong")) {
-      this.errorheader = outputMessage.msg;
-      return;
-    }
-    if (outputMessage.msg != null) {
-      if (outputMessage.msg.length - 1 === 1) {
-        this.errorheader = outputMessage.msg[outputMessage.msg.length - 1];
-        return;
-      }
-      this.errorheader = outputMessage.msg[outputMessage.msg.length - 1];
-      let mergeErrors = [];
-      outputMessage.msg.map((errorContainer, index) => {
-        if (index != 0 && index != outputMessage.msg.length - 1)
-          errorContainer.split("\r\n").map((errorMsg) => {
-            mergeErrors.push(errorMsg);
-          });
-      });
-      return this.filterOutPut(mergeErrors);
-    }
+    // if (outputMessage.msg != null) {  Currently Disabled the sorting of duplicate error msg (Note:) need additional logic to make it work 100%
+    //   let mergeErrors = [];
+    //   outputMessage.msg.map((errorContainer, index) => {
+    //     if (index != 0 && index != outputMessage.msg.length - 1)
+    //       errorContainer.split("\n").map((errorMsg) => {
+    //         mergeErrors.push(errorMsg);
+    //       });
+    //   });
+    //   return this.filterOutPut(mergeErrors);
+    // }
   };
 }

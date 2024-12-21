@@ -1,14 +1,14 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import RequestBodyFactory from "../../Utils/request-body-factory.js"
-import state from "../../store/index";
+import state from "../../store/store";
 import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorDisplayProcessor from '../output-panel/error-display-processor/ErrorDisplayProcessor.vue'
 import OutputPanel from "../output-panel/OutputPanel.vue";
 
 @Component({
-  components: { CodeEditor, ErrorDisplayProcessor, QuestionsPrb,OutputPanel}
+  components: { CodeEditor, ErrorDisplayProcessor, QuestionsPrb, OutputPanel}
 })
 export default class CodeEditorContainer extends Vue {
   @Prop({ type: String, required: true, default: "hey" }) name;
@@ -59,12 +59,12 @@ export default class CodeEditorContainer extends Vue {
       this.outputData = {
         ...this.outputData, defaultOpDesc: this.constructDefaultOpContent(
           state.questions[this.name].sampleInputDesc,
-          message.split("\r\n")
+          message
         )
       }
       console.log(this.outputData.defaultOpDesc);
     } else {
-      this.outputData = { ...this.outputData, msg: message, defaultOpDesc: undefined }
+      this.outputData = { ...this.outputData, msg: message, defaultOpDesc: undefined };
     }
   };
 

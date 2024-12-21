@@ -10,9 +10,9 @@ export default class MethodSignatureExtractor {
     ]);
     
     static extract(methodSignature, type, inType) {
-        const regex = /(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\((.*?)\)/;
+        const methodRegex = /(\w+(?:\s*\[\s*\])?)\s+(\w+)\s*\((.*?)\)/;
         const parameterRegex = /(\w+(?:\[\s*\]|\s?\[\s*\])*)\s*(\w+)/g;
-        const matchedGroups = methodSignature.match(regex);
+        const matchedGroups = methodSignature.match(methodRegex);
 
         if(ObjectUtils.isNullOrUndefinedOrEmpty(matchedGroups)) return [];
         const capturedGroup = matchedGroups[this.regexCapturePosition.get(type)];

@@ -1,7 +1,7 @@
 import { Component, Vue } from 'vue-facing-decorator';
 import moment from "moment";
 import HttpClient from '@/service/httpClient.js'
-import state from '../../../store/index';
+import state from '../../../store/store';
 import { navigateTo } from '@/router/navigation';
 
 @Component
