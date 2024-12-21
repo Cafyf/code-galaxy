@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.7",
     "axios": "^1.7.7",
     "bootstrap": "^5.2.3",
     "codemirror": "^5.65.12",
