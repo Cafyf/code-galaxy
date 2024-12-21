@@ -1,6 +1,6 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
 import getImage from '../../Utils/asset-utils';
-import state from '../../store/index'
+import state from '../../store/store'
 
 @Component
 export default class QuestionsGroups extends Vue {

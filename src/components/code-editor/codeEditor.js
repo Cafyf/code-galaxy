@@ -4,7 +4,7 @@ import "codemirror/addon/display/placeholder.js";
 import "codemirror/mode/clike/clike";
 import "codemirror/theme/dracula.css";
 import HttpClient from "@/service/httpClient";
-import state from "../../store/index";
+import state from "../../store/store";
 import RequestBodyFactory from "@/Utils/request-body-factory";
 import CodeViolationValidator from "@/service/codeViolationValidator";
 
@@ -24,16 +24,15 @@ export default class CodeEditor extends Vue {
   @Prop({ type: Object }) defaultInput;
   @Prop({ type: String }) codeTemplate;
   sizeheight = 300;
-  code = '';
+  codeSnippet = '';
   Enabletrace = { msg: "enable Trace Mood", switch: false };
   userIp = "";
   errors = "";
   
   async compileAndRun() {
-    const language = 'java'
-    const codePayload = [language,this.code,this.Enabletrace.switch,this.userIp,this.defaultInput];
-    console.log(codePayload,"codePay",this.defaultInput.methodDesc);
-   const rulesVoilated = CodeViolationValidator.rulesViolationChecker(this.code,this.defaultInput.methodDesc);
+    const codePayload = [this.codeSnippet,this.defaultInput.defaultIp," ",8342];
+    console.log(codePayload,"codePay",this.defaultInput);
+   const rulesVoilated = CodeViolationValidator.rulesViolationChecker(this.codeSnippet,this.defaultInput.methodDesc);
    console.log(rulesVoilated,"rulesVoilated");
    
    if(rulesVoilated){
@@ -47,55 +46,35 @@ export default class CodeEditor extends Vue {
       );
       return ;
     }
-    
-    await HttpClient.executeApiCall('post',"http://localhost:5000/run",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
-        state.lastRunnedStatus = "Accepted";
-        console.log( response.data.output);
-        
+    state.retainedCode=this.codeSnippet; 
+    await HttpClient.executeApiCall('post',"http://localhost:8090/execute",{ reqBody:RequestBodyFactory.createRequestBody('code',codePayload) }).then((response) => {
+       if(response.status!=200)  throw new Error(`HTTP Error: ${response.statusText}`);
+        const data = response.data;
+        state.lastRunnedStatus = data.codeStatus;
+        console.log(response,data,"--------------- response and data");
+
         this.$emit(
           "showOutput", // emit Listner name
-          response.data.output,
-          true,
-          this.userIp === "" && this.Enabletrace.switch === false
+          data.output,
+          data.codeStatus==="Accepted",
+          data.codeStatus==="Accepted" && this.Enabletrace.switch === false
             ? "showWithDefault"
             : ""
-        );
+        ); 
       })
       .catch((error) => {
         state.lastRunnedStatus = "Error";
-        this.errors = "compilation failed";
-        if (error.response.status === 400) {
-          this.errors = "Declaraction MisMatch";
-          this.$emit("showOutput", error.response.data.error, false,"");
-        } else if (
-          error.response.status === 500 &&
-          Object.values(error.response.data.error).length === 0
-        ) {
-          this.errors = "Declaraction MisMatch";
-          this.$emit(
-            "showOutput",
-            "Error:Internal Server Error\n\r Declarations are wrong",
-            false,
-            ""
-          );
-        } else {
-          console.log(error);
-          this.$emit(
-            "showOutput",
-            error.response.data.error.stderr.split("error:"),
-            false,
-            ""
-          );
-        }
+        this.errors = "";
+       console.log("Error",error);
       });
   };
   async submit() {
     if (this.Enabletrace.switch) {
-      alert("You Can Submit On Trace Mood");
+      alert("You Can't Submit On Trace Mood");
       return;
     }
     await this.compileAndRun();
-    this.$emit("submit", this.code, this.errors);
+    this.$emit("submit", this.codeSnippet, this.errors);
   };
 
   toggle() {
@@ -104,7 +83,7 @@ export default class CodeEditor extends Vue {
 
     if (this.Enabletrace.switch) {
       this.Enabletrace.msg = "disable Trace mood";
-      this.code = `//now you can practice and trace you code flow
+      this.codeSnippet = `//now you can practice and trace you code flow
  class Main {
 
    public static void main(String[] args) {
@@ -114,11 +93,11 @@ export default class CodeEditor extends Vue {
  `;
     } else {
       this.Enabletrace.msg = "enable Trace Mood";
-      this.code = this.codeTemplate;
+      this.codeSnippet = this.codeTemplate;
     }
   };
 
   created(){
-    this.code=this.codeTemplate;
+    this.codeSnippet=this.codeTemplate;
   };
 }

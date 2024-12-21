@@ -1,7 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "../src/store";
+import store from "./store/store";
 import { InstallCodemirro } from "codemirror-editor-vue3";
 import "bootstrap/dist/js/bootstrap.js"
 import "bootstrap/dist/css/bootstrap.css"

@@ -1,6 +1,5 @@
 import Vuex from 'vuex';
 
-
 const store = new Vuex.Store({
   state: {
     questions :'',
@@ -9,7 +8,9 @@ const store = new Vuex.Store({
     sessionManagerDetails:{},
     singleQuestion:{},
     lastRunnedStatus:'',
-    isDefaultTestAccepted:''
+    isDefaultTestAccepted:'',
+    retainedCode:'',
+    codeStatus:''
   },
   getters: {},
   mutations: {
