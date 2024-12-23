@@ -5,7 +5,7 @@
 <div class="main-container">
   <QuestionsPrb :problemContainer="problemContainer" />
  <div class="editor-container">
-  <CodeEditor :codeTemplate="codeSnippet " :defaultInput="defaultIp" @submit="submit" @showOutput="initializeCompiledOutPut"/>
+  <CodeEditor :codeTemplate="codeSnippet " :miData="methodAndInputs" @submit="submit" @showOutput="initializeCompiledOutPut"/>
   <OutputPanel :change="change" :outputContainer="outputData"/>
  </div>
  </div>

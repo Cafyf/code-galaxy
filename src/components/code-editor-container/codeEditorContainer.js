@@ -14,9 +14,9 @@ export default class CodeEditorContainer extends Vue {
   @Prop({ type: String, required: true, default: "hey" }) name;
   @Prop({ type: String, default: "" }) option;
 
-  defaultIp = {
-    defaultIp: [],
-    methodDesc: "",
+  methodAndInputs = {
+    testInputs: [],
+    methodSignature: "",
   };
 
   problemContainer = {
@@ -53,9 +53,9 @@ export default class CodeEditorContainer extends Vue {
     return DefaultAnswers;
   }; 
   //array question topics user input ah disable pannidu
-  initializeCompiledOutPut(message, resultFlag, showDefaulTester) {
+  initializeCompiledOutPut(message, resultFlag) {
     this.outputData.isTestResult = resultFlag; // instead of this flag use outputType eg:testResult,normal,error
-    if (showDefaulTester === "showWithDefault") { // execute when not trace mode
+    if (resultFlag) { 
       this.outputData = {
         ...this.outputData, defaultOpDesc: this.constructDefaultOpContent(
           state.questions[this.name].sampleInputDesc,
@@ -68,7 +68,7 @@ export default class CodeEditorContainer extends Vue {
     }
   };
 
-  async submit(code, errors) {
+  async submit(code) {
     console.log(state.questions, "questions2");
     const topic = JSON.parse(localStorage.getItem("topic"));
     const runtime = Math.floor(Math.random() * 20) + 1;
@@ -76,7 +76,6 @@ export default class CodeEditorContainer extends Vue {
     const sessionInfo = JSON.parse(localStorage.getItem("active-session"));
     console.log(
       code,
-      errors,
       this.name,
       state.isDefaultTestAccepted,
       state.lastRunnedStatus
@@ -84,7 +83,7 @@ export default class CodeEditorContainer extends Vue {
     const submissionStatus =
       state.lastRunnedStatus === "Accepted"
         ? state.isDefaultTestAccepted
-        : "compile Error";
+        : state.lastRunnedStatus;
 
     //The request body values should be follow the preserve order of request Body keys
     const submissionReqBodyValues = [userInfo.id,this.name,submissionStatus,runtime + " ms","Java",code,topic.topic];
@@ -126,8 +125,8 @@ export default class CodeEditorContainer extends Vue {
   }
 
   initializeDefaultMethodWithInputs(question) {
-    this.defaultIp.methodDesc = question.methodDesc;
-    this.defaultIp.defaultIp = question.inputDesc;
+    this.methodAndInputs.methodSignature = question.methodDesc;
+    this.methodAndInputs.testInputs = question.inputDesc;
   }
 
   initializeProblemContainer(question) {

@@ -12,8 +12,6 @@ export default class RequestBodyFactory {
     // setting values to their appropriate keys
     static fillModelBody(model, values) {
         const modelCopy = ObjectUtils.deepCopy(model);
-        console.log(modelCopy,"obj modelCopy");
-        
         Object.keys(modelCopy).forEach((key, index) => {
            if(!ObjectUtils.isNullOrUndefinedOrEmpty(values[index]))
             modelCopy[key] = values[index];
@@ -26,11 +24,12 @@ export default class RequestBodyFactory {
         const configStructure = this.reqBodyConfigMap.get(configName);
         if (Array.isArray(configStructure)) { // nested object structure
             configStructure.forEach((modelName, index) => {
+                const modelBody = requestBodies.get(modelName);
+                modelName = modelName.replace("Template",'');
                 requestBody[modelName] = {}; // object body created 
-                Object.assign(requestBody[modelName], this.fillModelBody(requestBodies.get(modelName), modelValues[index]))
+                Object.assign(requestBody[modelName], this.fillModelBody(modelBody, modelValues[index]))
             }); 
         } else {
-            console.log(requestBodies.get(configStructure),"(requestBodies.get(configStructure)=================");
           requestBody  = this.fillModelBody(requestBodies.get(configStructure), modelValues);
         }
         return requestBody ;
