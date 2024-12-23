@@ -28,7 +28,7 @@ export default class HomePage extends Vue {
   };
 
   created() {
-    this.initUserDatas();
+  //  this.initUserDatas();
     this.questionTopic = QuestionTopics.topics;
   };
 }

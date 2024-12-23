@@ -12,11 +12,8 @@
       :height="sizeheight"
     />
     <br> 
-    <button class="button-13" @click="compileAndRun">RUN</button> &hairsp;
-    <span
-      ><button class="button-13 btn-13" @click="toggle">{{ Enabletrace.msg }}</button></span
-    >
-    <button class=" float-end button-62" @click="submit">Submit</button>
+    <button class="button-13" @click="compileAndRun(false)">RUN</button> &hairsp;
+    <button :disabled="disableOn" class=" float-end button-62" @click="submit">Submit</button>
   </div>
 </template>
 
