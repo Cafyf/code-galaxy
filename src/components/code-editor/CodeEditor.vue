@@ -3,17 +3,10 @@
 
 <template>
   <div>
-    <Codemirror
-      ref="editor"
-      v-model:value="codeSnippet"
-      :options="cmOptions"
-      border
-      placeholder="JAVA LOGICAL PROGRAMS"
-      :height="sizeheight"
-    />
+    <div id="editor" style="height: 280px; width: 100%;"></div>
     <br> 
-    <button class="button-13" @click="compileAndRun(false)">RUN</button> &hairsp;
-    <button :disabled="disableOn" class=" float-end button-62" @click="submit">Submit</button>
+    <button id="run" class="button-13" >RUN</button> &hairsp;
+    <button id="submit" :disabled="disableOn" class="float-end button-62">Submit</button>
   </div>
 </template>
 
