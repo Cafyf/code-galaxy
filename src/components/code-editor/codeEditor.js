@@ -1,8 +1,5 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import Codemirror from "codemirror-editor-vue3";
-import "codemirror/addon/display/placeholder.js";
-import "codemirror/mode/clike/clike";
-import "codemirror/theme/dracula.css";
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.main';
 import HttpClient from "@/service/httpClient";
 import state from "../../store/store";
 import RequestBodyFactory from "@/Utils/request-body-factory";
@@ -11,39 +8,31 @@ import ObjectUtils from "@/Utils/object-utils";
 import StringUtils from "@/Utils/string-utils";
 
 @Component({
-  components: { Codemirror },
   setup() {
-    return {
-      cmOptions: {
-        lineNumbers: true,
-        mode: "text/x-java", // Language mode
-        theme: "dracula", // Theme
-      },
-    };
+    return {};
   }
 })
 export default class CodeEditor extends Vue {
   @Prop({ type: Object }) miData;
   @Prop({ type: String }) codeTemplate;
-  sizeheight = 300;
-  codeSnippet = '';
   disableOn = false;
+  editor; // Monaco editor instance
 
-  async compileAndRun(submissionCheck) {
-    const methodPrototype = CodeViolationValidator.isMultipleMethodSignature(this.codeSnippet) ? this.miData.methodSignature : " ";
-    const codePayload = [this.codeSnippet, this.miData.testInputs, methodPrototype, JSON.parse(localStorage.getItem("user-info")).id];
+  async compileAndRun(submissionCheck,codeSnippet) {
+    const methodPrototype = CodeViolationValidator.isMultipleMethodSignature(codeSnippet) ? this.miData.methodSignature : " ";
+    const codePayload = [codeSnippet, this.miData.testInputs, methodPrototype, JSON.parse(localStorage.getItem("user-info")).id];
     console.log(codePayload, "codePay", this.miData);
-    const rulesVoilated = CodeViolationValidator.rulesViolationChecker(this.codeSnippet, this.miData.methodSignature);
+    const rulesVoilated = CodeViolationValidator.rulesViolationChecker(codeSnippet, this.miData.methodSignature);
     if (rulesVoilated) {
       this.$emit("showOutput", rulesVoilated, false);
       return;
     }
 
     let runOrBreaker = true;
-    if (!submissionCheck && !ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && !StringUtils.hasValueChanged(state.retainedCode, this.codeSnippet)) {
+    if (!submissionCheck && !ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && !StringUtils.hasValueChanged(state.retainedCode, codeSnippet)) {
       runOrBreaker = confirm("Code is not changed from it's last run the output would be remain same, are you sure want to re-run or you can cancle it.");
     }
-    state.retainedCode = this.codeSnippet;
+    state.retainedCode = codeSnippet;
     if (!runOrBreaker) return;
 
     await HttpClient.executeApiCall('post', "http://localhost:8090/execute", { reqBody: RequestBodyFactory.createRequestBody('code', codePayload) }).then((response) => {
@@ -60,11 +49,11 @@ export default class CodeEditor extends Vue {
       });
   };
 
-  async submit() {
+  async submit(codeSnippet) {
     this.disableOn = true;
     let runOrBreaker = true;
     //code snippet is modified from it's last run are you sure submit
-    if (!ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && StringUtils.hasValueChanged(state.retainedCode, this.codeSnippet)) {
+    if (!ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && StringUtils.hasValueChanged(state.retainedCode, codeSnippet)) {
       runOrBreaker = confirm("The code was modified from its last run do you want to Submit it.\nAre you sure to submit might can expect unexpected resulted.");
     }
 
@@ -73,12 +62,82 @@ export default class CodeEditor extends Vue {
       return;
     };
 
-    await this.compileAndRun(true);// please discuss can we do run before submit or not (Note:if ok can we perform in frontend or backend)
-    this.$emit("submit", this.codeSnippet);
+    await this.compileAndRun(true,codeSnippet);// please discuss can we do run before submit or not (Note:if ok can we perform in frontend or backend)
+    this.$emit("submit",codeSnippet);
     this.disableOn = false;
   };
 
-  created() {
-    this.codeSnippet = this.codeTemplate;
-  };
+  buildMonacoEditor(monacoContainer){
+      // Define custom tokenization for the Java language
+      monaco.languages.setMonarchTokensProvider('java', {
+        tokenizer: {
+          root: [
+            [
+              /\b(interface|enum|public|private|protected|static|final|abstract|synchronized|volatile|transient|native|strictfp|super|this|extends|implements|package|import|throws|throw|new|try|catch|finally|return|if|else|while|for|switch|case|break|continue|default|goto|null)\b/,
+              'keyword',
+            ],
+            [
+              /\b(class|const|boolean|byte|char|short|int|long|float|double|void|null)\b|\b([A-Z][a-zA-Z0-9]*)\b/,
+              'type',
+            ],
+            [/\b(true|false)\b/, 'boolean'],
+            [/\b(\d+)\b/, 'number'],
+            [/[A-Za-z_][A-Za-z0-9_]*/, 'identifier'],
+            [/[;,.]/, 'delimiter'],
+            [/\"([^\\\"]|\\.)*\"/, 'string'],
+            [/'([^\\']|\\.)*'/, 'string'],
+            [/\/\/.*/, 'comment'],
+            [/(\/\*[\s\S]*?\*\/)/, 'comment'],
+            [/\b([A-Za-z_][A-Za-z0-9_]*)(?=\s*\()/, 'method'], // Match methods
+          ],
+        },
+      });
+  
+    const model = monaco.editor.createModel(this.codeTemplate, 'java');
+  
+      // Create the editor instance with the custom model
+     const editor = monaco.editor.create(monacoContainer, {
+        model: model,
+        theme: 'vs',
+        automaticLayout: false,
+        minimap: { enabled: false },
+        fontSize: 12,
+        padding: { top: 10},
+        scrollBeyondLastLine: false,
+        scrollbar: {
+          verticalScrollbarSize: 6,
+        },
+        lineDecorationsWidth:2,
+        lineNumbersMinChars: 4
+      });
+    
+     editor.layout({width:monacoContainer.offsetWidth,height:monacoContainer.offsetHeight - 2});
+
+     document.getElementById('run').addEventListener('click',() => {
+      this.compileAndRun(false,model.getValue());
+     });
+
+     document.getElementById('submit').addEventListener('click',() => {
+      this.submit(model.getValue());
+    });
+
+    window.addEventListener('resize', () => {
+      editor.layout();
+    });
+
+ // find a solution to perform dispose
+  }
+
+  async mounted() {
+    const monacoContainer = document.getElementById('editor');
+    if (monacoContainer) {
+      this.buildMonacoEditor(monacoContainer);
+    }
+    
+  }
+
+  beforeUnmount(){
+    console.log("disposed");
+  
+  }
 }
