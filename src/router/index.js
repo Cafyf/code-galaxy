@@ -10,6 +10,7 @@ import SessionActives from"../components/user-session/session-actives/SessionAct
 import LoginPage from "../components/auth/login/LoginPage.vue"
 import SignupPage  from "../components/auth/signup/SignupPage.vue"
 import HeaderSection from "../components/header/HeaderSection.vue"
+import LocalStorageUtils from "@/Utils/local-storage-utils";
 const routes = [
   {
     path: "/h",
@@ -99,7 +100,7 @@ router.beforeEach((to, from, next) => {
 });
 
 function checkIfUserIsAuthenticated(){
-  const user = localStorage.getItem("user-info");
+  const user = LocalStorageUtils.getItem("user-info");
   if(!user){
     return false;
   } else return true;

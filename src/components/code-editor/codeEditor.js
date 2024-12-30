@@ -6,6 +6,7 @@ import RequestBodyFactory from "@/Utils/request-body-factory";
 import CodeViolationValidator from "@/service/codeViolationValidator";
 import ObjectUtils from "@/Utils/object-utils";
 import StringUtils from "@/Utils/string-utils";
+import LocalStorageUtils from "@/Utils/local-storage-utils";
 
 @Component({
   setup() {
@@ -20,7 +21,7 @@ export default class CodeEditor extends Vue {
 
   async compileAndRun(submissionCheck,codeSnippet) {
     const methodPrototype = CodeViolationValidator.isMultipleMethodSignature(codeSnippet) ? this.miData.methodSignature : " ";
-    const codePayload = [codeSnippet, this.miData.testInputs, methodPrototype, JSON.parse(localStorage.getItem("user-info")).id];
+    const codePayload = [codeSnippet, this.miData.testInputs, methodPrototype,LocalStorageUtils.getItem("user-info").id];
     console.log(codePayload, "codePay", this.miData);
     const rulesVoilated = CodeViolationValidator.rulesViolationChecker(codeSnippet, this.miData.methodSignature);
     if (rulesVoilated) {

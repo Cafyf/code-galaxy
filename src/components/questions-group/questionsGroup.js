@@ -1,6 +1,7 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
 import getImage from '../../Utils/asset-utils';
 import state from '../../store/store'
+import LocalStorageUtils from "@/Utils/local-storage-utils";
 
 @Component
 export default class QuestionsGroups extends Vue {
@@ -11,7 +12,7 @@ export default class QuestionsGroups extends Vue {
     getImage = getImage;
 
     async created() {
-        await localStorage.setItem('topic', JSON.stringify({ topic: this.topic.header }));
+        await LocalStorageUtils.setItem('topic',{ topic: this.topic.header });
         const topic = JSON.parse(localStorage.getItem('topic'));
         state.questions = require(`../mocks/${topic.topic}.json`);
 
