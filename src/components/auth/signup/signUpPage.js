@@ -3,6 +3,7 @@ import HttpClient from '@/service/httpClient.js'
 import ValidationUtils from '@/Utils/validation-util';
 import RequestBodyFactory from "@/Utils/request-body-factory";
 import { navigateTo } from "@/router/navigation";
+import LocalStorageUtils from "@/Utils/local-storage-utils";
 
 @Component
 export default class SignupPage extends Vue {
@@ -74,7 +75,7 @@ export default class SignupPage extends Vue {
         return;
       }
       signed.data.password = "";
-      localStorage.setItem("user-info", JSON.stringify(signed.data));
+      LocalStorageUtils.setItem("user-info", signed.data);
       alert("SignUp Successful");
       navigateTo("HomePage")
       console.log(signed.data);

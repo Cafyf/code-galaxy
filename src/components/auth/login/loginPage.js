@@ -3,6 +3,7 @@ import HttpClient from '@/service/httpClient.js'
 import ObjectUtils from "@/Utils/object-utils";
 import ValidationUtils from '@/Utils/validation-util';
 import { navigateTo } from "@/router/navigation";
+import LocalStorageUtils from "@/Utils/local-storage-utils";
 
 @Component
 export default class LoginPage extends Vue {
@@ -30,16 +31,16 @@ export default class LoginPage extends Vue {
   initUserDatas() {
     const body = {
       id: 1,
-      name: "nandyRps",
-      email: "prasannaNandhini730@gmail.com",
-      password: "prasaNan57",
+      name: "RpsFreko",
+      email: "prasanna@gmail.com",
+      password: "prasa57",
       userProfile: {
         userProfile: 2,
-        userName: "nandyRps",
+        userName: "Rps",
         status: "beginner",
       },
     };
-    localStorage.setItem("user-info", JSON.stringify(body));
+    LocalStorageUtils.setItem("user-info",body);
   };
   async logIn() {
     console.log(this.email, this.password);
@@ -48,7 +49,7 @@ export default class LoginPage extends Vue {
       const response =  await HttpClient.executeApiCall('get',"http://localhost:8090/login",{ params });
       if (response.data != "") {
         console.log(response.data);
-        localStorage.setItem("user-info", JSON.stringify(response.data));
+        LocalStorageUtils.setItem("user-info",response.data);
         navigateTo("HomePage");
         alert("Login Success");
       }else {
