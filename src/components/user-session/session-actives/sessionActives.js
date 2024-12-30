@@ -2,6 +2,7 @@ import { Component, Vue } from 'vue-facing-decorator' // Third-party library
 import HttpClient from '@/service/httpClient.js' // Service module
 import state from '../../../store/store' // Internal state management
 import ObjectUtils from '@/Utils/object-utils';
+import LocalStorageUtils from '@/Utils/local-storage-utils';
 @Component
 export default class SessionActives extends Vue {
   getCallResponse = {};
@@ -24,14 +25,14 @@ export default class SessionActives extends Vue {
       console.log(response);
       if (response.status === 200) {
         console.log(response.data);
-        localStorage.setItem('active-session', JSON.stringify({ id: response.data, sessionName: this.createNewSession }))
+        LocalStorageUtils.setItem('active-session', { id: response.data, sessionName: this.createNewSession });
         window.location.reload();
       }
     }
     console.log(this.createNewSession);
   };
   activeEnabel(manageId, name) {
-    localStorage.setItem('active-session', JSON.stringify({ id: manageId, sessionName: name }));
+    LocalStorageUtils.setItem('active-session', { id: manageId, sessionName: name });
     this.activeSessionIndex = manageId;
     this.sessionDetails.forEach(session => {
       if (session.manageId === manageId) {
@@ -41,7 +42,7 @@ export default class SessionActives extends Vue {
   };
   isActive(manageId) {
     this.activeSessionIndex === manageId;
-    const activeSession = JSON.parse(localStorage.getItem('active-session'));
+    const activeSession = LocalStorageUtils.getItem('active-session');
     if (activeSession.id === manageId) {
       return true;
     } else
@@ -52,8 +53,8 @@ export default class SessionActives extends Vue {
     console.log(sessionName);
     if (!this.isActive(manageId)) { alert("Please Click And Active Your Session"); return; }
     if (mode === 'save' && !ObjectUtils.isNullOrUndefinedOrEmpty(this.sessionRename.trim())) {
-      const userInfo = JSON.parse(localStorage.getItem('user-info'));
-      const session = JSON.parse(localStorage.getItem('active-session'));
+      const userInfo = LocalStorageUtils.getItem('user-info');
+      const session = LocalStorageUtils.getItem('active-session');
       console.log(session);
       const SessionRenameParams = {
         newSessionName: this.sessionRename,
@@ -80,7 +81,7 @@ export default class SessionActives extends Vue {
   };
   async initSetUp() {
 
-    const userInfo = JSON.parse(localStorage.getItem('user-info'));
+    const userInfo = LocalStorageUtils.getItem('user-info');
     if (state.sessionManagerDetails === undefined) {
       state.sessionManagerDetails =  (await HttpClient.executeApiCall('get',"http://localhost:8090/sessionActive",{ params: { loginId: userInfo.id } })).data;
     }
@@ -89,10 +90,10 @@ export default class SessionActives extends Vue {
     this.sessionDetails = state.sessionManagerDetails.sessionDetails;
     console.log('okok');
     console.log(localStorage.getItem('active-session'));
-    if (localStorage.getItem('active-session') === null) {
+    if (!LocalStorageUtils.hasKey('active-session')) {
       console.log('okok');
       state.currentSession = this.sessionDetails[0];
-      localStorage.setItem('active-session', JSON.stringify({ id: this.sessionDetails[0].manageId, sessionName: this.sessionDetails[0].sessionName }))
+      LocalStorageUtils.setItem('active-session', { id: this.sessionDetails[0].manageId, sessionName: this.sessionDetails[0].sessionName });
     }
   };
 

@@ -1,5 +1,6 @@
 import { Component, Vue } from 'vue-facing-decorator'
 import getImage from '@/Utils/asset-utils';
+import LocalStorageUtils from '@/Utils/local-storage-utils';
 import HttpClient from '@/service/httpClient.js'
 import state from '../../../store/store'
 import { navigateTo } from '@/router/navigation';
@@ -39,7 +40,7 @@ export default class ProgressQuestion extends Vue {
   async getSubmission(questionName, submissionQuestionId) {
     const res = await HttpClient.executeApiCall('get',"http://localhost:8090/getSubmission",{ params:{'submissionQuestionId':submissionQuestionId} });
     // res.data.topic  replace here (from vue template)
-    localStorage.setItem('topic', JSON.stringify({ topic: res.data.topic }))
+    LocalStorageUtils.setItem('topic',{ topic: res.data.topic });
     const questionFile = require(`../../mocks/${res.data.topic}.json`);
     state.questions = questionFile;
     state.submittedQuestions = res.data.submittedQuestion;
@@ -48,8 +49,8 @@ export default class ProgressQuestion extends Vue {
   };
 
   async created() {
-    const userInfo = JSON.parse(localStorage.getItem('user-info'));
-    const session = JSON.parse(localStorage.getItem('active-session'));
+    const userInfo = LocalStorageUtils.getItem('user-info');
+    const session = LocalStorageUtils.getItem('active-session');
     
     this.progressData = (await HttpClient.executeApiCall('get',"http://localhost:8090/progressDetails",{ params:{'sessionId':session.id,'progressId':userInfo.id}})).data;
     if (this.progressData.length === 0) {

@@ -6,6 +6,7 @@ import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorDisplayProcessor from '../output-panel/error-display-processor/ErrorDisplayProcessor.vue'
 import OutputPanel from "../output-panel/OutputPanel.vue";
+import LocalStorageUtils from "@/Utils/local-storage-utils.js";
 
 @Component({
   components: { CodeEditor, ErrorDisplayProcessor, QuestionsPrb, OutputPanel}
@@ -70,10 +71,10 @@ export default class CodeEditorContainer extends Vue {
 
   async submit(code) {
     console.log(state.questions, "questions2");
-    const topic = JSON.parse(localStorage.getItem("topic"));
+    const topic = LocalStorageUtils.getItem("topic");
     const runtime = Math.floor(Math.random() * 20) + 1;
-    const userInfo = JSON.parse(localStorage.getItem("user-info"));
-    const sessionInfo = JSON.parse(localStorage.getItem("active-session"));
+    const userInfo = LocalStorageUtils.getItem("user-info");
+    const sessionInfo = LocalStorageUtils.getItem("active-session");
     console.log(
       code,
       this.name,

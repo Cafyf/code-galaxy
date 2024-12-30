@@ -1,5 +1,6 @@
 import { Component, Vue } from 'vue-facing-decorator';
 import moment from "moment";
+import LocalStorageUtils from '@/Utils/local-storage-utils';
 import HttpClient from '@/service/httpClient.js'
 import state from '../../../store/store';
 import { navigateTo } from '@/router/navigation';
@@ -13,7 +14,7 @@ export default class SubmissionDetails extends Vue {
     navigateTo("HomePage")
   };
   showInEditor(question, submittedQuestion, topic) {
-    localStorage.setItem('topic', JSON.stringify({ topic: topic }))
+    LocalStorageUtils.setItem('topic', { topic: topic });
     const questionFile = require(`../../mocks/${topic}.json`);
     state.questions = questionFile;
     state.submittedQuestions = submittedQuestion;
@@ -46,8 +47,8 @@ export default class SubmissionDetails extends Vue {
     }
   };
   async created() {
-    const userInfo = JSON.parse(localStorage.getItem("user-info"));
-    const session = JSON.parse(localStorage.getItem("active-session"));
+    const userInfo = LocalStorageUtils.getItem("user-info");
+    const session = LocalStorageUtils.getItem("active-session");
     this.submissionsData = 
       (await HttpClient.executeApiCall('get',"http://localhost:8090/submissionDetails",{ params:{'sessionId':session.id,'submissionId':userInfo.id}})).data;
   };
