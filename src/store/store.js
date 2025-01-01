@@ -1,6 +1,6 @@
-import Vuex from 'vuex';
+import { createStore } from 'vuex';
 
-const store = new Vuex.Store({
+const store = createStore({
   state: {
     questions :'',
     sessionData:[],
