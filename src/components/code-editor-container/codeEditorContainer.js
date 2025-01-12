@@ -101,6 +101,7 @@ export default class CodeEditorContainer extends Vue {
   };
 
   created() {
+    LocalStorageUtils.setItem('selectedQestionName',this.name)
     console.log(state.questions, "questions");
     try {
       const question = state.questions[this.name];
