@@ -1,5 +1,5 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
-import state from "../../../store/store";
+import store from "../../../store/store";
 import { MESSAGES } from "@/models/constants/custom-messages.js";
 import { CONSTANTS } from "@/models/constants/globalConstants";
 import ObjectUtils from "@/Utils/object-utils";
@@ -75,7 +75,7 @@ export default class ErrorDisplayProcessor extends Vue {
     }
     if (outputMessage.msg.length > 0) {
       console.log("okokoko");
-      this.errorheader = state.lastRunnedStatus;
+      this.errorheader = store.state.lastRunnedStatus;
       returnMessage.msg = outputMessage.msg.split("\n");
       returnMessage.validError = true;
       return returnMessage;

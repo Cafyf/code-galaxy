@@ -1,7 +1,7 @@
 import { Component, Prop, Vue } from "vue-facing-decorator";
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.main';
 import HttpClient from "@/service/httpClient";
-import state from "../../store/store";
+import store from "../../store/store";
 import RequestBodyFactory from "@/Utils/request-body-factory";
 import CodeViolationValidator from "@/service/codeViolationValidator";
 import ObjectUtils from "@/Utils/object-utils";
@@ -30,21 +30,21 @@ export default class CodeEditor extends Vue {
     }
 
     let runOrBreaker = true;
-    if (!submissionCheck && !ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && !StringUtils.hasValueChanged(state.retainedCode, codeSnippet)) {
+    if (!submissionCheck && !ObjectUtils.isNullOrUndefinedOrEmpty(store.state.retainedCode) && !StringUtils.hasValueChanged(store.state.retainedCode, codeSnippet)) {
       runOrBreaker = confirm("Code is not changed from it's last run the output would be remain same, are you sure want to re-run or you can cancle it.");
     }
-    state.retainedCode = codeSnippet;
+    store.dispatch("setRetainedCode", codeSnippet);
     if (!runOrBreaker) return;
 
     await HttpClient.executeApiCall('post', "http://localhost:8090/execute", { reqBody: RequestBodyFactory.createRequestBody('code', codePayload) }).then((response) => {
       if (response.status != 200) throw new Error(`HTTP Error: ${response.statusText}`);
       const data = response.data;
-      state.lastRunnedStatus = data.codeStatus;
+      store.dispatch("setLastRunnedStatus", data.codeStatus);
       console.log(response, data, "--------------- response and data");
       this.$emit("showOutput", data.output, data.codeStatus === "Accepted");
     })
       .catch((error) => {
-        state.lastRunnedStatus = "Error";
+        store.dispatch("setLastRunnedStatus", data.codeStatus); 
         alert("some unexpected error try again!")
         console.log("Error", error);
       });
@@ -54,7 +54,7 @@ export default class CodeEditor extends Vue {
     this.disableOn = true;
     let runOrBreaker = true;
     //code snippet is modified from it's last run are you sure submit
-    if (!ObjectUtils.isNullOrUndefinedOrEmpty(state.retainedCode) && StringUtils.hasValueChanged(state.retainedCode, codeSnippet)) {
+    if (!ObjectUtils.isNullOrUndefinedOrEmpty(store.state.retainedCode) && StringUtils.hasValueChanged(store.state.retainedCode, codeSnippet)) {
       runOrBreaker = confirm("The code was modified from its last run do you want to Submit it.\nAre you sure to submit might can expect unexpected resulted.");
     }
 
