@@ -2,7 +2,7 @@ import { Component, Vue } from 'vue-facing-decorator'
 import getImage from '@/Utils/asset-utils';
 import LocalStorageUtils from '@/Utils/local-storage-utils';
 import HttpClient from '@/service/httpClient.js'
-import state from '../../../store/store'
+import store from '../../../store/store'
 import { navigateTo } from '@/router/navigation';
 
 @Component
@@ -42,8 +42,8 @@ export default class ProgressQuestion extends Vue {
     // res.data.topic  replace here (from vue template)
     LocalStorageUtils.setItem('topic',{ topic: res.data.topic });
     const questionFile = require(`../../mocks/${res.data.topic}.json`);
-    state.questions = questionFile;
-    state.submittedQuestions = res.data.submittedQuestion;
+    store.commit('saveQuestions', questionFile);
+    store.state.submittedQuestions = res.data.submittedQuestion;
     navigateTo("CodeEditorContainer", { name: questionName, option: "previous" });
     console.log(res.data);
   };

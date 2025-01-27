@@ -1,7 +1,7 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
 import HttpClient from '@/service/httpClient.js'
 import RequestBodyFactory from "../../Utils/request-body-factory.js"
-import state from "../../store/store";
+import store from "../../store/store";
 import QuestionsPrb from "../questions/QuestionsPrb.vue";
 import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorDisplayProcessor from '../output-panel/error-display-processor/ErrorDisplayProcessor.vue'
@@ -46,11 +46,12 @@ export default class CodeEditorContainer extends Vue {
       }
       element.output = newOutPut[index];
     });
-    if (Object.values(DefaultAnswers).length !== count) {
-      state.isDefaultTestAccepted = "Wrong Answer";
-    } else {
-      state.isDefaultTestAccepted = "Accepted";
-    }
+    store.commit('updateDefaultTestAccepted',Object.values(DefaultAnswers).length !== count ? "Wrong Answer" : "Accepted")
+    // if (Object.values(DefaultAnswers).length !== count) {
+    //   state.isDefaultTestAccepted = "Wrong Answer";
+    // } else {
+    //   state.isDefaultTestAccepted = "Accepted";
+    // }
     return DefaultAnswers;
   }; 
   //array question topics user input ah disable pannidu
@@ -59,7 +60,7 @@ export default class CodeEditorContainer extends Vue {
     if (resultFlag) { 
       this.outputData = {
         ...this.outputData, defaultOpDesc: this.constructDefaultOpContent(
-          state.questions[this.name].sampleInputDesc,
+          store.state.questions[this.name].sampleInputDesc,
           message
         )
       }
@@ -70,7 +71,7 @@ export default class CodeEditorContainer extends Vue {
   };
 
   async submit(code) {
-    console.log(state.questions, "questions2");
+    console.log(store.state.questions, "questions2");
     const topic = LocalStorageUtils.getItem("topic");
     const runtime = Math.floor(Math.random() * 20) + 1;
     const userInfo = LocalStorageUtils.getItem("user-info");
@@ -78,18 +79,18 @@ export default class CodeEditorContainer extends Vue {
     console.log(
       code,
       this.name,
-      state.isDefaultTestAccepted,
-      state.lastRunnedStatus
+      store.state.isDefaultTestAccepted,
+      store.state.lastRunnedStatus
     );
     const submissionStatus =
-      state.lastRunnedStatus === "Accepted"
-        ? state.isDefaultTestAccepted
-        : state.lastRunnedStatus;
+      store.state.lastRunnedStatus === "Accepted"
+        ? store.state.isDefaultTestAccepted
+        : store.state.lastRunnedStatus;
 
     //The request body values should be follow the preserve order of request Body keys
     const submissionReqBodyValues = [userInfo.id,this.name,submissionStatus,runtime + " ms","Java",code,topic.topic];
-    const progressReqBodyValues = [userInfo.id,this.name,topic.topic,state.questions[this.name].mode,state.lastRunnedStatus];
-    const sessionReqBodyValues = [userInfo.id,sessionInfo.sessionName,state.questions[this.name].mode];
+    const progressReqBodyValues = [userInfo.id,this.name,topic.topic,store.state.questions[this.name].mode,state.lastRunnedStatus];
+    const sessionReqBodyValues = [userInfo.id,sessionInfo.sessionName,store.state.questions[this.name].mode];
 
     const reqBodyValues =[submissionReqBodyValues,progressReqBodyValues,sessionReqBodyValues];
 
@@ -102,9 +103,9 @@ export default class CodeEditorContainer extends Vue {
 
   created() {
     LocalStorageUtils.setItem('selectedQestionName',this.name)
-    console.log(state.questions, "questions");
+    console.log(store.state.questions, "questions");
     try {
-      const question = state.questions[this.name];
+      const question = store.state.questions[this.name];
       this.initializeDefaultMethodWithInputs(question);
       this.initializeProblemContainer(question);
       this.initializeCodeSnippet(question);
@@ -120,7 +121,7 @@ export default class CodeEditorContainer extends Vue {
 
   initializeCodeSnippet(question) {
     if (this.option === "previous") {
-      this.codeSnippet = state.submittedQuestions;
+      this.codeSnippet = store.state.submittedQuestions;
     } else {
       this.codeSnippet = question.methodTemplate;
     }

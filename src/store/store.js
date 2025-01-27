@@ -2,26 +2,32 @@ import { createStore } from 'vuex';
 
 const store = createStore({
   state: {
-    questions :'',
-    sessionData:[],
-    currentSession:{},
-    sessionManagerDetails:{},
-    singleQuestion:{},
-    lastRunnedStatus:'',
-    isDefaultTestAccepted:'',
-    retainedCode:'',
-    codeStatus:''
+    questions: '',
+    sessionData: [],
+    currentSession: {},
+    sessionManagerDetails: {},
+    singleQuestion: {},
+    lastRunnedStatus: '',
+    isDefaultTestAccepted: '',
+    retainedCode: '',
+    codeStatus: ''
   },
   getters: {},
   mutations: {
-    setPreservedState(state, preservedState) {
-      state.questions = preservedState;
+    saveQuestions(state, questions) {
+      state.questions = questions;
+    },
+    updateDefaultTestAccepted(state, status) {
+      state.isDefaultTestAccepted = status;
     },
   },
   actions: {
-    setPreservedState(state, preservedState) {
-      state.questions = preservedState;
-    }
+    storeQuestions({ commit }, questions) {
+      commit('saveQuestions', questions);
+    },
+    setDefaultTestAccepted({ commit }, status) {
+      commit("updateDefaultTestAccepted", status);
+    },
   },
   modules: {}
 });
