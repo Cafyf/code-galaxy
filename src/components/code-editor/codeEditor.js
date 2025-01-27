@@ -33,18 +33,18 @@ export default class CodeEditor extends Vue {
     if (!submissionCheck && !ObjectUtils.isNullOrUndefinedOrEmpty(store.state.retainedCode) && !StringUtils.hasValueChanged(store.state.retainedCode, codeSnippet)) {
       runOrBreaker = confirm("Code is not changed from it's last run the output would be remain same, are you sure want to re-run or you can cancle it.");
     }
-    store.dispatch("setRetainedCode", codeSnippet);
+    store.state.retainedCode = codeSnippet;
     if (!runOrBreaker) return;
 
     await HttpClient.executeApiCall('post', "http://localhost:8090/execute", { reqBody: RequestBodyFactory.createRequestBody('code', codePayload) }).then((response) => {
       if (response.status != 200) throw new Error(`HTTP Error: ${response.statusText}`);
       const data = response.data;
-      store.dispatch("setLastRunnedStatus", data.codeStatus);
+      store.state.lastRunnedStatus = data.codeStatus;
       console.log(response, data, "--------------- response and data");
       this.$emit("showOutput", data.output, data.codeStatus === "Accepted");
     })
       .catch((error) => {
-        store.dispatch("setLastRunnedStatus", data.codeStatus); 
+        store.state.lastRunnedStatus = "error"; 
         alert("some unexpected error try again!")
         console.log("Error", error);
       });
