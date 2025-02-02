@@ -12,7 +12,7 @@ export default class QuestionsGroups extends Vue {
     getImage = getImage;
 
     async created() {
-        await LocalStorageUtils.setItem('topic',{ topic: this.topic.header });
+        LocalStorageUtils.setItem('topic',{ topic: this.topic.header });
         const topic = JSON.parse(localStorage.getItem('topic'));
         store.state.questions = require(`../mocks/${topic.topic}.json`);
 
