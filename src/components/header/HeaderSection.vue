@@ -19,26 +19,52 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item list-1">
-              <span class="nav-link" href="#">{{profileName}}</span>
+              <span class="nav-link" href="#">{{ profileName }}</span>
             </li>
             <li class="nav-item list-1">
-              <span class="nav-link" href="#">{{'('+status+')'}}</span>
+              <span class="nav-link" href="#">{{ "(" + status + ")" }}</span>
             </li>
             <li class="nav-item list-2">
-              <router-link to="/session" class="nav-link" href="#">Session</router-link>
+              <router-link to="/session" class="nav-link" href="#"
+                >Session</router-link
+              >
             </li>
             <li class="nav-item list-2">
-             <router-link to="/progress" class="nav-link" href="#">Progress</router-link>
+              <router-link to="/progress" class="nav-link" href="#"
+                >Progress</router-link
+              >
             </li>
-            <li class="nav-item list-2 ">
-             <router-link to="/submission" class="nav-link">Submission</router-link>
-
-            </li>
-             <li  class="nav-item list-2 ml-auto ">
-             <a @click="logout" class="nav-link">LogOut</a>
-
+            <li class="nav-item list-2">
+              <router-link to="/submission" class="nav-link"
+                >Submission</router-link
+              >
             </li>
           </ul>
+        </div>
+        <div class="popup-overlay logout-popup">
+          <div class="dropdown">
+            <button
+              class="btn buttonRegion"
+              type="button"
+              data-dispaly="static"
+              data-bs-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <img
+                class="justify-content-end logout-icon"
+                width="20"
+                :src="getImage('logouticon.jpg')"
+                alt=""
+              />
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li> User:<span class="user">Shilpa</span></li>
+              <li> <img  width="20" :src="getImage('logout-img.jpg')" @click="logout()"><span class="pl-3 signout">
+                Signout</span></li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
