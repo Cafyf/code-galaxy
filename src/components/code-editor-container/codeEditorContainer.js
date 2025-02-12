@@ -112,7 +112,6 @@ export default class CodeEditorContainer extends Vue {
     }
     catch (err) {
       console.error(err);
-      alert("Question not found");
       this.$router.go(-1);
     }
     console.log(this.name, " Question Selected");
