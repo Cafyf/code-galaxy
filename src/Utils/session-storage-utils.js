@@ -27,6 +27,10 @@ export class SessionStorageUtils {
         console.error(`Error removing item from sessionStorage: ${error}`);
       }
     }
+
+    static hasKey(key) {
+      return sessionStorage.getItem(key) !== null;
+    }
   
     static clear() {
       try {

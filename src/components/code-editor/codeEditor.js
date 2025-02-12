@@ -2,11 +2,13 @@ import { Component, Prop, Vue } from "vue-facing-decorator";
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.main';
 import HttpClient from "@/service/httpClient";
 import store from "../../store/store";
+import { onBeforeRouteLeave } from "vue-router";
 import RequestBodyFactory from "@/Utils/request-body-factory";
 import CodeViolationValidator from "@/service/codeViolationValidator";
 import ObjectUtils from "@/Utils/object-utils";
 import StringUtils from "@/Utils/string-utils";
 import LocalStorageUtils from "@/Utils/local-storage-utils";
+import { SessionStorageUtils } from "@/Utils/session-storage-utils";
 
 @Component({
   setup() {
@@ -14,10 +16,9 @@ import LocalStorageUtils from "@/Utils/local-storage-utils";
   }
 })
 export default class CodeEditor extends Vue {
-  @Prop({ type: Object }) miData;
+  @Prop({ type: Object }) miData; // method & input data
   @Prop({ type: String }) codeTemplate;
   disableOn = false;
-  editor; // Monaco editor instance
 
   async compileAndRun(submissionCheck,codeSnippet) {
     const methodPrototype = CodeViolationValidator.isMultipleMethodSignature(codeSnippet) ? this.miData.methodSignature : " ";
@@ -70,7 +71,7 @@ export default class CodeEditor extends Vue {
 
   buildMonacoEditor(monacoContainer){
       // Define custom tokenization for the Java language
-      monaco.languages.setMonarchTokensProvider('java', {
+    monaco.languages.setMonarchTokensProvider('java', {
         tokenizer: {
           root: [
             [
@@ -93,11 +94,13 @@ export default class CodeEditor extends Vue {
           ],
         },
       });
-  
-    const model = monaco.editor.createModel(this.codeTemplate, 'java');
+    const template =  SessionStorageUtils.getItem(localStorage.getItem('selectedQestionName')) ?? this.codeTemplate;
+    store.state.retainedCode = template;
+    
+    const model = monaco.editor.createModel(template, 'java');
   
       // Create the editor instance with the custom model
-     const editor = monaco.editor.create(monacoContainer, {
+    const editor = monaco.editor.create(monacoContainer, {
         model: model,
         theme: 'vs',
         automaticLayout: false,
@@ -110,35 +113,54 @@ export default class CodeEditor extends Vue {
         },
         lineDecorationsWidth:2,
         lineNumbersMinChars: 4
-      });
+    });
     
-     editor.layout({width:monacoContainer.offsetWidth,height:monacoContainer.offsetHeight - 2});
+    editor.layout({width:monacoContainer.offsetWidth,height:monacoContainer.offsetHeight - 2});
 
-     document.getElementById('run').addEventListener('click',() => {
+    document.getElementById('run').addEventListener('click',() => {
       this.compileAndRun(false,model.getValue());
-     });
+    });
 
-     document.getElementById('submit').addEventListener('click',() => {
+    document.getElementById('submit').addEventListener('click',() => {
       this.submit(model.getValue());
     });
+
+    this.boundHandlePreserveCode = () => this.handlePreserveCode(model.getValue());
+    
+    window.addEventListener('beforeunload', this.boundHandlePreserveCode);
+
+    onBeforeRouteLeave(() => {
+      console.log("Leaving the route from Class Component!");
+      this.handlePreserveCode(model.getValue());
+     });
 
     window.addEventListener('resize', () => {
       editor.layout();
     });
-
- // find a solution to perform dispose
+    
+ // find a solution to perform dispose editor
   }
 
-  async mounted() {
+  handlePreserveCode = (value) => {
+    const questionName = LocalStorageUtils.getItem('selectedQestionName');
+    if(ObjectUtils.isNullOrUndefinedOrEmpty(value)){
+      SessionStorageUtils.setItem(questionName, null);
+      return ;
+    }
+    if(StringUtils.hasValueChanged(value, store.state.retainedCode )){
+      SessionStorageUtils.setItem(questionName, value);
+    } 
+  };
+
+ async mounted() {
     const monacoContainer = document.getElementById('editor');
     if (monacoContainer) {
       this.buildMonacoEditor(monacoContainer);
     }
-    
   }
 
   beforeUnmount(){
-    console.log("disposed");
-  
+    window.removeEventListener('beforeunload',this.boundHandlePreserveCode);
+    this.boundHandlePreserveCode=null;
   }
 }
