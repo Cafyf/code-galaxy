@@ -148,7 +148,6 @@ export default class CodeEditor extends Vue {
       return ;
     }
     if(StringUtils.hasValueChanged(value, store.state.retainedCode )){
-      //localStorage.setItem("checking",value+"   /    "+store.state.retainedCode );
       SessionStorageUtils.setItem(questionName, value);
     } 
   };
