@@ -42,7 +42,7 @@ export default class ProgressQuestion extends Vue {
     // res.data.topic  replace here (from vue template)
     LocalStorageUtils.setItem('topic',{ topic: res.data.topic });
     const questionFile = require(`../../mocks/${res.data.topic}.json`);
-    store.dispatch('saveQuestions', questionFile);
+    store.commit('saveQuestions', questionFile);
     store.state.submittedQuestions = res.data.submittedQuestion;
     navigateTo("CodeEditorContainer", { name: questionName, option: "previous" });
     console.log(res.data);

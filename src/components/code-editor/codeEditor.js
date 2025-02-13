@@ -94,9 +94,9 @@ export default class CodeEditor extends Vue {
           ],
         },
       });
-    const template =  SessionStorageUtils.getItem(localStorage.getItem('selectedQestionName')) ?? this.codeTemplate;
+    const template =  SessionStorageUtils.getItem(LocalStorageUtils.getItem('selectedQuestionName')) ?? this.codeTemplate;
     store.state.retainedCode = template;
-    
+
     const model = monaco.editor.createModel(template, 'java');
   
       // Create the editor instance with the custom model
@@ -130,7 +130,6 @@ export default class CodeEditor extends Vue {
     window.addEventListener('beforeunload', this.boundHandlePreserveCode);
 
     onBeforeRouteLeave(() => {
-      console.log("Leaving the route from Class Component!");
       this.handlePreserveCode(model.getValue());
      });
 
@@ -142,7 +141,7 @@ export default class CodeEditor extends Vue {
   }
 
   handlePreserveCode = (value) => {
-    const questionName = LocalStorageUtils.getItem('selectedQestionName');
+    const questionName = LocalStorageUtils.getItem('selectedQuestionName');
     if(ObjectUtils.isNullOrUndefinedOrEmpty(value)){
       SessionStorageUtils.setItem(questionName, null);
       return ;
