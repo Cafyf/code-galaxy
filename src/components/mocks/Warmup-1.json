@@ -17,45 +17,45 @@
   {"imgUrl":"tick.png","name":"makes10","font":"H"}
 ],
 [
-{"imgUrl":"tick.png","name":"nearHundred ","font":"H"},
+{"imgUrl":"tick.png","name":"nearHundred","font":"H"},
 {"imgUrl":"tick.png","name":"posNeg","font":"H"},
-{"imgUrl":"tick.png","name":" notString","font":"H"}
+{"imgUrl":"tick.png","name":"notString","font":"H"}
 ],
 [
-  {"imgUrl":"tick.png","name":" missingChar","font":"H"},
-  {"imgUrl":"tick.png","name":" frontBack","font":"H"},
-  {"imgUrl":"tick.png","name":" front3","font":"H"}
+  {"imgUrl":"tick.png","name":"missingChar","font":"H"},
+  {"imgUrl":"tick.png","name":"frontBack","font":"H"},
+  {"imgUrl":"tick.png","name":"front3","font":"H"}
 ],
 [
-{"imgUrl":"tick.png","name":" backAround","font":"H"},
+{"imgUrl":"tick.png","name":"backAround","font":"H"},
 
-{"imgUrl":"tick.png","name":" or35 ","font":"H"},
+{"imgUrl":"tick.png","name":"or35","font":"H"},
 {"imgUrl":"tick.png","name":"front22","font":"H"}
 ],
 [
   {"imgUrl":"tick.png","name":"startHi","font":"H"},
   {"imgUrl":"tick.png","name":"icyHot","font":"H"},
-  {"imgUrl":"tick.png","name":"in1020 ","font":"H"}
+  {"imgUrl":"tick.png","name":"in1020","font":"H"}
 ],
 [
 {"imgUrl":"tick.png","name":"hasTeen","font":"H"},
 {"imgUrl":"tick.png","name":"loneTeen","font":"H"},
-{"imgUrl":"tick.png","name":"delDel ","font":"H"}
+{"imgUrl":"tick.png","name":"delDel","font":"H"}
 ],
 [
-  {"imgUrl":"tick.png","name":" mixStart","font":"H"},
+  {"imgUrl":"tick.png","name":"mixStart","font":"H"},
   {"imgUrl":"tick.png","name":"startOz","font":"H"},
-  {"imgUrl":"tick.png","name":"intMax ","font":"H"}
+  {"imgUrl":"tick.png","name":"intMax","font":"H"}
 ],
 [
 {"imgUrl":"tick.png","name":"close10","font":"H"},
 {"imgUrl":"tick.png","name":"in3050","font":"H"},
-{"imgUrl":"tick.png","name":"max1020 ","font":"H"}
+{"imgUrl":"tick.png","name":"max1020","font":"H"}
 ],
 [
   {"imgUrl":"tick.png","name":"stringE","font":"H"},
   {"imgUrl":"tick.png","name":"lastDigit","font":"H"},
-  {"imgUrl":"tick.png","name":"endUp ","font":"H"}
+  {"imgUrl":"tick.png","name":"endUp","font":"H"}
 ]
 
 
@@ -93,7 +93,7 @@
       "mode":"easy"
 },
 "monkeyTrouble":{
-  "methodDesc":"monkeyTrouble(boolean aSmile, boolean bSmile) ",
+  "methodDesc":"monkeyTrouble(boolean aSmile, boolean bSmile)",
   "methodTemplate":"public static boolean monkeyTrouble(boolean aSmile, boolean bSmile)  {\n\r        \n}",
   
   
@@ -109,7 +109,7 @@
   "mode":"medium"
 },
 "sumDouble":{
-  "methodDesc":"sumDouble(int a, int b) ",
+  "methodDesc":"sumDouble(int a, int b)",
   "methodTemplate":"public static int sumDouble(int a, int b)  {\n\r        \n}",
   
   
@@ -130,7 +130,7 @@
   "mode":"medium"
 },
 "diff21":{
-  "methodDesc":"diff21(int n) ",
+  "methodDesc":"diff21(int n)",
   "methodTemplate":"public static  int diff21(int n) {\n\r        \n}",
   "questions":"Given an int n, return the absolute difference between n and 21, except return double the absolute difference if n is over 21.",
   "sampleInputDesc":[
@@ -155,7 +155,7 @@
 
 },
 "parrotTrouble":{
-  "methodDesc":"parrotTrouble(boolean talking, int hour) ",
+  "methodDesc":"parrotTrouble(boolean talking, int hour)",
   "methodTemplate":"public static boolean parrotTrouble(boolean talking, int hour)  {\n\r        \n}",
   "questions":"We have a loud talking parrot.The'hour' parameter is the current hour time in the range 0..23. We are in trouble if the parrot is talking and the hour is before 7 or after 20. Return true if we are in trouble.",
   "sampleInputDesc":[
@@ -174,7 +174,7 @@
   "mode":"medium"
 },
 "makes10":{
-  "methodDesc":"makes10(int a, int b) ",
+  "methodDesc":"makes10(int a, int b)",
   "methodTemplate":"public static boolean makes10(int a, int b)  {\n\r        \n}",
     "questions":"Given 2 ints, a and b, return true if one if them is 10 or if their sum is 10.",
   "sampleInputDesc":[
@@ -220,7 +220,7 @@
   "mode":"hard"
 },
 "posNeg":{
-  "methodDesc":"posNeg(int a, int b, boolean negative) ",
+  "methodDesc":"posNeg(int a, int b, boolean negative)",
   "methodTemplate":"public boolean posNeg(int a, int b, boolean negative)  {\n\r        \n}",
     "questions":"Given 2 int values, return true if one is negative and one is positive. Except if the parameter \"negative\" is true, then return true only if both are negative.",
   "sampleInputDesc":[
@@ -268,7 +268,7 @@
   "mode":"easy"
 },
 "missingChar":{
-  "methodDesc":"missingChar(String str, int n) " ,
+  "methodDesc":"missingChar(String str, int n)" ,
   "methodTemplate":"public static String missingChar(String str, int n) {\n\r        \n}", 
     "questions":"Given a non-empty string and an int n, return a new string where the char at index n has been removed. The value of n will be a valid index of a char in the original string (i.e. n will be in the range 0..str.length()-1 inclusive).",
   "sampleInputDesc":[
@@ -289,7 +289,7 @@
   "mode":"medium"
 },
 "frontBack":{
-  "methodDesc":"frontBack(String str) ",
+  "methodDesc":"frontBack(String str)",
   "methodTemplate":"public static String frontBack(String str)   {\n\r        \n}",
     "questions":"Given a string, return a new string where the first and last chars have been exchanged.",
   "sampleInputDesc":[
@@ -309,7 +309,7 @@
 },
 
 "front3":{
-  "methodDesc":"front3(String str) ",
+  "methodDesc":"front3(String str)",
   "methodTemplate":"public static String front3(String str) {\n\r        \n}", 
     "questions":"Given a string, we'll say that the front is the first 3 chars of the string. If the string length is less than 3, the front is whatever is there. Return a new string which is 3 copies of the front.",
   "sampleInputDesc":[

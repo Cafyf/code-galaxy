@@ -1,4 +1,5 @@
 import { Component, Vue, Prop } from "vue-facing-decorator";
+import { toRaw } from "vue";
 import HttpClient from '@/service/httpClient.js'
 import RequestBodyFactory from "../../Utils/request-body-factory.js"
 import store from "../../store/store";
@@ -7,6 +8,8 @@ import CodeEditor from "../code-editor/CodeEditor.vue";
 import ErrorDisplayProcessor from '../output-panel/error-display-processor/ErrorDisplayProcessor.vue'
 import OutputPanel from "../output-panel/OutputPanel.vue";
 import LocalStorageUtils from "@/Utils/local-storage-utils.js";
+import IndexedDbService from "@/service/indexedDbService.js";
+import ObjectUtils from "@/Utils/object-utils.js";
 
 @Component({
   components: { CodeEditor, ErrorDisplayProcessor, QuestionsPrb, OutputPanel}
@@ -33,6 +36,7 @@ export default class CodeEditorContainer extends Vue {
 
   change = false;
   codeSnippet = "";
+  showEditor = false;
 
   constructDefaultOpContent(DefaultAnswers, newOutPut) {
     let count = 0;
@@ -46,7 +50,7 @@ export default class CodeEditorContainer extends Vue {
       }
       element.output = newOutPut[index];
     });
-    store.commit('updateDefaultTestAccepted',Object.values(DefaultAnswers).length !== count ? "Wrong Answer" : "Accepted")
+    store.commit('updateDefaultTestAccepted',Object.values(DefaultAnswers).length !== count ? "Wrong Answer" : "Accepted");
     // if (Object.values(DefaultAnswers).length !== count) {
     //   state.isDefaultTestAccepted = "Wrong Answer";
     // } else {
@@ -101,11 +105,11 @@ export default class CodeEditorContainer extends Vue {
     console.log(response);
   };
 
-  created() {
-    LocalStorageUtils.setItem('selectedQestionName',this.name)
-    console.log(store.state.questions, "questions");
+   async created() {
+    this.showEditor=false; 
+    LocalStorageUtils.setItem('selectedQuestionName',this.name)
     try {
-      const question = store.state.questions[this.name];
+      const question = await this.fetchAndInitQuestion();
       this.initializeDefaultMethodWithInputs(question);
       this.initializeProblemContainer(question);
       this.initializeCodeSnippet(question);
@@ -114,9 +118,9 @@ export default class CodeEditorContainer extends Vue {
       console.error(err);
       this.$router.go(-1);
     }
+    this.showEditor=true;
     console.log(this.name, " Question Selected");
   };
-
 
   initializeCodeSnippet(question) {
     if (this.option === "previous") {
@@ -134,5 +138,15 @@ export default class CodeEditorContainer extends Vue {
   initializeProblemContainer(question) {
     this.problemContainer.problemQuestion = question.questions;
     this.problemContainer.sampleInputDesc = question.sampleInputDesc.slice(0, 3);
+  }
+
+  async fetchAndInitQuestion(){
+    let question = await IndexedDbService.getData("questions",this.name);
+    if(ObjectUtils.isNullOrUndefinedOrEmpty(question)){
+        question = store.state.questions[this.name]; // make API call here  
+        question.name = this.name;
+        await IndexedDbService.addData("questions",toRaw(question));
+    }
+    return question;
   }
 }
